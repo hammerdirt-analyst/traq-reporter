@@ -1,0 +1,10 @@
+staging:
+  root: ../server/testdata/staged_jobs_manual
+
+publish:
+  index_path: .state/publish_index.json
+
+paths:
+  examples_dir: examples
+  content_dir: content
+  docs_dir: docs

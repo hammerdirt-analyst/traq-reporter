@@ -1,0 +1,222 @@
+[
+  {
+    "project": "Briarwood",
+    "job_id": "job_briarwood_001",
+    "client_revision_id": "rev_briarwood_001",
+    "archived_at": "2026-03-25T09:10:08.608364Z",
+    "species": "Quercus agrifolia",
+    "dbh": 20,
+    "height": 54,
+    "gps": { "latitude": 38.620857, "longitude": -121.290324 },
+    "risk_profile": { "overall_tree_risk": "low", "overall_residual_risk": "low", "recommended_inspection_interval": "18 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Extended branches over the parking area"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_briarwood_001.geojson"
+    },
+    "transcript": "[client_tree_details]\nBriarwood tree 1 transcript.\n\n[crown_and_branches]\nObserved extended branches over the parking area.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_briarwood_001"
+  },
+  {
+    "project": "Briarwood",
+    "job_id": "job_briarwood_002",
+    "client_revision_id": "rev_briarwood_002",
+    "archived_at": "2026-03-25T09:20:08.608364Z",
+    "species": "Platanus racemosa",
+    "dbh": 26,
+    "height": 62,
+    "gps": { "latitude": 38.620957, "longitude": -121.290224 },
+    "risk_profile": { "overall_tree_risk": "moderate", "overall_residual_risk": "low", "recommended_inspection_interval": "12 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed bark irregularities on trunk"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_briarwood_002.geojson"
+    },
+    "transcript": "[client_tree_details]\nBriarwood tree 2 transcript.\n\n[trunk]\nObserved bark irregularities on trunk.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_briarwood_002"
+  },
+  {
+    "project": "Briarwood",
+    "job_id": "job_briarwood_003",
+    "client_revision_id": "rev_briarwood_003",
+    "archived_at": "2026-03-25T09:30:08.608364Z",
+    "species": "Acer macrophyllum",
+    "dbh": 18,
+    "height": 48,
+    "gps": { "latitude": 38.621057, "longitude": -121.290124 },
+    "risk_profile": { "overall_tree_risk": "low", "overall_residual_risk": "low", "recommended_inspection_interval": "24 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed pavement over roots"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_briarwood_003.geojson"
+    },
+    "transcript": "[client_tree_details]\nBriarwood tree 3 transcript.\n\n[roots_and_root_collar]\nObserved pavement over roots.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_briarwood_003"
+  },
+  {
+    "project": "Briarwood",
+    "job_id": "job_briarwood_004",
+    "client_revision_id": "rev_briarwood_004",
+    "archived_at": "2026-03-25T09:40:08.608364Z",
+    "species": "Sequoia sempervirens",
+    "dbh": 32,
+    "height": 88,
+    "gps": { "latitude": 38.621157, "longitude": -121.290024 },
+    "risk_profile": { "overall_tree_risk": "low", "overall_residual_risk": "low", "recommended_inspection_interval": "24 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed high vigor and normal foliage"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_briarwood_004.geojson"
+    },
+    "transcript": "[client_tree_details]\nBriarwood tree 4 transcript.\n\n[tree_health_and_species]\nObserved high vigor and normal foliage.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_briarwood_004"
+  },
+  {
+    "project": "Arboretum",
+    "job_id": "job_arboretum_001",
+    "client_revision_id": "rev_arboretum_001",
+    "archived_at": "2026-03-25T10:10:08.608364Z",
+    "species": "Cedrus deodara",
+    "dbh": 30,
+    "height": 72,
+    "gps": { "latitude": 38.622157, "longitude": -121.289924 },
+    "risk_profile": { "overall_tree_risk": "moderate", "overall_residual_risk": "moderate", "recommended_inspection_interval": "12 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Conditions of concern involve branch extension over pedestrian area"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_arboretum_001.geojson"
+    },
+    "transcript": "[client_tree_details]\nArboretum tree 1 transcript.\n\n[risk_categorization]\nConditions of concern involve branch extension over pedestrian area.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_arboretum_001"
+  },
+  {
+    "project": "Arboretum",
+    "job_id": "job_arboretum_002",
+    "client_revision_id": "rev_arboretum_002",
+    "archived_at": "2026-03-25T10:20:08.608364Z",
+    "species": "Quercus lobata",
+    "dbh": 42,
+    "height": 76,
+    "gps": { "latitude": 38.622257, "longitude": -121.289824 },
+    "risk_profile": { "overall_tree_risk": "low", "overall_residual_risk": "low", "recommended_inspection_interval": "18 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed dense crown and minor deadwood"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_arboretum_002.geojson"
+    },
+    "transcript": "[client_tree_details]\nArboretum tree 2 transcript.\n\n[crown_and_branches]\nObserved dense crown and minor deadwood.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_arboretum_002"
+  },
+  {
+    "project": "Arboretum",
+    "job_id": "job_arboretum_003",
+    "client_revision_id": "rev_arboretum_003",
+    "archived_at": "2026-03-25T10:30:08.608364Z",
+    "species": "Ulmus parvifolia",
+    "dbh": 16,
+    "height": 38,
+    "gps": { "latitude": 38.622357, "longitude": -121.289724 },
+    "risk_profile": { "overall_tree_risk": "low", "overall_residual_risk": "low", "recommended_inspection_interval": "24 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed minor bark texture variation"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_arboretum_003.geojson"
+    },
+    "transcript": "[client_tree_details]\nArboretum tree 3 transcript.\n\n[trunk]\nObserved minor bark texture variation.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_arboretum_003"
+  },
+  {
+    "project": "American River",
+    "job_id": "job_americanriver_001",
+    "client_revision_id": "rev_americanriver_001",
+    "archived_at": "2026-03-25T11:10:08.608364Z",
+    "species": "Populus fremontii",
+    "dbh": 28,
+    "height": 66,
+    "gps": { "latitude": 38.623157, "longitude": -121.289624 },
+    "risk_profile": { "overall_tree_risk": "moderate", "overall_residual_risk": "low", "recommended_inspection_interval": "12 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed erosion near root flare"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_americanriver_001.geojson"
+    },
+    "transcript": "[client_tree_details]\nAmerican River tree 1 transcript.\n\n[roots_and_root_collar]\nObserved erosion near root flare.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_americanriver_001"
+  },
+  {
+    "project": "American River",
+    "job_id": "job_americanriver_002",
+    "client_revision_id": "rev_americanriver_002",
+    "archived_at": "2026-03-25T11:20:08.608364Z",
+    "species": "Salix gooddingii",
+    "dbh": 22,
+    "height": 44,
+    "gps": { "latitude": 38.623257, "longitude": -121.289524 },
+    "risk_profile": { "overall_tree_risk": "low", "overall_residual_risk": "low", "recommended_inspection_interval": "18 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed seasonal vigor and healthy foliage"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_americanriver_002.geojson"
+    },
+    "transcript": "[client_tree_details]\nAmerican River tree 2 transcript.\n\n[tree_health_and_species]\nObserved seasonal vigor and healthy foliage.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_americanriver_002"
+  },
+  {
+    "project": "American River",
+    "job_id": "job_americanriver_003",
+    "client_revision_id": "rev_americanriver_003",
+    "archived_at": "2026-03-25T11:30:08.608364Z",
+    "species": "Fraxinus latifolia",
+    "dbh": 24,
+    "height": 52,
+    "gps": { "latitude": 38.623357, "longitude": -121.289424 },
+    "risk_profile": { "overall_tree_risk": "moderate", "overall_residual_risk": "moderate", "recommended_inspection_interval": "12 months" },
+    "assessor_name": "Roger Erismann",
+    "main_concerns": ["Observed need for continued pruning and monitoring"],
+    "images": [
+      { "image_src": "../assets/images/job_123/img_1.svg", "caption": "The tree: in the middle" },
+      { "image_src": "../assets/images/job_123/img_2.svg", "caption": "trunk" }
+    ],
+    "geojson": {
+      "geojson_src": "assets/geojson/job_americanriver_003.geojson"
+    },
+    "transcript": "[client_tree_details]\nAmerican River tree 3 transcript.\n\n[mitigation_options]\nObserved need for continued pruning and monitoring.",
+    "completed_inspection_form_url": "https://client-ops.example.test/completed/job_americanriver_003"
+  }
+]

@@ -1,0 +1,36 @@
+site_name: TRAQ Reporter
+site_description: Static reporting client prototype for field inspection publications
+site_url: https://example.github.io/reporter-client/
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  features:
+    - navigation.tabs
+    - navigation.top
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+  logo: assets/branding/logo.svg
+
+nav:
+  - Home: index.md
+  - About: about.md
+  - Briarwood: projects/briarwood.md
+  - Arboretum: projects/arboretum.md
+  - American River: projects/american-river.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - md_in_html
+  - tables
+
+extra_css:
+  - assets/styles/extra.css
+
+plugins:
+  - search

@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reporter-client"
+version = "0.1.0"
+description = "Static reporting client for field inspection publications."
+readme = "docs/publish_model.md"
+requires-python = ">=3.11"
+dependencies = [
+  "Jinja2>=3.1,<4",
+  "mkdocs>=1.6,<2",
+  "mkdocs-material>=9.6,<10",
+  "openai>=1.0,<2",
+  "python-dotenv>=1.0,<2",
+  "PyYAML>=6.0,<7",
+]
+
+[project.scripts]
+reporter-client = "reporter_client.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["reporter_client", "reporter_client.*"]
+
+[tool.setuptools.package-data]
+reporter_client = ["templates/**/*.j2"]

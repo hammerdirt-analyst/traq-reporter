@@ -1,0 +1,11 @@
+---
+updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '' }}"
+---
+
+{% set breadcrumbs = view.breadcrumbs %}
+{% set title = view.page_title %}
+{% include "components/page_heading.j2" %}
+
+<div class="text-block" markdown="1">
+{{ view.body_markdown }}
+</div>

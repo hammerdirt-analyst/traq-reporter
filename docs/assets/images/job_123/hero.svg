@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <defs>
+    <linearGradient id="treehero" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#6a8765"/>
+      <stop offset="100%" stop-color="#d8d0b3"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="420" fill="url(#treehero)"/>
+  <rect x="320" y="150" width="54" height="180" rx="16" fill="#5b3d2b"/>
+  <circle cx="348" cy="122" r="88" fill="#4e7052"/>
+  <circle cx="282" cy="138" r="54" fill="#6d936a"/>
+  <circle cx="418" cy="152" r="50" fill="#6d936a"/>
+  <text x="36" y="50" font-family="Georgia, serif" font-size="30" fill="#fff">Image Slot: Tree 12 Hero</text>
+</svg>

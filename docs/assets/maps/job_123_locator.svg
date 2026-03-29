@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f5f1e7"/>
+  <rect x="46" y="46" width="868" height="448" rx="24" fill="#ffffff" stroke="#d8dfd7" stroke-width="4"/>
+  <rect x="170" y="110" width="600" height="300" rx="18" fill="#2f6b4f" opacity="0.12"/>
+  <path d="M220 330 C350 250 460 210 700 170" fill="none" stroke="#c6d0c3" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="490" cy="250" r="22" fill="#b85c38"/>
+  <circle cx="490" cy="250" r="40" fill="none" stroke="#b85c38" stroke-width="8" opacity="0.35"/>
+  <text x="78" y="92" font-family="Georgia, serif" font-size="28" fill="#2d3a33">Tree Locator Map Placeholder</text>
+  <text x="525" y="258" font-family="Arial, sans-serif" font-size="20" fill="#2d3a33">Tree 12</text>
+</svg>
