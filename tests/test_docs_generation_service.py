@@ -51,7 +51,7 @@ class DocsGenerationServiceTests(unittest.TestCase):
             self.assertIn("Extended branches over the parking area", project_page)
             self.assertIn("assets/maps/projects/briarwood.svg", project_page)
             self.assertIn("assets/maps/trees/briarwood_001.svg", tree_page)
-            self.assertIn("assets/images/", project_page)
+            self.assertIn("assets/project-images/briarwood.svg", project_page)
             self.assertIn("assets/images/", tree_page)
             self.assertIn("/reporter-client/assets/traq-forms/briarwood_001.pdf", tree_page)
 

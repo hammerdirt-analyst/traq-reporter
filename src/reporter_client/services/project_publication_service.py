@@ -10,6 +10,7 @@ from ..renderers.project_renderer import ProjectRenderer
 from .content_source_service import ContentSourceService
 from .project_report_services import (
     ProjectMapService,
+    ProjectMediaService,
     ProjectPageInputService,
     ProjectReportSourceService,
     ProjectSummaryService,
@@ -30,6 +31,7 @@ class ProjectPublicationService:
         self._builder = ProjectPageBuilder()
         self._renderer = ProjectRenderer(template_dir=template_dir)
         self._page_input_service = ProjectPageInputService(
+            project_media_service=ProjectMediaService(docs_dir=docs_dir),
             project_map_service=ProjectMapService(docs_dir=docs_dir)
         )
         self._report_source_service = ProjectReportSourceService()

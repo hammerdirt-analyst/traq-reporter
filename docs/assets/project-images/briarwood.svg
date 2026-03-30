@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-label="Briarwood project image">
+  <rect width="1200" height="640" fill="#f4efe3"/>
+  <rect x="60" y="60" width="1080" height="520" rx="28" fill="#dfe7d7"/>
+  <circle cx="250" cy="260" r="95" fill="#6b8f71"/>
+  <rect x="228" y="260" width="44" height="170" fill="#6a4a3c"/>
+  <circle cx="470" cy="220" r="75" fill="#91b17a"/>
+  <rect x="452" y="220" width="36" height="140" fill="#6a4a3c"/>
+  <path d="M110 470 C310 410, 520 420, 760 470 S1040 520, 1090 500" fill="none" stroke="#9a7b5f" stroke-width="36" stroke-linecap="round"/>
+  <text x="100" y="120" fill="#2f4230" font-size="48" font-family="Georgia, serif">Briarwood</text>
+</svg>

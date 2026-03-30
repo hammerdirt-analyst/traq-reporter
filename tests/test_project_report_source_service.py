@@ -55,8 +55,9 @@ class ProjectReportSourceServiceTests(unittest.TestCase):
         )
         self.assertEqual(briarwood.canonical_image_caption, "the tree in the middle")
 
-        media = ProjectMediaService().build_media(briarwood)
-        self.assertEqual(media.canonical_image.caption, "the tree in the middle")
+        media = ProjectMediaService(docs_dir=repo_root / "docs").build_media(briarwood)
+        self.assertEqual(media.canonical_image.caption, "Briarwood project image")
+        self.assertEqual(media.canonical_image.image_src, "assets/project-images/briarwood.svg")
 
         project_map = ProjectMapService().build_map(
             project_source=briarwood,

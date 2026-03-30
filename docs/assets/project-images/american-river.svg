@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-label="American River project image">
+  <rect width="1200" height="640" fill="#e8f1ef"/>
+  <rect x="50" y="50" width="1100" height="540" rx="28" fill="#d9e7cf"/>
+  <path d="M90 420 C240 360, 380 470, 520 420 S800 360, 1110 450" fill="none" stroke="#6ea6c1" stroke-width="56" stroke-linecap="round"/>
+  <circle cx="280" cy="235" r="88" fill="#6d9266"/>
+  <rect x="258" y="235" width="44" height="155" fill="#6e523c"/>
+  <circle cx="720" cy="210" r="102" fill="#86aa74"/>
+  <rect x="694" y="210" width="52" height="180" fill="#6e523c"/>
+  <text x="95" y="120" fill="#23414a" font-size="48" font-family="Georgia, serif">American River</text>
+</svg>

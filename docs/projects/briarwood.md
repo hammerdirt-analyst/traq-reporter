@@ -23,8 +23,8 @@ Briarwood is a community of Rancho Cordova. It is a friendly community known for
 
 <div class="tree-hero">
   <figure>
-    <img src="../../assets/images/briarwood_001/image_01.jpg" alt="the tree in the middle" />
-    <figcaption>the tree in the middle</figcaption>
+    <img src="../../assets/project-images/briarwood.svg" alt="Briarwood project image" />
+    <figcaption>Briarwood project image</figcaption>
   </figure>
 </div>
 

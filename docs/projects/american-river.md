@@ -27,8 +27,8 @@ It is also a great place to study oak trees and other species common along the p
 
 <div class="tree-hero">
   <figure>
-    <img src="../../assets/images/american-river_001/image_01.svg" alt="The tree: riverbank view" />
-    <figcaption>The tree: riverbank view</figcaption>
+    <img src="../../assets/project-images/american-river.svg" alt="American River project image" />
+    <figcaption>American River project image</figcaption>
   </figure>
 </div>
 

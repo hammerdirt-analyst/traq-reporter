@@ -14,6 +14,7 @@ from .home_report_services import HomePageInputService, HomeReportSourceService,
 from .project_naming import project_slug
 from .project_report_services import (
     ProjectMapService,
+    ProjectMediaService,
     ProjectPageInputService,
     ProjectReportSourceService,
     ProjectSummaryService,
@@ -50,6 +51,7 @@ class StagedInputService:
         self._home_page_input_service = HomePageInputService()
         self._home_summary_service = HomeSummaryService()
         self._project_page_input_service = ProjectPageInputService(
+            project_media_service=ProjectMediaService(docs_dir=docs_dir),
             project_map_service=ProjectMapService(docs_dir=docs_dir)
         )
         self._project_report_source_service = ProjectReportSourceService()
