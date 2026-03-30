@@ -3,23 +3,34 @@
 from __future__ import annotations
 
 import json
+from dataclasses import dataclass
 from pathlib import Path
 
 from .report_source import TreeReportSourceService
 from ...models.tree_report_source import TreeReportSource
 
 
+@dataclass(frozen=True)
+class StagedTreeRecord:
+    source: TreeReportSource
+    completed_payload: dict
+
+
 class StagedTreeBundleService:
     """Adapt a staged job bundle manifest into a canonical tree report source."""
 
     def build_from_manifest(self, manifest_path: Path) -> TreeReportSource:
+        return self.build_record_from_manifest(manifest_path).source
+
+    def build_record_from_manifest(self, manifest_path: Path) -> StagedTreeRecord:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         bundle_dir = manifest_path.parent
         completed_payload = self._load_completed_payload(bundle_dir, manifest)
         transcript = str(completed_payload.get("transcript", ""))
-        return TreeReportSourceService(
+        source = TreeReportSourceService(
             completed_form_url_resolver=lambda payload: self._resolve_completed_form_path(bundle_dir, manifest)
         ).build(completed_payload, transcript=transcript)
+        return StagedTreeRecord(source=source, completed_payload=completed_payload)
 
     def _load_completed_payload(self, bundle_dir: Path, manifest: dict) -> dict:
         final_json_path = self._resolve_bundle_path(bundle_dir, manifest.get("artifacts", {}).get("final_json"))

@@ -18,7 +18,6 @@ class PublishConfig:
 
 @dataclass(frozen=True)
 class PathConfig:
-    examples_dir: Path
     content_dir: Path
     docs_dir: Path
 

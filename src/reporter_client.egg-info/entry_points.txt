@@ -1,2 +1,0 @@
-[console_scripts]
-reporter-client = reporter_client.cli:main

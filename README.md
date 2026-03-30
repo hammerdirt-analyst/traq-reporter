@@ -36,8 +36,11 @@ The repo-root config is [reporter_client.yaml](/home/roger/projects/codex_trial/
 Run tests:
 
 ```bash
-env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync python -m unittest tests.test_config_service tests.test_publish_state_service tests.test_staged_tree_bundle_service tests.test_summary_services tests.test_tree_report_source_service tests.test_page_builders tests.test_docs_generation_service
+env OPENAI_API_KEY='' UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync python -m unittest discover -s tests -p 'test_*.py'
 ```
+
+Use `discover` as the standard unittest entrypoint for this repo. Plain
+`python -m unittest` is not the supported test command here.
 
 Serve the MkDocs site locally:
 

@@ -34,7 +34,7 @@ def main() -> int:
 
     if args.command == "generate-docs":
         service = DocsGenerationService(
-            examples_dir=Path(args.examples_dir).resolve() if args.examples_dir else config.paths.examples_dir,
+            staging_root=config.staging.root,
             content_dir=Path(args.content_dir).resolve() if args.content_dir else config.paths.content_dir,
             docs_dir=Path(args.docs_dir).resolve() if args.docs_dir else config.paths.docs_dir,
         )

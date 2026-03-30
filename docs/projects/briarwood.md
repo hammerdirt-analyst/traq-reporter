@@ -25,14 +25,14 @@ project_page_input.summary_markdown.paragraph_2
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../assets/images/briarwood_001/image_01.jpg" alt="the tree in the middle" />
+    <figcaption>the tree in the middle</figcaption>
   </figure>
 </div>
 
 
 <div class="panel panel-map">
-  <img src="../../assets/maps/project_alpha_overview.svg" alt="Briarwood assessment map" />
+  <img src="../../assets/maps/projects/briarwood.svg" alt="Briarwood assessment map" />
 </div>
 
 <div class="text-block" markdown="1">
@@ -45,11 +45,11 @@ I have been summarized for Briarwood.
 | --- | ---: |
 | Assessments | 4 |
 | Trees | 4 |
-| Species | 4 |
+| Species | 3 |
 
 | Job | Species | DBH | Height | Risk | Main Concerns |
 | --- | --- | ---: | ---: | --- | --- |
-| [briarwood_001](/reporter-client/projects/briarwood/trees/briarwood_001/) | Quercus agrifolia | 20 in | 54 ft | low | Extended branches over the parking area |
-| [briarwood_002](/reporter-client/projects/briarwood/trees/briarwood_002/) | Platanus racemosa | 26 in | 62 ft | moderate | Observed bark irregularities on trunk |
-| [briarwood_003](/reporter-client/projects/briarwood/trees/briarwood_003/) | Acer macrophyllum | 18 in | 48 ft | low | Observed pavement over roots |
+| [briarwood_001](/reporter-client/projects/briarwood/trees/briarwood_001/) | Quercus agrifolia | 20 in | 54 ft | low | The main concern are the branches hanging over the parking lot, and that's it.; the sap ooze in the, there is a, yes, there is sap ooze coming from a crack on the north; the pavement that covers thirty percent of the roots |
+| [briarwood_002](/reporter-client/projects/briarwood/trees/briarwood_002/) | Quercus agrifolia | 20 in | 54 ft | low | Extended branches over the parking area |
+| [briarwood_003](/reporter-client/projects/briarwood/trees/briarwood_003/) | Platanus racemosa | 26 in | 62 ft | moderate | Observed bark irregularities on trunk |
 | [briarwood_004](/reporter-client/projects/briarwood/trees/briarwood_004/) | Sequoia sempervirens | 32 in | 88 ft | low | Observed high vigor and normal foliage |

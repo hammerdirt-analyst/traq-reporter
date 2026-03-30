@@ -5,6 +5,7 @@ from __future__ import annotations
 from ...models.page_inputs import MapAssetInput, TreePageInput
 from ...models.summary_artifacts import SummaryArtifact
 from ...models.tree_report_source import TreeReportSource
+from ..project_naming import project_slug
 from .map import TreeMapService
 from .media import TreeMediaService
 
@@ -24,11 +25,11 @@ class TreePageInputService:
     def build(self, source: TreeReportSource, summary_artifact: SummaryArtifact) -> TreePageInput:
         tree_map = self._tree_map_service.build_map(source)
         media = self._tree_media_service.build_media(source)
-        project_slug = self._project_slug(source.project)
+        slug = project_slug(source.project)
         return TreePageInput(
-            tree_doc=f"projects/{project_slug}/trees/{source.tree_id}.md",
+            tree_doc=f"projects/{slug}/trees/{source.tree_id}.md",
             project_name=source.project,
-            project_doc=f"projects/{project_slug}.md",
+            project_doc=f"projects/{slug}.md",
             tree_name=str(source.species),
             title_text=f"{source.dbh} in DBH | {source.height} ft tall",
             facts=[
@@ -43,7 +44,3 @@ class TreePageInputService:
             completed_inspection_form_url=str(source.completed_inspection_form_url),
             updated_at=str(source.archived_at),
         )
-
-    @staticmethod
-    def _project_slug(project_name: str) -> str:
-        return project_name.strip().lower().replace(" ", "-")

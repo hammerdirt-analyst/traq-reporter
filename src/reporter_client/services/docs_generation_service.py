@@ -12,17 +12,17 @@ from ..renderers.about_renderer import AboutRenderer
 from ..renderers.home_renderer import HomeRenderer
 from ..renderers.project_renderer import ProjectRenderer
 from ..renderers.tree_renderer import TreeRenderer
-from .fixture_input_service import FixtureInputService
+from .staged_input_service import StagedInputService
 
 
 class DocsGenerationService:
     """Render documentation pages from canonical page inputs."""
 
-    def __init__(self, *, examples_dir: Path, content_dir: Path, docs_dir: Path) -> None:
-        self._examples_dir = examples_dir
+    def __init__(self, *, staging_root: Path, content_dir: Path, docs_dir: Path) -> None:
+        self._staging_root = staging_root
         self._docs_dir = docs_dir
         template_dir = self._resolve_template_dir()
-        self._fixture_inputs = FixtureInputService(examples_dir=examples_dir, content_dir=content_dir)
+        self._inputs = StagedInputService(staging_root=staging_root, content_dir=content_dir, docs_dir=docs_dir)
         self._home_builder = HomePageBuilder()
         self._about_builder = AboutPageBuilder()
         self._project_builder = ProjectPageBuilder()
@@ -34,11 +34,11 @@ class DocsGenerationService:
 
     def generate(self) -> None:
         """Generate the docs pages used by MkDocs."""
-        home_view = self._home_builder.build(self._fixture_inputs.load_home_input())
+        home_view = self._home_builder.build(self._inputs.load_home_input())
         self._write("index.md", self._home_renderer.render({"view": home_view}))
-        about_view = self._about_builder.build(self._fixture_inputs.load_about_input())
+        about_view = self._about_builder.build(self._inputs.load_about_input())
         self._write("about.md", self._about_renderer.render({"view": about_view}))
-        project_inputs = self._fixture_inputs.load_project_inputs()
+        project_inputs = self._inputs.load_project_inputs()
         self._clear_generated_docs(
             subdir="projects",
             keep_paths={f"projects/{project_input.project_id}.md" for project_input in project_inputs},
@@ -46,7 +46,7 @@ class DocsGenerationService:
         for project_input in project_inputs:
             project_view = self._project_builder.build(project_input)
             self._write(f"projects/{project_input.project_id}.md", self._project_renderer.render({"view": project_view}))
-        tree_inputs = self._fixture_inputs.load_tree_inputs()
+        tree_inputs = self._inputs.load_tree_inputs()
         self._clear_generated_tree_docs(keep_paths={tree_input.tree_doc for tree_input in tree_inputs})
         for tree_input in tree_inputs:
             tree_view = self._tree_builder.build(tree_input)

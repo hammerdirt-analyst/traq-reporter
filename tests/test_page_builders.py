@@ -10,7 +10,7 @@ from reporter_client.builders.about_page_builder import AboutPageBuilder
 from reporter_client.builders.home_page_builder import HomePageBuilder
 from reporter_client.builders.project_page_builder import ProjectPageBuilder
 from reporter_client.builders.tree_page_builder import TreePageBuilder
-from reporter_client.services.fixture_input_service import FixtureInputService
+from reporter_client.services.staged_input_service import StagedInputService
 
 
 class PageBuilderTests(unittest.TestCase):
@@ -18,9 +18,10 @@ class PageBuilderTests(unittest.TestCase):
         self._env_patcher = patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False)
         self._env_patcher.start()
         repo_root = Path(__file__).resolve().parent.parent
-        self.inputs = FixtureInputService(
-            examples_dir=repo_root / "examples",
+        self.inputs = StagedInputService(
+            staging_root=repo_root.parent / "server" / "staging",
             content_dir=repo_root / "content",
+            docs_dir=repo_root / "docs",
         )
 
     def tearDown(self) -> None:
@@ -48,11 +49,15 @@ class PageBuilderTests(unittest.TestCase):
         self.assertEqual(view.page_title, "Briarwood")
         self.assertIn("I have been summarized", view.summary_markdown)
         self.assertIn("project_page_input.summary_markdown", view.description_markdown)
-        self.assertEqual(view.project_image.caption, "The tree: in the middle")
+        self.assertEqual(view.project_image.caption, "the tree in the middle")
+        self.assertIn("assets/images/", view.project_image.image_href)
+        self.assertIn("assets/maps/projects/briarwood.svg", view.project_map.image_href)
         self.assertEqual(view.tree_rows[0].job_number, "briarwood_001")
         self.assertEqual(view.tree_rows[0].species_common, "Quercus agrifolia")
         self.assertEqual(view.tree_rows[0].risk_rating, "low")
-        self.assertEqual(view.tree_rows[0].main_concerns, "Extended branches over the parking area")
+        self.assertIn("branches hanging over the parking lot", view.tree_rows[0].main_concerns)
+        self.assertIn("sap ooze", view.tree_rows[0].main_concerns)
+        self.assertIn("thirty percent of the roots", view.tree_rows[0].main_concerns)
 
     def test_tree_page_builder(self) -> None:
         tree_inputs = self.inputs.load_tree_inputs()
@@ -62,8 +67,10 @@ class PageBuilderTests(unittest.TestCase):
         self.assertEqual(view.page_title, "Quercus agrifolia")
         self.assertEqual(view.breadcrumbs[1].label, "Briarwood")
         self.assertEqual(view.completed_inspection_form_link.label, "Completed inspection form")
-        self.assertEqual(view.image_gallery[0].caption, "The tree: in the middle")
-        self.assertIn("job_123_locator.svg", view.tree_map.image_href)
+        self.assertEqual(view.image_gallery[0].caption, "the tree in the middle")
+        self.assertIn("assets/images/", view.image_gallery[0].image_href)
+        self.assertIn("assets/maps/trees/briarwood_001.svg", view.tree_map.image_href)
+        self.assertIn("assets/traq-forms/briarwood_001.pdf", view.completed_inspection_form_link.href)
 
 
 if __name__ == "__main__":

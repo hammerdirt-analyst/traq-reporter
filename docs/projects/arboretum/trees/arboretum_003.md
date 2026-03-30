@@ -16,7 +16,7 @@ updated_at: "2026-03-25 10:30"
   <span>Ulmus parvifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../../assets/maps/job_123_locator.svg" alt="Ulmus parvifolia locator map" />
+  <img src="../../../../assets/maps/trees/arboretum_003.svg" alt="Ulmus parvifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |
@@ -26,8 +26,8 @@ updated_at: "2026-03-25 10:30"
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../../../assets/images/arboretum_003/image_01.svg" alt="The tree: entry path view" />
+    <figcaption>The tree: entry path view</figcaption>
   </figure>
 </div>
 
@@ -42,9 +42,9 @@ I have been summarized again for layout testing.
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_2.svg" alt="trunk" />
-    <figcaption>trunk</figcaption>
+    <img src="../../../../assets/images/arboretum_003/image_02.svg" alt="trunk texture" />
+    <figcaption>trunk texture</figcaption>
   </figure>
 </div>
 
-- [Completed inspection form](https://client-ops.example.test/completed/job_arboretum_003)
+- [Completed inspection form](assets/traq-forms/arboretum_003.pdf)

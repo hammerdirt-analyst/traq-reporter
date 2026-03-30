@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from ..models.page_inputs import TreePageInput
 from ..models.page_views import BreadcrumbView, ImageAssetView, LinkView, MapView, TreePageView
+from ..services.media_rules import is_lead_tree_caption
 from ..services.path_service import PathService
 
 
@@ -53,7 +54,7 @@ class TreePageBuilder:
             return []
 
         lead_index = next(
-            (index for index, image in enumerate(rendered_images) if "tree" in image.caption.lower()),
+            (index for index, image in enumerate(rendered_images) if is_lead_tree_caption(image.caption)),
             0,
         )
         lead_image = rendered_images[lead_index]

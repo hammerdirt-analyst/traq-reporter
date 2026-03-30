@@ -16,7 +16,7 @@ updated_at: "2026-03-25 09:40"
   <span>Sequoia sempervirens</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../../assets/maps/job_123_locator.svg" alt="Sequoia sempervirens locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_004.svg" alt="Sequoia sempervirens locator map" />
 </div>
 | Field | Value |
 | --- | --- |
@@ -26,8 +26,8 @@ updated_at: "2026-03-25 09:40"
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../../../assets/images/briarwood_004/image_01.svg" alt="The tree: north-facing view" />
+    <figcaption>The tree: north-facing view</figcaption>
   </figure>
 </div>
 
@@ -42,9 +42,9 @@ I have been summarized again for layout testing.
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_2.svg" alt="trunk" />
-    <figcaption>trunk</figcaption>
+    <img src="../../../../assets/images/briarwood_004/image_02.svg" alt="canopy detail" />
+    <figcaption>canopy detail</figcaption>
   </figure>
 </div>
 
-- [Completed inspection form](https://client-ops.example.test/completed/job_briarwood_004)
+- [Completed inspection form](assets/traq-forms/briarwood_004.pdf)

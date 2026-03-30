@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 from ...models.tree_report_source import TreeReportSource
+from ..map_processor_service import MapProcessorRequest, MapProcessorService
 
 
 @dataclass(frozen=True)
@@ -17,12 +19,23 @@ class TreeMapArtifact:
 class TreeMapService:
     """Build the tree-page map asset from the tree source."""
 
+    _PLACEHOLDER_IMAGE_SRC = "../assets/maps/job_123_locator.svg"
+
+    def __init__(self, *, docs_dir: Path | None = None, map_processor_service: MapProcessorService | None = None) -> None:
+        self._map_processor_service = map_processor_service or MapProcessorService(docs_dir=docs_dir)
+
     def build_map(self, source: TreeReportSource, *, geojson_asset_src: str | None = None) -> TreeMapArtifact:
-        image_src = "../assets/maps/job_123_locator.svg"
-        if source.geojson and source.geojson.geojson_src:
-            image_src = "../assets/maps/job_123_locator.svg"
+        resolved_geojson_asset_src = geojson_asset_src or (source.geojson.geojson_src if source.geojson else None)
+        map_artifact = self._map_processor_service.render(
+            MapProcessorRequest(
+                output_asset_src=f"assets/maps/trees/{source.tree_id}.svg" if source.tree_id else self._PLACEHOLDER_IMAGE_SRC,
+                fallback_image_src=self._PLACEHOLDER_IMAGE_SRC,
+                alt=f"{source.species} locator map",
+                geojson_sources=[resolved_geojson_asset_src] if resolved_geojson_asset_src else [],
+            )
+        )
         return TreeMapArtifact(
-            image_src=image_src,
-            alt=f"{source.species} locator map",
-            geojson_asset_src=geojson_asset_src or (source.geojson.geojson_src if source.geojson else None),
+            image_src=map_artifact.image_src,
+            alt=map_artifact.alt,
+            geojson_asset_src=resolved_geojson_asset_src,
         )

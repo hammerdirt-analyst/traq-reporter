@@ -6,6 +6,7 @@ from dataclasses import dataclass
 
 from ...models.page_inputs import ImageAssetInput
 from ...models.tree_report_source import TreeReportSource
+from ..media_rules import is_lead_tree_caption
 
 
 @dataclass(frozen=True)
@@ -16,8 +17,6 @@ class TreeMediaArtifact:
 
 class TreeMediaService:
     """Map tree-source images into page-ready image assets."""
-
-    _LEAD_IMAGE_PREFIX = "the tree:"
 
     def build_media(self, source: TreeReportSource) -> TreeMediaArtifact:
         images = [
@@ -33,7 +32,7 @@ class TreeMediaService:
             (
                 index
                 for index, image in enumerate(images)
-                if image.caption.strip().lower().startswith(self._LEAD_IMAGE_PREFIX)
+                if is_lead_tree_caption(image.caption)
             ),
             0,
         )

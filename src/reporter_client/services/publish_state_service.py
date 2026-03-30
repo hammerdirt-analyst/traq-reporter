@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from ..models.publish_index import PublishIndex, PublishPlan, PublishRecord, PublishWorkItem, StagedManifestRecord
+from .project_naming import project_slug
 
 
 class PublishStateService:
@@ -99,25 +100,21 @@ class PublishStateService:
             )
         return PublishIndex(records=updated_records)
 
-    @staticmethod
-    def _project_slug(project_name: str) -> str:
-        return project_name.strip().lower().replace(" ", "-")
-
     def _project_counters(self, index: PublishIndex) -> dict[str, int]:
         counters: dict[str, int] = {}
         for record in index.records.values():
-            project_slug = self._project_slug(record.project)
-            prefix = f"{project_slug}_"
+            slug = project_slug(record.project)
+            prefix = f"{slug}_"
             if not record.tree_id.startswith(prefix):
                 continue
             suffix = record.tree_id.removeprefix(prefix)
             if not suffix.isdigit():
                 continue
-            counters[project_slug] = max(counters.get(project_slug, 0), int(suffix))
+            counters[slug] = max(counters.get(slug, 0), int(suffix))
         return counters
 
     def _next_tree_id(self, project: str, project_counters: dict[str, int]) -> str:
-        project_slug = self._project_slug(project)
-        next_value = project_counters.get(project_slug, 0) + 1
-        project_counters[project_slug] = next_value
-        return f"{project_slug}_{next_value:03d}"
+        slug = project_slug(project)
+        next_value = project_counters.get(slug, 0) + 1
+        project_counters[slug] = next_value
+        return f"{slug}_{next_value:03d}"

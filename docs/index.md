@@ -24,7 +24,7 @@ completed forms and related outputs organized and accessible.
 
 
 <div class="panel panel-map">
-  <img src="assets/maps/all-projects-overview.svg" alt="home_page_input.combined_map.image_alt" />
+  <img src="assets/maps/all-projects-overview.svg" alt="Combined assessment map" />
 </div>
 
 <div class="text-block" markdown="1">
@@ -43,7 +43,7 @@ I have been summarized for TRAQ Reporter.
   <tbody>
     <tr><td>Assessments</td><td>10</td></tr>
     <tr><td>Trees</td><td>10</td></tr>
-    <tr><td>Species</td><td>10</td></tr>
+    <tr><td>Species</td><td>9</td></tr>
     <tr><td>Projects</td><td>3</td></tr>
   </tbody>
 </table>  </section>

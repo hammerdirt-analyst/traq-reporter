@@ -25,14 +25,14 @@ project_page_input.summary_markdown.paragraph_2
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../assets/images/arboretum_001/image_01.svg" alt="The tree: pedestrian path view" />
+    <figcaption>The tree: pedestrian path view</figcaption>
   </figure>
 </div>
 
 
 <div class="panel panel-map">
-  <img src="../../assets/maps/project_bravo_overview.svg" alt="Arboretum assessment map" />
+  <img src="../../assets/maps/projects/arboretum.svg" alt="Arboretum assessment map" />
 </div>
 
 <div class="text-block" markdown="1">

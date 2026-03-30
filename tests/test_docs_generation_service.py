@@ -15,11 +15,12 @@ from reporter_client.services.docs_generation_service import DocsGenerationServi
 class DocsGenerationServiceTests(unittest.TestCase):
     def test_generate_writes_pages_with_authored_markdown_and_footer(self) -> None:
         repo_root = Path(__file__).resolve().parent.parent
+        staging_root = repo_root.parent / "server" / "staging"
         content_source = ContentSourceService(content_dir=repo_root / "content")
         with patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False), TemporaryDirectory() as tempdir:
             docs_dir = Path(tempdir) / "docs"
             service = DocsGenerationService(
-                examples_dir=repo_root / "examples",
+                staging_root=staging_root,
                 content_dir=repo_root / "content",
                 docs_dir=docs_dir,
             )
@@ -48,6 +49,10 @@ class DocsGenerationServiceTests(unittest.TestCase):
             self.assertNotIn("Sample tree page:", project_page)
             self.assertIn("briarwood_001", project_page)
             self.assertIn("Extended branches over the parking area", project_page)
+            self.assertIn("assets/maps/projects/briarwood.svg", project_page)
+            self.assertIn("assets/maps/trees/briarwood_001.svg", tree_page)
+            self.assertIn("assets/images/", project_page)
+            self.assertIn("assets/images/", tree_page)
 
 
 if __name__ == "__main__":

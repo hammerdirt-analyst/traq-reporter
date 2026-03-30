@@ -1,11 +1,11 @@
 ---
-updated_at: "2026-03-25 09:20"
+updated_at: "2026-03-25 09:10"
 ---
 
 <div class="page-header">
   <div>
-    <h1>Platanus racemosa</h1>
-    <p class="tagline">26 in DBH | 62 ft tall</p>
+    <h1>Quercus agrifolia</h1>
+    <p class="tagline">20 in DBH | 54 ft tall</p>
   </div>
 </div>
 <div class="crumb-bar">
@@ -13,26 +13,26 @@ updated_at: "2026-03-25 09:20"
   <span>/</span>
   <a href="/reporter-client/projects/briarwood/">Briarwood</a>
   <span>/</span>
-  <span>Platanus racemosa</span>
+  <span>Quercus agrifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../../assets/maps/job_123_locator.svg" alt="Platanus racemosa locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_002.svg" alt="Quercus agrifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |
-| Overall Tree Risk | moderate |
+| Overall Tree Risk | low |
 | Residual Risk | low |
-| Inspection Interval | 12 months |
+| Inspection Interval | 18 months |
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
+    <img src="../../../../assets/images/briarwood_002/image_01.svg" alt="The tree: in the middle" />
     <figcaption>The tree: in the middle</figcaption>
   </figure>
 </div>
 
 <div class="text-block" markdown="1">
-I have been summarized from transcript and form data for Platanus racemosa.
+I have been summarized from transcript and form data for Quercus agrifolia.
 
 I have been summarized.
 
@@ -42,9 +42,9 @@ I have been summarized again for layout testing.
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_2.svg" alt="trunk" />
+    <img src="../../../../assets/images/briarwood_002/image_02.svg" alt="trunk" />
     <figcaption>trunk</figcaption>
   </figure>
 </div>
 
-- [Completed inspection form](https://client-ops.example.test/completed/job_briarwood_002)
+- [Completed inspection form](assets/traq-forms/briarwood_002.pdf)

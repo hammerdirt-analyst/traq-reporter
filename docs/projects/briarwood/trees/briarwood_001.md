@@ -16,7 +16,7 @@ updated_at: "2026-03-25 09:10"
   <span>Quercus agrifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../../assets/maps/job_123_locator.svg" alt="Quercus agrifolia locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_001.svg" alt="Quercus agrifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |
@@ -26,8 +26,8 @@ updated_at: "2026-03-25 09:10"
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../../../assets/images/briarwood_001/image_01.jpg" alt="the tree in the middle" />
+    <figcaption>the tree in the middle</figcaption>
   </figure>
 </div>
 
@@ -42,9 +42,13 @@ I have been summarized again for layout testing.
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../../assets/images/job_123/img_2.svg" alt="trunk" />
+    <img src="../../../../assets/images/briarwood_001/image_02.jpg" alt="trunk" />
     <figcaption>trunk</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/briarwood_001/image_03.jpg" alt="ooze on trunk" />
+    <figcaption>ooze on trunk</figcaption>
   </figure>
 </div>
 
-- [Completed inspection form](https://client-ops.example.test/completed/job_briarwood_001)
+- [Completed inspection form](assets/traq-forms/briarwood_001.pdf)

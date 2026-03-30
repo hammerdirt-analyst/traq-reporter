@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import replace
 
 from ...models.tree_report_source import TreeReportSource
+from ..project_naming import project_slug
 
 
 class TreeIdentityService:
@@ -17,13 +18,9 @@ class TreeIdentityService:
 
         identified: list[TreeReportSource] = []
         for project_name in sorted(grouped):
-            project_slug = self._project_slug(project_name)
+            slug = project_slug(project_name)
             ordered_sources = sorted(grouped[project_name], key=lambda item: (item.archived_at, item.job_id))
             for index, source in enumerate(ordered_sources, start=1):
-                tree_id = source.tree_id or f"{project_slug}_{index:03d}"
+                tree_id = source.tree_id or f"{slug}_{index:03d}"
                 identified.append(replace(source, tree_id=tree_id))
         return identified
-
-    @staticmethod
-    def _project_slug(project_name: str) -> str:
-        return project_name.strip().lower().replace(" ", "-")

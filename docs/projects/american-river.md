@@ -25,14 +25,14 @@ project_page_input.summary_markdown.paragraph_2
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../assets/images/job_123/img_1.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../assets/images/american-river_001/image_01.svg" alt="The tree: riverbank view" />
+    <figcaption>The tree: riverbank view</figcaption>
   </figure>
 </div>
 
 
 <div class="panel panel-map">
-  <img src="../../assets/maps/project_charlie_overview.svg" alt="American River assessment map" />
+  <img src="../../assets/maps/projects/american-river.svg" alt="American River assessment map" />
 </div>
 
 <div class="text-block" markdown="1">

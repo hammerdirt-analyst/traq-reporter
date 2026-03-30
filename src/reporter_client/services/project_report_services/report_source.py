@@ -6,6 +6,8 @@ from collections import defaultdict
 
 from ...models.project_report_source import ProjectReportSource, ProjectTreeEntry
 from ...models.tree_report_source import TreeReportSource
+from ..media_rules import is_lead_tree_caption
+from ..project_naming import project_slug
 
 
 class ProjectReportSourceService:
@@ -33,7 +35,7 @@ class ProjectReportSourceService:
             project_sources.append(
                 ProjectReportSource(
                     project=project_name,
-                    project_slug=self._project_slug(project_name),
+                    project_slug=project_slug(project_name),
                     project_description=project_descriptions.get(project_name, ""),
                     tree_count=len(entries),
                     species_count=len({entry.species for entry in entries}),
@@ -48,14 +50,14 @@ class ProjectReportSourceService:
 
     def _build_tree_entry(self, source: TreeReportSource) -> ProjectTreeEntry:
         canonical_image = next(
-            (image for image in source.images if "tree" in image.caption.lower()),
+            (image for image in source.images if is_lead_tree_caption(image.caption)),
             source.images[0] if source.images else None,
         )
-        project_slug = self._project_slug(source.project)
+        slug = project_slug(source.project)
         return ProjectTreeEntry(
             tree_id=source.tree_id,
             job_id=source.job_id,
-            tree_doc=f"projects/{project_slug}/trees/{source.tree_id}.md",
+            tree_doc=f"projects/{slug}/trees/{source.tree_id}.md",
             species=source.species,
             risk_rating=source.risk_profile.overall_tree_risk,
             main_concerns=list(source.main_concerns),
@@ -67,7 +69,3 @@ class ProjectReportSourceService:
             dbh=source.dbh,
             height=source.height,
         )
-
-    @staticmethod
-    def _project_slug(project_name: str) -> str:
-        return project_name.strip().lower().replace(" ", "-")

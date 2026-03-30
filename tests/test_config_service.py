@@ -22,7 +22,6 @@ class ConfigServiceTests(unittest.TestCase):
                         "publish:",
                         "  index_path: .state/publish_index.json",
                         "paths:",
-                        "  examples_dir: examples",
                         "  content_dir: content",
                         "  docs_dir: docs",
                     ]
@@ -34,7 +33,6 @@ class ConfigServiceTests(unittest.TestCase):
 
             self.assertEqual(config.staging.root, (config_dir / "../server/testdata/staged_jobs_manual").resolve())
             self.assertEqual(config.publish.index_path, (config_dir / ".state/publish_index.json").resolve())
-            self.assertEqual(config.paths.examples_dir, (config_dir / "examples").resolve())
             self.assertEqual(config.paths.content_dir, (config_dir / "content").resolve())
             self.assertEqual(config.paths.docs_dir, (config_dir / "docs").resolve())
 
