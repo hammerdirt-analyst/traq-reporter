@@ -131,6 +131,56 @@ class TreeMapServiceTests(unittest.TestCase):
         self.assertEqual(artifact.risk_rating, "low")
         self.assertEqual(artifact.geojson_asset_src, "assets/geojson/briarwood_001.geojson")
 
+    def test_build_map_renders_cropped_tree_map_from_gps_when_basemap_exists(self) -> None:
+        with TemporaryDirectory() as tempdir:
+            docs_dir = Path(tempdir) / "docs"
+            map_base_dir = docs_dir / "assets" / "map-bases"
+            map_base_dir.mkdir(parents=True, exist_ok=True)
+            Image.new("RGB", (400, 300), (235, 239, 244)).save(map_base_dir / "briarwood_base.jpg", format="JPEG")
+            (map_base_dir / "briarwood_base.json").write_text(
+                json.dumps(
+                    {
+                        "west": -121.30,
+                        "east": -121.27,
+                        "south": 38.61,
+                        "north": 38.64,
+                        "width": 400,
+                        "height": 300,
+                        "zoom": 16,
+                    }
+                ),
+                encoding="utf-8",
+            )
+            source = TreeReportSource(
+                project="Briarwood",
+                job_id="job_123",
+                client_revision_id="rev_123",
+                archived_at="2026-03-28T12:00:00Z",
+                species="Quercus agrifolia",
+                dbh=30,
+                height=40,
+                gps=GpsPoint(latitude=38.62, longitude=-121.29),
+                risk_profile=RiskProfile(
+                    overall_tree_risk="low",
+                    overall_residual_risk="low",
+                    recommended_inspection_interval="12 months",
+                ),
+                assessor_name="Assessor",
+                transcript="Transcript",
+                completed_inspection_form_url="assets/traq-forms/briarwood_001.pdf",
+                tree_id="briarwood_001",
+                geojson=None,
+            )
+
+            artifact = TreeMapService(docs_dir=docs_dir).build_map(source)
+
+            self.assertEqual(artifact.image_src, "assets/maps/trees/briarwood_001.jpg")
+            rendered_map = docs_dir / "assets" / "maps" / "trees" / "briarwood_001.jpg"
+            self.assertTrue(rendered_map.exists())
+            with Image.open(rendered_map) as image:
+                self.assertEqual(image.format, "JPEG")
+                self.assertEqual(image.size, (320, 240))
+
 
 class ProjectMapServiceTests(unittest.TestCase):
     def test_build_map_uses_all_project_tree_geojson_assets(self) -> None:

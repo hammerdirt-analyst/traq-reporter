@@ -14,6 +14,8 @@ class MapRenderPoint:
     ordinal: int
     risk_rating: str
     geojson_src: str
+    longitude: float | None = None
+    latitude: float | None = None
 
 
 @dataclass(frozen=True)
@@ -23,6 +25,10 @@ class MapRenderRequest:
     alt: str
     points: list[MapRenderPoint]
     basemap_slug: str | None = None
+    crop_width: int | None = None
+    crop_height: int | None = None
+    marker_radius: int | None = None
+    marker_font_size: int | None = None
 
 
 @dataclass(frozen=True)
@@ -36,6 +42,7 @@ class MapProcessorService:
     """Render numbered risk markers onto a prepared project basemap."""
 
     _MARKER_RADIUS = 18
+    _MARKER_FONT_SIZE = 16
     _MARKER_OUTLINE = "#ffffff"
     _TEXT_COLOR = "#111827"
 
@@ -62,12 +69,34 @@ class MapProcessorService:
             return self._fallback(request)
 
         annotated = image.copy()
+        crop_box = self._crop_box(
+            request=request,
+            bounds=bounds,
+            image_width=annotated.width,
+            image_height=annotated.height,
+            render_points=render_points,
+        )
+        crop_left, crop_top, crop_right, crop_bottom = crop_box
+        if crop_box != (0, 0, annotated.width, annotated.height):
+            annotated = annotated.crop(crop_box)
         draw = ImageDraw.Draw(annotated)
-        font = ImageFont.load_default()
+        marker_radius = request.marker_radius or self._MARKER_RADIUS
+        marker_font_size = request.marker_font_size or self._MARKER_FONT_SIZE
+        font = self._load_font(marker_font_size)
 
         for render_point, longitude, latitude in render_points:
-            x, y = self._project(longitude, latitude, bounds, annotated.width, annotated.height)
-            self._draw_marker(draw, font, x, y, render_point.ordinal, self._risk_color(render_point.risk_rating))
+            x, y = self._project(longitude, latitude, bounds, image.width, image.height)
+            x -= crop_left
+            y -= crop_top
+            self._draw_marker(
+                draw,
+                font,
+                x,
+                y,
+                render_point.ordinal,
+                self._risk_color(render_point.risk_rating),
+                marker_radius=marker_radius,
+            )
 
         target_path = self._docs_dir / request.output_asset_src
         target_path.parent.mkdir(parents=True, exist_ok=True)
@@ -81,6 +110,9 @@ class MapProcessorService:
     def _load_render_points(self, points: list[MapRenderPoint]) -> list[tuple[MapRenderPoint, float, float]]:
         render_points: list[tuple[MapRenderPoint, float, float]] = []
         for render_point in points:
+            if render_point.longitude is not None and render_point.latitude is not None:
+                render_points.append((render_point, render_point.longitude, render_point.latitude))
+                continue
             source_path = self._docs_dir / render_point.geojson_src
             if not source_path.exists():
                 continue
@@ -95,6 +127,31 @@ class MapProcessorService:
             latitude = sum(point[1] for point in coordinates) / len(coordinates)
             render_points.append((render_point, longitude, latitude))
         return render_points
+
+    def _crop_box(
+        self,
+        *,
+        request: MapRenderRequest,
+        bounds: dict[str, float],
+        image_width: int,
+        image_height: int,
+        render_points: list[tuple[MapRenderPoint, float, float]],
+    ) -> tuple[int, int, int, int]:
+        if not request.crop_width or not request.crop_height or not render_points:
+            return (0, 0, image_width, image_height)
+
+        target_width = min(request.crop_width, image_width)
+        target_height = min(request.crop_height, image_height)
+        center_longitude = render_points[0][1]
+        center_latitude = render_points[0][2]
+        center_x, center_y = self._project(center_longitude, center_latitude, bounds, image_width, image_height)
+        left = int(round(center_x - (target_width / 2)))
+        top = int(round(center_y - (target_height / 2)))
+        max_left = image_width - target_width
+        max_top = image_height - target_height
+        left = max(0, min(max_left, left))
+        top = max(0, min(max_top, top))
+        return (left, top, left + target_width, top + target_height)
 
     def _extract_coordinates(self, payload: object) -> list[tuple[float, float]]:
         if not isinstance(payload, dict):
@@ -155,11 +212,13 @@ class MapProcessorService:
         y: float,
         ordinal: int,
         color: str,
+        *,
+        marker_radius: int,
     ) -> None:
-        left = x - self._MARKER_RADIUS
-        top = y - self._MARKER_RADIUS
-        right = x + self._MARKER_RADIUS
-        bottom = y + self._MARKER_RADIUS
+        left = x - marker_radius
+        top = y - marker_radius
+        right = x + marker_radius
+        bottom = y + marker_radius
         draw.ellipse(
             (left, top, right, bottom),
             fill=color,
@@ -176,6 +235,13 @@ class MapProcessorService:
             fill=self._TEXT_COLOR,
             font=font,
         )
+
+    @staticmethod
+    def _load_font(size: int) -> ImageFont.ImageFont | ImageFont.FreeTypeFont:
+        try:
+            return ImageFont.truetype("DejaVuSans-Bold.ttf", size)
+        except OSError:
+            return ImageFont.load_default()
 
     @staticmethod
     def _risk_color(risk_rating: str) -> str:

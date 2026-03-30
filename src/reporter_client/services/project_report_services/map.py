@@ -19,6 +19,9 @@ class ProjectMapArtifact:
 class ProjectMapService:
     """Build the project-page map artifact from all tree geojson sources."""
 
+    _MARKER_RADIUS = 8
+    _MARKER_FONT_SIZE = 6
+
     def __init__(self, *, docs_dir: Path | None = None, map_processor_service: MapProcessorService | None = None) -> None:
         self._map_processor_service = map_processor_service or MapProcessorService(docs_dir=docs_dir)
 
@@ -43,6 +46,8 @@ class ProjectMapService:
                 fallback_image_src=fallback_map_src,
                 alt=f"{project_source.project} assessment map",
                 basemap_slug=project_source.project_slug,
+                marker_radius=self._MARKER_RADIUS,
+                marker_font_size=self._MARKER_FONT_SIZE,
                 points=points,
             )
         )
