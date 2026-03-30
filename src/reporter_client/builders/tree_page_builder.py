@@ -37,7 +37,7 @@ class TreePageBuilder:
             narrative_paragraphs=list(page_input.narrative_paragraphs),
             completed_inspection_form_link=LinkView(
                 label="Completed inspection form",
-                href=page_input.completed_inspection_form_url,
+                href=self._paths.site_asset_link(page_input.completed_inspection_form_url),
             ),
             updated_at=page_input.updated_at,
         )

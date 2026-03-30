@@ -53,6 +53,7 @@ class DocsGenerationServiceTests(unittest.TestCase):
             self.assertIn("assets/maps/trees/briarwood_001.svg", tree_page)
             self.assertIn("assets/images/", project_page)
             self.assertIn("assets/images/", tree_page)
+            self.assertIn("/reporter-client/assets/traq-forms/briarwood_001.pdf", tree_page)
 
 
 if __name__ == "__main__":

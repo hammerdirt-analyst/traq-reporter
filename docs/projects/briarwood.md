@@ -17,9 +17,7 @@ updated_at: "2026-03-25 09:40"
   <span>Briarwood</span>
 </div>
 <div class="text-block" markdown="1">
-project_page_input.summary_markdown.paragraph_1
-
-project_page_input.summary_markdown.paragraph_2
+Briarwood is a community of Rancho Cordova. It is a friendly community known for its well maintained  homes. There are plenty of green spaces and quite a few trees that are professionally maintained. Briarwood is also where I live.
 
 </div>
 

@@ -27,6 +27,12 @@ class PathService:
         return PathService._relative_path(PathService._served_dir(PurePosixPath(from_doc)), PurePosixPath(asset_path))
 
     @staticmethod
+    def site_asset_link(asset_path: str) -> str:
+        """Return a site-root absolute link to a static asset."""
+        target_text = str(PurePosixPath(asset_path)).strip("/")
+        return f"{PathService.SITE_ROOT}/{target_text}"
+
+    @staticmethod
     def _served_dir(doc_path: PurePosixPath) -> PurePosixPath:
         if doc_path.stem == "index":
             return doc_path.parent

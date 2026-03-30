@@ -48,7 +48,7 @@ class PageBuilderTests(unittest.TestCase):
         view = ProjectPageBuilder().build(project_input)
         self.assertEqual(view.page_title, "Briarwood")
         self.assertIn("I have been summarized", view.summary_markdown)
-        self.assertIn("project_page_input.summary_markdown", view.description_markdown)
+        self.assertIn("Briarwood is a community of Rancho Cordova", view.description_markdown)
         self.assertEqual(view.project_image.caption, "the tree in the middle")
         self.assertIn("assets/images/", view.project_image.image_href)
         self.assertIn("assets/maps/projects/briarwood.svg", view.project_map.image_href)
@@ -70,7 +70,7 @@ class PageBuilderTests(unittest.TestCase):
         self.assertEqual(view.image_gallery[0].caption, "the tree in the middle")
         self.assertIn("assets/images/", view.image_gallery[0].image_href)
         self.assertIn("assets/maps/trees/briarwood_001.svg", view.tree_map.image_href)
-        self.assertIn("assets/traq-forms/briarwood_001.pdf", view.completed_inspection_form_link.href)
+        self.assertEqual(view.completed_inspection_form_link.href, "/reporter-client/assets/traq-forms/briarwood_001.pdf")
 
 
 if __name__ == "__main__":

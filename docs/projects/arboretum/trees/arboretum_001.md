@@ -47,4 +47,4 @@ I have been summarized again for layout testing.
   </figure>
 </div>
 
-- [Completed inspection form](assets/traq-forms/arboretum_001.pdf)
+- [Completed inspection form](/reporter-client/assets/traq-forms/arboretum_001.pdf)
