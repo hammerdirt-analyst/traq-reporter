@@ -52,7 +52,7 @@ class PageBuilderTests(unittest.TestCase):
         self.assertIn("Briarwood is a community of Rancho Cordova", view.description_markdown)
         self.assertEqual(view.project_image.caption, "Briarwood project image")
         self.assertIn("assets/project-images/briarwood.svg", view.project_image.image_href)
-        self.assertIn("assets/maps/projects/briarwood.svg", view.project_map.image_href)
+        self.assertIn("assets/maps/projects/briarwood.jpg", view.project_map.image_href)
         self.assertEqual(view.tree_cards[0].ordinal, 1)
         self.assertEqual(view.tree_cards[0].job_number, "briarwood_001")
         self.assertEqual(view.tree_cards[0].species_common, "Quercus agrifolia")
@@ -71,7 +71,7 @@ class PageBuilderTests(unittest.TestCase):
         self.assertEqual(view.completed_inspection_form_link.label, "Completed inspection form")
         self.assertEqual(view.image_gallery[0].caption, "the tree in the middle")
         self.assertIn("assets/images/", view.image_gallery[0].image_href)
-        self.assertIn("assets/maps/trees/briarwood_001.svg", view.tree_map.image_href)
+        self.assertIn("assets/maps/trees/briarwood_001.jpg", view.tree_map.image_href)
         self.assertEqual(view.completed_inspection_form_link.href, "/reporter-client/assets/traq-forms/briarwood_001.pdf")
 
 

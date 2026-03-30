@@ -16,7 +16,7 @@ updated_at: "2026-03-25 10:10"
   <span>Cedrus deodara</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/arboretum_001.svg" alt="Cedrus deodara locator map" />
+  <img src="../../../../assets/maps/trees/arboretum_001.jpg" alt="Cedrus deodara locator map" />
 </div>
 | Field | Value |
 | --- | --- |

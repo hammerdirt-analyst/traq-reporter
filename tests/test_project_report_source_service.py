@@ -64,7 +64,8 @@ class ProjectReportSourceServiceTests(unittest.TestCase):
             fallback_map_src="assets/maps/project_alpha_overview.svg",
         )
         self.assertEqual(project_map.image_src, "assets/maps/project_alpha_overview.svg")
-        self.assertEqual(len(project_map.geojson_sources), 4)
+        self.assertEqual(len(project_map.points), 4)
+        self.assertEqual([point.ordinal for point in project_map.points], [1, 2, 3, 4])
 
 
 if __name__ == "__main__":

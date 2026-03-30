@@ -16,7 +16,7 @@ updated_at: "2026-03-25 11:10"
   <span>Populus fremontii</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/american-river_001.svg" alt="Populus fremontii locator map" />
+  <img src="../../../../assets/maps/trees/american-river_001.jpg" alt="Populus fremontii locator map" />
 </div>
 | Field | Value |
 | --- | --- |

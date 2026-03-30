@@ -6,20 +6,22 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ...models.tree_report_source import TreeReportSource
-from ..map_processor_service import MapProcessorRequest, MapProcessorService
+from ..map_processor_service import MapProcessorService, MapRenderPoint, MapRenderRequest
 
 
 @dataclass(frozen=True)
 class TreeMapArtifact:
     image_src: str
     alt: str
+    ordinal: int
+    risk_rating: str
     geojson_asset_src: str | None = None
 
 
 class TreeMapService:
     """Build the tree-page map asset from the tree source."""
 
-    _PLACEHOLDER_IMAGE_SRC = "../assets/maps/job_123_locator.svg"
+    _PLACEHOLDER_IMAGE_SRC = "../assets/maps/job_123_locator.jpg"
 
     def __init__(self, *, docs_dir: Path | None = None, map_processor_service: MapProcessorService | None = None) -> None:
         self._map_processor_service = map_processor_service or MapProcessorService(docs_dir=docs_dir)
@@ -27,15 +29,25 @@ class TreeMapService:
     def build_map(self, source: TreeReportSource, *, geojson_asset_src: str | None = None) -> TreeMapArtifact:
         resolved_geojson_asset_src = geojson_asset_src or (source.geojson.geojson_src if source.geojson else None)
         map_artifact = self._map_processor_service.render(
-            MapProcessorRequest(
-                output_asset_src=f"assets/maps/trees/{source.tree_id}.svg" if source.tree_id else self._PLACEHOLDER_IMAGE_SRC,
+            MapRenderRequest(
+                output_asset_src=f"assets/maps/trees/{source.tree_id}.jpg" if source.tree_id else self._PLACEHOLDER_IMAGE_SRC,
                 fallback_image_src=self._PLACEHOLDER_IMAGE_SRC,
                 alt=f"{source.species} locator map",
-                geojson_sources=[resolved_geojson_asset_src] if resolved_geojson_asset_src else [],
+                points=[
+                    MapRenderPoint(
+                        ordinal=1,
+                        risk_rating=source.risk_profile.overall_tree_risk,
+                        geojson_src=resolved_geojson_asset_src,
+                    )
+                ]
+                if resolved_geojson_asset_src
+                else [],
             )
         )
         return TreeMapArtifact(
             image_src=map_artifact.image_src,
             alt=map_artifact.alt,
+            ordinal=1,
+            risk_rating=source.risk_profile.overall_tree_risk,
             geojson_asset_src=resolved_geojson_asset_src,
         )

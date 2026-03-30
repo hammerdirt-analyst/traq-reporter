@@ -16,7 +16,7 @@ updated_at: "2026-03-25 10:30"
   <span>Ulmus parvifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/arboretum_003.svg" alt="Ulmus parvifolia locator map" />
+  <img src="../../../../assets/maps/trees/arboretum_003.jpg" alt="Ulmus parvifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |

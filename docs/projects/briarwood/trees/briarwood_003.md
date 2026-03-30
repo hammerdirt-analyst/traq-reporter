@@ -16,7 +16,7 @@ updated_at: "2026-03-25 09:20"
   <span>Platanus racemosa</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/briarwood_003.svg" alt="Platanus racemosa locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_003.jpg" alt="Platanus racemosa locator map" />
 </div>
 | Field | Value |
 | --- | --- |

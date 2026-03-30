@@ -8,22 +8,29 @@ from pathlib import Path
 
 
 @dataclass(frozen=True)
-class MapProcessorRequest:
-    output_asset_src: str
-    fallback_image_src: str
-    alt: str
-    geojson_sources: list[str]
+class MapRenderPoint:
+    ordinal: int
+    risk_rating: str
+    geojson_src: str
 
 
 @dataclass(frozen=True)
-class MapProcessorArtifact:
+class MapRenderRequest:
+    output_asset_src: str
+    fallback_image_src: str
+    alt: str
+    points: list[MapRenderPoint]
+
+
+@dataclass(frozen=True)
+class MapRenderArtifact:
     image_src: str
     alt: str
-    geojson_sources: list[str]
+    points: list[MapRenderPoint]
 
 
 class MapProcessorService:
-    """Render a simple SVG map from published GeoJSON assets."""
+    """Render a simple map artifact from published GeoJSON assets."""
 
     _WIDTH = 640
     _HEIGHT = 360
@@ -33,35 +40,38 @@ class MapProcessorService:
     def __init__(self, *, docs_dir: Path | None = None) -> None:
         self._docs_dir = docs_dir
 
-    def render(self, request: MapProcessorRequest) -> MapProcessorArtifact:
+    def render(self, request: MapRenderRequest) -> MapRenderArtifact:
         if self._docs_dir is None:
-            return MapProcessorArtifact(
+            return MapRenderArtifact(
                 image_src=request.fallback_image_src,
                 alt=request.alt,
-                geojson_sources=list(request.geojson_sources),
+                points=list(request.points),
             )
 
-        layers = self._load_layers(request.geojson_sources)
+        layers = self._load_layers(request.points)
         if not layers:
-            return MapProcessorArtifact(
+            return MapRenderArtifact(
                 image_src=request.fallback_image_src,
                 alt=request.alt,
-                geojson_sources=list(request.geojson_sources),
+                points=list(request.points),
             )
 
         target_path = self._docs_dir / request.output_asset_src
         target_path.parent.mkdir(parents=True, exist_ok=True)
         target_path.write_text(self._build_svg(layers), encoding="utf-8")
-        return MapProcessorArtifact(
+        return MapRenderArtifact(
             image_src=request.output_asset_src,
             alt=request.alt,
-            geojson_sources=list(request.geojson_sources),
+            points=list(request.points),
         )
 
-    def _load_layers(self, geojson_sources: list[str]) -> list[tuple[int, list[tuple[str, object]], list[tuple[float, float]]]]:
-        layers: list[tuple[int, list[tuple[str, object]], list[tuple[float, float]]]] = []
-        for index, asset_src in enumerate(geojson_sources):
-            source_path = self._docs_dir / asset_src
+    def _load_layers(
+        self,
+        points: list[MapRenderPoint],
+    ) -> list[tuple[MapRenderPoint, list[tuple[str, object]], list[tuple[float, float]]]]:
+        layers: list[tuple[MapRenderPoint, list[tuple[str, object]], list[tuple[float, float]]]] = []
+        for render_point in points:
+            source_path = self._docs_dir / render_point.geojson_src
             if not source_path.exists():
                 continue
             try:
@@ -69,14 +79,14 @@ class MapProcessorService:
             except (OSError, json.JSONDecodeError):
                 continue
             shapes = self._extract_shapes(payload)
-            points: list[tuple[float, float]] = []
+            shape_points: list[tuple[float, float]] = []
             for _, shape in shapes:
-                points.extend(self._flatten_points(shape))
-            if points:
-                layers.append((index, shapes, points))
+                shape_points.extend(self._flatten_points(shape))
+            if shape_points:
+                layers.append((render_point, shapes, shape_points))
         return layers
 
-    def _build_svg(self, layers: list[tuple[int, list[tuple[str, object]], list[tuple[float, float]]]]) -> str:
+    def _build_svg(self, layers: list[tuple[MapRenderPoint, list[tuple[str, object]], list[tuple[float, float]]]]) -> str:
         all_points = [point for _, _, points in layers for point in points]
         min_x = min(point[0] for point in all_points)
         max_x = max(point[0] for point in all_points)
@@ -106,14 +116,23 @@ class MapProcessorService:
             f'<rect x="{self._PADDING / 2}" y="{self._PADDING / 2}" width="{self._WIDTH - self._PADDING}" height="{self._HEIGHT - self._PADDING}" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>',
         ]
 
-        for layer_index, shapes, _ in layers:
-            color = self._PALETTE[layer_index % len(self._PALETTE)]
+        for point, shapes, points in layers:
+            color = self._risk_color(point.risk_rating)
             fill = self._with_alpha(color, "0.18")
             for geometry_type, shape in shapes:
                 svg_parts.extend(self._render_shape(geometry_type, shape, color, fill, project))
+            anchor_x, anchor_y = project(points[0])
+            svg_parts.extend(self._render_marker(anchor_x, anchor_y, point.ordinal, color))
 
         svg_parts.append("</svg>")
         return "\n".join(svg_parts)
+
+    @staticmethod
+    def _render_marker(x: float, y: float, ordinal: int, color: str) -> list[str]:
+        return [
+            f'<circle cx="{x}" cy="{y}" r="18" fill="{color}" stroke="#ffffff" stroke-width="3"/>',
+            f'<text x="{x}" y="{y + 6}" text-anchor="middle" font-size="16" font-weight="700" fill="#111827" font-family="Arial, sans-serif">{ordinal}</text>',
+        ]
 
     def _render_shape(
         self,
@@ -202,3 +221,12 @@ class MapProcessorService:
         green = int(color[2:4], 16)
         blue = int(color[4:6], 16)
         return f"rgba({red}, {green}, {blue}, {alpha})"
+
+    @staticmethod
+    def _risk_color(risk_rating: str) -> str:
+        normalized = risk_rating.strip().lower()
+        if normalized == "high":
+            return "#dc2626"
+        if normalized == "moderate":
+            return "#facc15"
+        return "#16a34a"

@@ -30,7 +30,7 @@ Briarwood is a community of Rancho Cordova. It is a friendly community known for
 
 
 <div class="panel panel-map">
-  <img src="../../assets/maps/projects/briarwood.svg" alt="Briarwood assessment map" />
+  <img src="../../assets/maps/projects/briarwood.jpg" alt="Briarwood assessment map" />
 </div>
 
 <div class="text-block" markdown="1">

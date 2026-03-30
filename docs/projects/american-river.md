@@ -34,7 +34,7 @@ It is also a great place to study oak trees and other species common along the p
 
 
 <div class="panel panel-map">
-  <img src="../../assets/maps/projects/american-river.svg" alt="American River assessment map" />
+  <img src="../../assets/maps/projects/american-river.jpg" alt="American River assessment map" />
 </div>
 
 <div class="text-block" markdown="1">

@@ -30,7 +30,7 @@ The University Arboretum at Sacramento State University supports 1400 species of
 
 
 <div class="panel panel-map">
-  <img src="../../assets/maps/projects/arboretum.svg" alt="Arboretum assessment map" />
+  <img src="../../assets/maps/projects/arboretum.jpg" alt="Arboretum assessment map" />
 </div>
 
 <div class="text-block" markdown="1">

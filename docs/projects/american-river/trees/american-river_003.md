@@ -16,7 +16,7 @@ updated_at: "2026-03-25 11:30"
   <span>Fraxinus latifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/american-river_003.svg" alt="Fraxinus latifolia locator map" />
+  <img src="../../../../assets/maps/trees/american-river_003.jpg" alt="Fraxinus latifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |

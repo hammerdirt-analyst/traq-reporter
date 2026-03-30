@@ -16,7 +16,7 @@ updated_at: "2026-03-25 10:20"
   <span>Quercus lobata</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/arboretum_002.svg" alt="Quercus lobata locator map" />
+  <img src="../../../../assets/maps/trees/arboretum_002.jpg" alt="Quercus lobata locator map" />
 </div>
 | Field | Value |
 | --- | --- |

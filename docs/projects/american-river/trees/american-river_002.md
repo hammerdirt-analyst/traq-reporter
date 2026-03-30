@@ -16,7 +16,7 @@ updated_at: "2026-03-25 11:20"
   <span>Salix gooddingii</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/american-river_002.svg" alt="Salix gooddingii locator map" />
+  <img src="../../../../assets/maps/trees/american-river_002.jpg" alt="Salix gooddingii locator map" />
 </div>
 | Field | Value |
 | --- | --- |

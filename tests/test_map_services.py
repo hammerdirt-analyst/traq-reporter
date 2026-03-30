@@ -9,13 +9,13 @@ import unittest
 
 from reporter_client.models.project_report_source import ProjectReportSource, ProjectTreeEntry
 from reporter_client.models.tree_report_source import GpsPoint, RiskProfile, TreeGeoJsonSource, TreeReportSource
-from reporter_client.services.map_processor_service import MapProcessorRequest, MapProcessorService
+from reporter_client.services.map_processor_service import MapProcessorService, MapRenderPoint, MapRenderRequest
 from reporter_client.services.project_report_services import ProjectMapService
 from reporter_client.services.tree_report_services import TreeMapService
 
 
 class MapProcessorServiceTests(unittest.TestCase):
-    def test_render_writes_svg_when_geojson_assets_exist(self) -> None:
+    def test_render_writes_map_when_geojson_assets_exist(self) -> None:
         with TemporaryDirectory() as tempdir:
             docs_dir = Path(tempdir) / "docs"
             geojson_dir = docs_dir / "assets" / "geojson"
@@ -37,31 +37,45 @@ class MapProcessorServiceTests(unittest.TestCase):
             )
 
             artifact = MapProcessorService(docs_dir=docs_dir).render(
-                MapProcessorRequest(
-                    output_asset_src="assets/maps/trees/example_001.svg",
-                    fallback_image_src="assets/maps/placeholder.svg",
+                MapRenderRequest(
+                    output_asset_src="assets/maps/trees/example_001.jpg",
+                    fallback_image_src="assets/maps/placeholder.jpg",
                     alt="Example map",
-                    geojson_sources=["assets/geojson/example_001.geojson"],
+                    points=[
+                        MapRenderPoint(
+                            ordinal=1,
+                            risk_rating="low",
+                            geojson_src="assets/geojson/example_001.geojson",
+                        )
+                    ],
                 )
             )
 
-            self.assertEqual(artifact.image_src, "assets/maps/trees/example_001.svg")
-            rendered_map = docs_dir / "assets" / "maps" / "trees" / "example_001.svg"
+            self.assertEqual(artifact.image_src, "assets/maps/trees/example_001.jpg")
+            rendered_map = docs_dir / "assets" / "maps" / "trees" / "example_001.jpg"
             self.assertTrue(rendered_map.exists())
             self.assertIn("<svg", rendered_map.read_text(encoding="utf-8"))
+            self.assertEqual(artifact.points[0].ordinal, 1)
+            self.assertEqual(artifact.points[0].risk_rating, "low")
 
     def test_render_falls_back_when_geojson_assets_are_missing(self) -> None:
         with TemporaryDirectory() as tempdir:
             artifact = MapProcessorService(docs_dir=Path(tempdir) / "docs").render(
-                MapProcessorRequest(
-                    output_asset_src="assets/maps/trees/example_001.svg",
-                    fallback_image_src="assets/maps/placeholder.svg",
+                MapRenderRequest(
+                    output_asset_src="assets/maps/trees/example_001.jpg",
+                    fallback_image_src="assets/maps/placeholder.jpg",
                     alt="Example map",
-                    geojson_sources=["assets/geojson/example_001.geojson"],
+                    points=[
+                        MapRenderPoint(
+                            ordinal=1,
+                            risk_rating="low",
+                            geojson_src="assets/geojson/example_001.geojson",
+                        )
+                    ],
                 )
             )
 
-        self.assertEqual(artifact.image_src, "assets/maps/placeholder.svg")
+        self.assertEqual(artifact.image_src, "assets/maps/placeholder.jpg")
 
 
 class TreeMapServiceTests(unittest.TestCase):
@@ -89,7 +103,9 @@ class TreeMapServiceTests(unittest.TestCase):
 
         artifact = TreeMapService().build_map(source)
 
-        self.assertEqual(artifact.image_src, "../assets/maps/job_123_locator.svg")
+        self.assertEqual(artifact.image_src, "../assets/maps/job_123_locator.jpg")
+        self.assertEqual(artifact.ordinal, 1)
+        self.assertEqual(artifact.risk_rating, "low")
         self.assertEqual(artifact.geojson_asset_src, "assets/geojson/briarwood_001.geojson")
 
 
@@ -157,12 +173,16 @@ class ProjectMapServiceTests(unittest.TestCase):
                 fallback_map_src="assets/maps/project_alpha_overview.svg",
             )
 
-            self.assertEqual(artifact.image_src, "assets/maps/projects/briarwood.svg")
+            self.assertEqual(artifact.image_src, "assets/maps/projects/briarwood.jpg")
             self.assertEqual(
-                artifact.geojson_sources,
-                ["assets/geojson/briarwood_001.geojson", "assets/geojson/briarwood_002.geojson"],
+                [point.ordinal for point in artifact.points],
+                [1, 2],
             )
-            self.assertTrue((docs_dir / "assets" / "maps" / "projects" / "briarwood.svg").exists())
+            self.assertEqual(
+                [point.risk_rating for point in artifact.points],
+                ["low", "moderate"],
+            )
+            self.assertTrue((docs_dir / "assets" / "maps" / "projects" / "briarwood.jpg").exists())
 
 
 if __name__ == "__main__":

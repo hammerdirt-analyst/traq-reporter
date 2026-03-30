@@ -16,7 +16,7 @@ updated_at: "2026-03-25 09:10"
   <span>Quercus agrifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/briarwood_001.svg" alt="Quercus agrifolia locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_001.jpg" alt="Quercus agrifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |

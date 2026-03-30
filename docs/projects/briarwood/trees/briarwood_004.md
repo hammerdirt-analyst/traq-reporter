@@ -16,7 +16,7 @@ updated_at: "2026-03-25 09:40"
   <span>Sequoia sempervirens</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/briarwood_004.svg" alt="Sequoia sempervirens locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_004.jpg" alt="Sequoia sempervirens locator map" />
 </div>
 | Field | Value |
 | --- | --- |

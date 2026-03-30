@@ -6,14 +6,14 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ...models.project_report_source import ProjectReportSource
-from ..map_processor_service import MapProcessorRequest, MapProcessorService
+from ..map_processor_service import MapProcessorService, MapRenderPoint, MapRenderRequest
 
 
 @dataclass(frozen=True)
 class ProjectMapArtifact:
     image_src: str
     alt: str
-    geojson_sources: list[str]
+    points: list[MapRenderPoint]
 
 
 class ProjectMapService:
@@ -27,19 +27,26 @@ class ProjectMapService:
         *,
         project_source: ProjectReportSource,
         fallback_map_src: str,
-        geojson_sources: list[str] | None = None,
     ) -> ProjectMapArtifact:
-        resolved_geojson_sources = geojson_sources or [entry.geojson_src for entry in project_source.trees if entry.geojson_src]
+        points = [
+            MapRenderPoint(
+                ordinal=index,
+                risk_rating=entry.risk_rating,
+                geojson_src=entry.geojson_src,
+            )
+            for index, entry in enumerate(project_source.trees, start=1)
+            if entry.geojson_src
+        ]
         map_artifact = self._map_processor_service.render(
-            MapProcessorRequest(
-                output_asset_src=f"assets/maps/projects/{project_source.project_slug}.svg",
+            MapRenderRequest(
+                output_asset_src=f"assets/maps/projects/{project_source.project_slug}.jpg",
                 fallback_image_src=fallback_map_src,
                 alt=f"{project_source.project} assessment map",
-                geojson_sources=resolved_geojson_sources,
+                points=points,
             )
         )
         return ProjectMapArtifact(
             image_src=map_artifact.image_src,
             alt=map_artifact.alt,
-            geojson_sources=map_artifact.geojson_sources,
+            points=map_artifact.points,
         )
