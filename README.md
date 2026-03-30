@@ -30,7 +30,7 @@ env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client generate-docs
 The repo-root config is [reporter_client.yaml](/home/roger/projects/codex_trial/agent_client/reporter_client/reporter_client.yaml). It currently points the staged-job root at:
 
 ```text
-../server/testdata/staged_jobs_manual
+../server/staging
 ```
 
 Run tests:
@@ -52,6 +52,49 @@ Build the MkDocs site:
 
 ```bash
 env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync mkdocs build
+```
+
+Build a project basemap from an exact bounding box:
+
+```bash
+env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client build-basemap \
+  --slug briarwood \
+  --west -121.28101670195525 \
+  --east -121.27448722406692 \
+  --south 38.613356397796935 \
+  --north 38.61699761222076
+```
+
+## Basemap Bounding Boxes
+
+These are the exact bounding-box coordinates passed to OpenStreetMap when
+building project basemaps. No padding is added by the tool.
+
+### Briarwood
+
+```text
+west  = -121.28101670195525
+east  = -121.27448722406692
+south = 38.613356397796935
+north = 38.61699761222076
+```
+
+### American River
+
+```text
+west  = -121.29353585346439
+east  = -121.2838424751227
+south = 38.61734479859987
+north = 38.62316523581157
+```
+
+### Arboretum
+
+```text
+west  = -121.43074717273919
+east  = -121.4267454093663
+south = 38.563799990800874
+north = 38.56620294217032
 ```
 
 ## Notes

@@ -42,6 +42,7 @@ class ProjectMapService:
                 output_asset_src=f"assets/maps/projects/{project_source.project_slug}.jpg",
                 fallback_image_src=fallback_map_src,
                 alt=f"{project_source.project} assessment map",
+                basemap_slug=project_source.project_slug,
                 points=points,
             )
         )

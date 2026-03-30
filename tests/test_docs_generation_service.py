@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 import re
 from tempfile import TemporaryDirectory
@@ -19,6 +20,11 @@ class DocsGenerationServiceTests(unittest.TestCase):
         content_source = ContentSourceService(content_dir=repo_root / "content")
         with patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False), TemporaryDirectory() as tempdir:
             docs_dir = Path(tempdir) / "docs"
+            shutil.copytree(
+                repo_root / "docs" / "assets" / "map-bases",
+                docs_dir / "assets" / "map-bases",
+                dirs_exist_ok=True,
+            )
             service = DocsGenerationService(
                 staging_root=staging_root,
                 content_dir=repo_root / "content",

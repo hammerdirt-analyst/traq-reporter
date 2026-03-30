@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ...models.tree_report_source import TreeReportSource
+from ..project_naming import project_slug
 from ..map_processor_service import MapProcessorService, MapRenderPoint, MapRenderRequest
 
 
@@ -33,6 +34,7 @@ class TreeMapService:
                 output_asset_src=f"assets/maps/trees/{source.tree_id}.jpg" if source.tree_id else self._PLACEHOLDER_IMAGE_SRC,
                 fallback_image_src=self._PLACEHOLDER_IMAGE_SRC,
                 alt=f"{source.species} locator map",
+                basemap_slug=project_slug(source.project),
                 points=[
                     MapRenderPoint(
                         ordinal=1,

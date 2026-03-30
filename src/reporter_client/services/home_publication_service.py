@@ -18,8 +18,6 @@ class HomePublicationService:
 
     _SITE_TITLE = "TRAQ Reporter"
     _ABOUT_TITLE = "About Hammerdirt"
-    _HOME_MAP_SRC = "assets/maps/all-projects-overview.svg"
-    _HOME_MAP_ALT = "Combined assessment map"
 
     def __init__(self, *, content_dir: Path, docs_dir: Path, template_dir: Path) -> None:
         self._content_source = ContentSourceService(content_dir=content_dir)
@@ -57,8 +55,6 @@ class HomePublicationService:
             home_source=home_source,
             stable_intro=stable_intro,
             summary_artifact=summary_artifact,
-            combined_map_src=self._HOME_MAP_SRC,
-            combined_map_alt=self._HOME_MAP_ALT,
             raw_updated_at=home_source.latest_archived_at,
         )
         about_input = AboutPageInput(

@@ -7,6 +7,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
+from PIL import Image
+
 from reporter_client.models.project_report_source import ProjectReportSource, ProjectTreeEntry
 from reporter_client.models.tree_report_source import GpsPoint, RiskProfile, TreeGeoJsonSource, TreeReportSource
 from reporter_client.services.map_processor_service import MapProcessorService, MapRenderPoint, MapRenderRequest
@@ -18,8 +20,25 @@ class MapProcessorServiceTests(unittest.TestCase):
     def test_render_writes_map_when_geojson_assets_exist(self) -> None:
         with TemporaryDirectory() as tempdir:
             docs_dir = Path(tempdir) / "docs"
+            map_base_dir = docs_dir / "assets" / "map-bases"
             geojson_dir = docs_dir / "assets" / "geojson"
+            map_base_dir.mkdir(parents=True, exist_ok=True)
             geojson_dir.mkdir(parents=True, exist_ok=True)
+            Image.new("RGB", (320, 240), (235, 239, 244)).save(map_base_dir / "briarwood_base.jpg", format="JPEG")
+            (map_base_dir / "briarwood_base.json").write_text(
+                json.dumps(
+                    {
+                        "west": -121.30,
+                        "east": -121.28,
+                        "south": 38.61,
+                        "north": 38.63,
+                        "width": 320,
+                        "height": 240,
+                        "zoom": 16,
+                    }
+                ),
+                encoding="utf-8",
+            )
             (geojson_dir / "example_001.geojson").write_text(
                 json.dumps(
                     {
@@ -41,6 +60,7 @@ class MapProcessorServiceTests(unittest.TestCase):
                     output_asset_src="assets/maps/trees/example_001.jpg",
                     fallback_image_src="assets/maps/placeholder.jpg",
                     alt="Example map",
+                    basemap_slug="briarwood",
                     points=[
                         MapRenderPoint(
                             ordinal=1,
@@ -54,7 +74,9 @@ class MapProcessorServiceTests(unittest.TestCase):
             self.assertEqual(artifact.image_src, "assets/maps/trees/example_001.jpg")
             rendered_map = docs_dir / "assets" / "maps" / "trees" / "example_001.jpg"
             self.assertTrue(rendered_map.exists())
-            self.assertIn("<svg", rendered_map.read_text(encoding="utf-8"))
+            with Image.open(rendered_map) as image:
+                self.assertEqual(image.format, "JPEG")
+                self.assertEqual(image.size, (320, 240))
             self.assertEqual(artifact.points[0].ordinal, 1)
             self.assertEqual(artifact.points[0].risk_rating, "low")
 
@@ -65,6 +87,7 @@ class MapProcessorServiceTests(unittest.TestCase):
                     output_asset_src="assets/maps/trees/example_001.jpg",
                     fallback_image_src="assets/maps/placeholder.jpg",
                     alt="Example map",
+                    basemap_slug="briarwood",
                     points=[
                         MapRenderPoint(
                             ordinal=1,
@@ -113,8 +136,25 @@ class ProjectMapServiceTests(unittest.TestCase):
     def test_build_map_uses_all_project_tree_geojson_assets(self) -> None:
         with TemporaryDirectory() as tempdir:
             docs_dir = Path(tempdir) / "docs"
+            map_base_dir = docs_dir / "assets" / "map-bases"
             geojson_dir = docs_dir / "assets" / "geojson"
+            map_base_dir.mkdir(parents=True, exist_ok=True)
             geojson_dir.mkdir(parents=True, exist_ok=True)
+            Image.new("RGB", (400, 300), (235, 239, 244)).save(map_base_dir / "briarwood_base.jpg", format="JPEG")
+            (map_base_dir / "briarwood_base.json").write_text(
+                json.dumps(
+                    {
+                        "west": -121.30,
+                        "east": -121.27,
+                        "south": 38.61,
+                        "north": 38.64,
+                        "width": 400,
+                        "height": 300,
+                        "zoom": 16,
+                    }
+                ),
+                encoding="utf-8",
+            )
             (geojson_dir / "briarwood_001.geojson").write_text(
                 json.dumps(
                     {"type": "FeatureCollection", "features": [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-121.29, 38.62]}, "properties": {}}]}
@@ -183,6 +223,9 @@ class ProjectMapServiceTests(unittest.TestCase):
                 ["low", "moderate"],
             )
             self.assertTrue((docs_dir / "assets" / "maps" / "projects" / "briarwood.jpg").exists())
+            with Image.open(docs_dir / "assets" / "maps" / "projects" / "briarwood.jpg") as image:
+                self.assertEqual(image.format, "JPEG")
+                self.assertEqual(image.size, (400, 300))
 
 
 if __name__ == "__main__":

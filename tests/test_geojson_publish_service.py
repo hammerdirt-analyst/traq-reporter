@@ -111,16 +111,14 @@ class GeoJsonPublishServiceTests(unittest.TestCase):
         artifact = ProjectMapService().build_map(
             project_source=project_source,
             fallback_map_src="assets/maps/project_alpha_overview.svg",
-            geojson_sources=[
-                "assets/geojson/briarwood_001.geojson",
-                "assets/geojson/briarwood_002.geojson",
-            ],
         )
 
         self.assertEqual(
-            artifact.geojson_sources,
-            ["assets/geojson/briarwood_001.geojson", "assets/geojson/briarwood_002.geojson"],
+            [point.geojson_src for point in artifact.points],
+            ["/tmp/staged/final_1.geojson", "/tmp/staged/final_2.geojson"],
         )
+        self.assertEqual([point.ordinal for point in artifact.points], [1, 2])
+        self.assertEqual([point.risk_rating for point in artifact.points], ["low", "moderate"])
         self.assertEqual(artifact.image_src, "assets/maps/project_alpha_overview.svg")
 
 
