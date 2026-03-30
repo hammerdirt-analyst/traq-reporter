@@ -1,6 +1,6 @@
 site_name: TRAQ Reporter
-site_description: Static reporting client prototype for field inspection publications
-site_url: https://example.github.io/reporter-client/
+site_description: TRAQ Reporter uses the data captured with the TRAQ observer to make a client-ready view of each project. The reporter organizes the trees by project, maps the locations and organizes them by risk.
+site_url: https://hammerdirt-analyst.github.io/traq-reporter/
 
 theme:
   name: material
@@ -14,6 +14,7 @@ theme:
       primary: custom
       accent: custom
   logo: assets/branding/ourlogo.png
+  favicon: assets/branding/ourlogo.png
 
 nav:
   - Home: index.md

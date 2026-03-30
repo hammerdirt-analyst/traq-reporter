@@ -8,6 +8,16 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 <div class="text-block" markdown="1">
 {{ view.description_markdown }}
 </div>
+<div class="home-repo-link">
+  <a href="https://github.com/hammerdirt-analyst/traq-reporter" aria-label="TRAQ Reporter GitHub repository">
+    <span class="home-repo-link__icon" aria-hidden="true">
+      <svg viewBox="0 0 16 16" role="img" focusable="false">
+        <path fill="currentColor" d="M8 0C3.58 0 0 3.67 0 8.2c0 3.63 2.29 6.7 5.47 7.78.4.08.55-.18.55-.4 0-.2-.01-.86-.01-1.56-2.01.38-2.53-.5-2.69-.96-.09-.24-.48-.97-.82-1.16-.28-.16-.68-.55-.01-.56.63-.01 1.08.59 1.23.83.72 1.24 1.87.89 2.33.68.07-.54.28-.89.51-1.09-1.78-.21-3.64-.92-3.64-4.08 0-.9.31-1.64.82-2.22-.08-.21-.36-1.05.08-2.19 0 0 .67-.22 2.2.85A7.39 7.39 0 0 1 8 4.95c.68 0 1.37.09 2.01.27 1.53-1.07 2.2-.85 2.2-.85.44 1.14.16 1.98.08 2.19.51.58.82 1.31.82 2.22 0 3.17-1.87 3.86-3.66 4.08.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .22.15.49.55.4A8.23 8.23 0 0 0 16 8.2C16 3.67 12.42 0 8 0Z"/>
+      </svg>
+    </span>
+    <span class="home-repo-link__label">View The Repository</span>
+  </a>
+</div>
 {%- endset %}
 
 {% set summary_table_html -%}
