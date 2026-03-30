@@ -45,6 +45,7 @@ class MapProcessorService:
     _MARKER_FONT_SIZE = 16
     _MARKER_OUTLINE = "#ffffff"
     _TEXT_COLOR = "#111827"
+    _LEADER_LINE_COLOR = "#64748b"
 
     def __init__(self, *, docs_dir: Path | None = None) -> None:
         self._docs_dir = docs_dir
@@ -83,16 +84,37 @@ class MapProcessorService:
         marker_radius = request.marker_radius or self._MARKER_RADIUS
         marker_font_size = request.marker_font_size or self._MARKER_FONT_SIZE
         font = self._load_font(marker_font_size)
+        projected_points = [
+            (
+                render_point,
+                self._project(longitude, latitude, bounds, image.width, image.height),
+            )
+            for render_point, longitude, latitude in render_points
+        ]
+        marker_positions = self._resolve_marker_positions(
+            projected_points=projected_points,
+            marker_radius=marker_radius,
+        )
 
-        for render_point, longitude, latitude in render_points:
-            x, y = self._project(longitude, latitude, bounds, image.width, image.height)
-            x -= crop_left
-            y -= crop_top
+        for render_point, (true_x, true_y), (marker_x, marker_y) in marker_positions:
+            marker_x -= crop_left
+            marker_y -= crop_top
+            true_x -= crop_left
+            true_y -= crop_top
+            if abs(marker_x - true_x) > 0.5 or abs(marker_y - true_y) > 0.5:
+                self._draw_leader_line(
+                    draw,
+                    true_x,
+                    true_y,
+                    marker_x,
+                    marker_y,
+                    marker_radius=marker_radius,
+                )
             self._draw_marker(
                 draw,
                 font,
-                x,
-                y,
+                marker_x,
+                marker_y,
                 render_point.ordinal,
                 self._risk_color(render_point.risk_rating),
                 marker_radius=marker_radius,
@@ -127,6 +149,58 @@ class MapProcessorService:
             latitude = sum(point[1] for point in coordinates) / len(coordinates)
             render_points.append((render_point, longitude, latitude))
         return render_points
+
+    def _resolve_marker_positions(
+        self,
+        *,
+        projected_points: list[tuple[MapRenderPoint, tuple[float, float]]],
+        marker_radius: int,
+    ) -> list[tuple[MapRenderPoint, tuple[float, float], tuple[float, float]]]:
+        placed: list[tuple[MapRenderPoint, tuple[float, float], tuple[float, float]]] = []
+        collision_distance = marker_radius * 1.8
+        for render_point, true_position in projected_points:
+            marker_position = true_position
+            attempt = 0
+            while self._collides(marker_position, placed, collision_distance):
+                marker_position = self._offset_position(true_position, attempt, marker_radius)
+                attempt += 1
+            placed.append((render_point, true_position, marker_position))
+        return placed
+
+    @staticmethod
+    def _collides(
+        candidate: tuple[float, float],
+        placed: list[tuple[MapRenderPoint, tuple[float, float], tuple[float, float]]],
+        collision_distance: float,
+    ) -> bool:
+        for _, _, other_position in placed:
+            delta_x = candidate[0] - other_position[0]
+            delta_y = candidate[1] - other_position[1]
+            if (delta_x * delta_x) + (delta_y * delta_y) < (collision_distance * collision_distance):
+                return True
+        return False
+
+    @staticmethod
+    def _offset_position(
+        true_position: tuple[float, float],
+        attempt: int,
+        marker_radius: int,
+    ) -> tuple[float, float]:
+        ring = (attempt // 8) + 1
+        pattern_index = attempt % 8
+        distance = marker_radius * 2.2 * ring
+        offsets = (
+            (distance, 0.0),
+            (-distance, 0.0),
+            (0.0, -distance),
+            (0.0, distance),
+            (distance, -distance),
+            (-distance, -distance),
+            (distance, distance),
+            (-distance, distance),
+        )
+        offset_x, offset_y = offsets[pattern_index]
+        return (true_position[0] + offset_x, true_position[1] + offset_y)
 
     def _crop_box(
         self,
@@ -234,6 +308,27 @@ class MapProcessorService:
             label,
             fill=self._TEXT_COLOR,
             font=font,
+        )
+
+    def _draw_leader_line(
+        self,
+        draw: ImageDraw.ImageDraw,
+        true_x: float,
+        true_y: float,
+        marker_x: float,
+        marker_y: float,
+        *,
+        marker_radius: int,
+    ) -> None:
+        delta_x = marker_x - true_x
+        delta_y = marker_y - true_y
+        distance = max((delta_x * delta_x + delta_y * delta_y) ** 0.5, 1e-9)
+        line_end_x = marker_x - ((delta_x / distance) * marker_radius)
+        line_end_y = marker_y - ((delta_y / distance) * marker_radius)
+        draw.line(
+            [(true_x, true_y), (line_end_x, line_end_y)],
+            fill=self._LEADER_LINE_COLOR,
+            width=1,
         )
 
     @staticmethod

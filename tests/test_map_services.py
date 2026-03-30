@@ -100,6 +100,31 @@ class MapProcessorServiceTests(unittest.TestCase):
 
         self.assertEqual(artifact.image_src, "assets/maps/placeholder.jpg")
 
+    def test_resolve_marker_positions_displaces_overlapping_project_points(self) -> None:
+        service = MapProcessorService()
+        projected_points = [
+            (
+                MapRenderPoint(ordinal=1, risk_rating="low", geojson_src="one.geojson"),
+                (100.0, 100.0),
+            ),
+            (
+                MapRenderPoint(ordinal=2, risk_rating="moderate", geojson_src="two.geojson"),
+                (100.0, 100.0),
+            ),
+            (
+                MapRenderPoint(ordinal=3, risk_rating="high", geojson_src="three.geojson"),
+                (100.0, 100.0),
+            ),
+        ]
+
+        resolved = service._resolve_marker_positions(projected_points=projected_points, marker_radius=8)
+
+        self.assertEqual(resolved[0][1], (100.0, 100.0))
+        self.assertEqual(resolved[0][2], (100.0, 100.0))
+        self.assertNotEqual(resolved[1][2], (100.0, 100.0))
+        self.assertNotEqual(resolved[2][2], (100.0, 100.0))
+        self.assertNotEqual(resolved[1][2], resolved[2][2])
+
 
 class TreeMapServiceTests(unittest.TestCase):
     def test_build_map_uses_published_tree_geojson_asset(self) -> None:
