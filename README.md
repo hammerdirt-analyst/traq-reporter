@@ -1,6 +1,30 @@
 # Reporter Client
 
-This repo is designed to run through `uv`.
+This repo builds the local reporter documentation site from staged job bundles in the sibling `server` repo.
+
+The generated documentation source lives in [docs](/home/roger/projects/codex_trial/agent_client/reporter_client/docs). The built MkDocs site goes into `site/` and is not committed.
+
+## What This Repo Does
+
+- reads staged job bundles from the configured staging root
+- publishes assets into `docs/assets/...`
+- renders:
+  - home page
+  - project pages
+  - tree pages
+- generates:
+  - tree summaries
+  - project maps
+  - tree maps
+- serves the documentation through MkDocs
+
+## Repo Layout
+
+- source code: [src/reporter_client](/home/roger/projects/codex_trial/agent_client/reporter_client/src/reporter_client)
+- authored content: [content](/home/roger/projects/codex_trial/agent_client/reporter_client/content)
+- generated docs source: [docs](/home/roger/projects/codex_trial/agent_client/reporter_client/docs)
+- config: [reporter_client.yaml](/home/roger/projects/codex_trial/agent_client/reporter_client/reporter_client.yaml)
+- tests: [tests](/home/roger/projects/codex_trial/agent_client/reporter_client/tests)
 
 ## Setup
 
@@ -19,42 +43,58 @@ You can copy from [.env.example](/home/roger/projects/codex_trial/agent_client/r
 env UV_CACHE_DIR=/tmp/uv-cache uv sync
 ```
 
-## Main Commands
+## Configuration
 
-Generate docs:
+The repo-root config is [reporter_client.yaml](/home/roger/projects/codex_trial/agent_client/reporter_client/reporter_client.yaml).
 
-```bash
-env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client generate-docs
-```
-
-The repo-root config is [reporter_client.yaml](/home/roger/projects/codex_trial/agent_client/reporter_client/reporter_client.yaml). It currently points the staged-job root at:
+The current staged-job root is:
 
 ```text
 ../server/staging
 ```
 
-Run tests:
+That means the reporter expects staged manifests under:
 
-```bash
-env OPENAI_API_KEY='' UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync python -m unittest discover -s tests -p 'test_*.py'
+```text
+../server/staging/jobs/*/manifest.json
 ```
 
-Use `discover` as the standard unittest entrypoint for this repo. Plain
-`python -m unittest` is not the supported test command here.
+## CLI Manual
 
-Serve the MkDocs site locally:
+### `generate-docs`
 
-```bash
-env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync mkdocs serve -a 0.0.0.0:8000
-```
-
-Build the MkDocs site:
+Regenerates the full docs set from the current staged job bundles and authored content.
 
 ```bash
-env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync mkdocs build
+env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client generate-docs
 ```
 
-Build a project basemap from an exact bounding box:
+Use this when:
+- you want a full refresh
+- you changed templates
+- you changed content
+- you want to force tree summaries to regenerate
+
+### `publish-staged`
+
+Runs the incremental staged publication path.
+
+```bash
+env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client publish-staged
+```
+
+What it does:
+- scans staged manifests
+- compares them to the local publish index
+- rebuilds only new or changed jobs
+- republishes affected project pages
+- republishes home/about when needed
+
+Use this for normal day-to-day staged publishing.
+
+### `build-basemap`
+
+Builds an exact project basemap from OpenStreetMap tiles using the provided bounding box.
 
 ```bash
 env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client build-basemap \
@@ -65,10 +105,64 @@ env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client build-basemap \
   --north 38.61699761222076
 ```
 
+What it writes:
+- `docs/assets/map-bases/<slug>_base.jpg`
+- `docs/assets/map-bases/<slug>_base.json`
+
+No padding is added by the tool. The supplied bounding box is used exactly.
+
+## Local Build Workflow
+
+### Run tests
+
+```bash
+env OPENAI_API_KEY='' UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync python -m unittest discover -s tests -p 'test_*.py'
+```
+
+Use `discover` as the standard unittest entrypoint for this repo. Plain `python -m unittest` is not the supported command here.
+
+### Generate docs
+
+```bash
+env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client generate-docs
+```
+
+### Serve locally
+
+```bash
+env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync mkdocs serve -a 0.0.0.0:8000
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000/reporter-client/
+```
+
+### Build the MkDocs site
+
+```bash
+env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync mkdocs build
+```
+
+## Git And Build Notes
+
+There is no checked-in CI workflow file in this repo right now. The build workflow is local and command-driven:
+
+1. run tests
+2. run `reporter-client generate-docs` or `reporter-client publish-staged`
+3. run `mkdocs serve` for review or `mkdocs build` for a site build
+4. review changes in `docs/`
+5. commit the source and generated docs together when appropriate
+
+Important repo behavior:
+- `docs/` is treated as generated documentation source and is committed
+- `site/` is the built MkDocs output and is not committed
+- `.state/` is local runtime state and is ignored
+
 ## Basemap Bounding Boxes
 
-These are the exact bounding-box coordinates passed to OpenStreetMap when
-building project basemaps. No padding is added by the tool.
+These are the exact bounding-box coordinates passed to OpenStreetMap when building project basemaps.
 
 ### Briarwood
 
@@ -99,6 +193,6 @@ north = 38.56620294217032
 
 ## Notes
 
-- `OPENAI_API_KEY` enables the real summary-generation path.
+- `OPENAI_API_KEY` enables the real tree summary-generation path.
 - If `OPENAI_API_KEY` is not set, the summary generator falls back to the local stub path.
 - `REPORTER_OPENAI_SUMMARY_MODEL` is optional. If omitted, the default is `gpt-4o-mini`.
