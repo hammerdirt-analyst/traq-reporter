@@ -42,8 +42,8 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 {%- endset %}
 
 {% set extra_html -%}
-{% with tree_table=view.tree_rows %}
-{% include "components/tree_summary_table.j2" %}
+{% with tree_cards=view.tree_cards %}
+{% include "components/project_tree_cards.j2" %}
 {% endwith %}
 {%- endset %}
 

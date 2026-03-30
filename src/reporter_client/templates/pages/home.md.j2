@@ -10,12 +10,6 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 </div>
 {%- endset %}
 
-{% set map_html -%}
-{% with image_href=view.combined_map.image_href, alt=view.combined_map.alt %}
-{% include "components/map_panel.j2" %}
-{% endwith %}
-{%- endset %}
-
 {% set summary_html -%}
 <div class="text-block" markdown="1">
 <hr class="section-rule" />
@@ -41,4 +35,4 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 </div>
 {%- endset %}
 
-{{ frame.render(view.page_title, view.breadcrumbs, description_html=description_html, map_html=map_html, summary_html=summary_html, summary_table_html=summary_table_html) }}
+{{ frame.render(view.page_title, view.breadcrumbs, description_html=description_html, summary_html=summary_html, summary_table_html=summary_table_html) }}

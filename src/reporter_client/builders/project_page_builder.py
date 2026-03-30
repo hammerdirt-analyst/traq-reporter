@@ -7,9 +7,9 @@ from ..models.page_views import (
     BreadcrumbView,
     ImageAssetView,
     MapView,
+    ProjectTreeCardView,
     ProjectPageView,
     SummaryMetricsView,
-    TreeRowView,
 )
 from ..services.path_service import PathService
 
@@ -47,17 +47,16 @@ class ProjectPageBuilder:
                 tree_count=page_input.summary_metrics.tree_count,
                 species_count=page_input.summary_metrics.species_count,
             ),
-            tree_rows=[
-                TreeRowView(
-                    job_number=row.job_number,
-                    tree_href=self._paths.doc_link(current_doc, row.tree_doc),
-                    species_common=row.species_common,
-                    dbh=row.dbh,
-                    height=row.height,
-                    risk_rating=row.risk_rating,
-                    main_concerns=row.main_concerns,
+            tree_cards=[
+                ProjectTreeCardView(
+                    ordinal=card.ordinal,
+                    job_number=card.job_number,
+                    tree_href=self._paths.doc_link(current_doc, card.tree_doc),
+                    species_common=card.species_common,
+                    risk_rating=card.risk_rating,
+                    main_concerns=card.main_concerns,
                 )
-                for row in page_input.tree_rows
+                for card in page_input.tree_cards
             ],
             updated_at=page_input.updated_at,
         )

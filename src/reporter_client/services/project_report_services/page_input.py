@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from ...models.page_inputs import ProjectPageInput, SummaryMetricsInput, TreeRowInput
+from ...models.page_inputs import ProjectPageInput, ProjectTreeCardInput, SummaryMetricsInput
 from ...models.project_report_source import ProjectReportSource
 from ...models.summary_artifacts import SummaryArtifact
 from .map import ProjectMapService
@@ -46,23 +46,16 @@ class ProjectPageInputService:
                 tree_count=str(project_source.tree_count),
                 species_count=str(project_source.species_count),
             ),
-            tree_rows=[
-                TreeRowInput(
+            tree_cards=[
+                ProjectTreeCardInput(
+                    ordinal=index,
                     job_number=entry.tree_id,
                     tree_doc=entry.tree_doc,
                     species_common=entry.species,
-                    dbh=self._display_measure(entry.dbh, "in"),
-                    height=self._display_measure(entry.height, "ft"),
                     risk_rating=entry.risk_rating,
                     main_concerns="; ".join(entry.main_concerns),
                 )
-                for entry in project_source.trees
+                for index, entry in enumerate(project_source.trees, start=1)
             ],
             updated_at=project_source.latest_archived_at,
         )
-
-    @staticmethod
-    def _display_measure(value: float | int | None, unit: str) -> str:
-        if value is None:
-            return ""
-        return f"{value} {unit}"

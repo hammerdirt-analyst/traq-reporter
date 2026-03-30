@@ -6,7 +6,6 @@ updated_at: "2026-03-25 11:30"
 
 
 
-
 # TRAQ Reporter
 
 <div class="crumb-bar">
@@ -23,9 +22,6 @@ completed forms and related outputs organized and accessible.
 </div>
 
 
-<div class="panel panel-map">
-  <img src="assets/maps/all-projects-overview.svg" alt="Combined assessment map" />
-</div>
 
 <div class="text-block" markdown="1">
 <hr class="section-rule" />

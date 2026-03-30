@@ -21,12 +21,11 @@ class ProjectLinkInput:
 
 
 @dataclass(frozen=True)
-class TreeRowInput:
+class ProjectTreeCardInput:
+    ordinal: int
     job_number: str
     tree_doc: str
     species_common: str
-    dbh: str
-    height: str
     risk_rating: str
     main_concerns: str
 
@@ -48,8 +47,6 @@ class HomePageInput:
     site_title: str
     description_markdown: str
     summary_markdown: str
-    combined_map_src: str
-    combined_map_alt: str
     summary_metrics: SummaryMetricsInput
     project_links: list[ProjectLinkInput]
     updated_at: str
@@ -65,7 +62,7 @@ class ProjectPageInput:
     map_alt: str
     project_image: ImageAssetInput | None
     summary_metrics: SummaryMetricsInput
-    tree_rows: list[TreeRowInput]
+    tree_cards: list[ProjectTreeCardInput]
     updated_at: str
 
 

@@ -1,9 +1,0 @@
-{% if tree_table %}
-| Job | Species | DBH | Height | Risk | Main Concerns |
-| --- | --- | ---: | ---: | --- | --- |
-{% for tree in tree_table -%}
-| [{{ tree.job_number }}]({{ tree.tree_href }}) | {{ tree.species_common }} | {{ tree.dbh }} | {{ tree.height }} | {{ tree.risk_rating }} | {{ tree.main_concerns }} |
-{% endfor %}
-{% else %}
-Tree summary rows will appear here when project-specific publish data is assigned.
-{% endif %}

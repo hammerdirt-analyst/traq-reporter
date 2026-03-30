@@ -33,6 +33,7 @@ class PageBuilderTests(unittest.TestCase):
         self.assertEqual(view.breadcrumbs[0].label, "Home")
         self.assertEqual(view.summary_metrics.assessment_count, "10")
         self.assertEqual(view.summary_metrics.project_count, "3")
+        self.assertFalse(hasattr(view, "combined_map"))
         project_labels = [link.label for link in view.project_links]
         self.assertIn("Briarwood", project_labels)
         self.assertIn("Arboretum", project_labels)
@@ -52,12 +53,13 @@ class PageBuilderTests(unittest.TestCase):
         self.assertEqual(view.project_image.caption, "Briarwood project image")
         self.assertIn("assets/project-images/briarwood.svg", view.project_image.image_href)
         self.assertIn("assets/maps/projects/briarwood.svg", view.project_map.image_href)
-        self.assertEqual(view.tree_rows[0].job_number, "briarwood_001")
-        self.assertEqual(view.tree_rows[0].species_common, "Quercus agrifolia")
-        self.assertEqual(view.tree_rows[0].risk_rating, "low")
-        self.assertIn("branches hanging over the parking lot", view.tree_rows[0].main_concerns)
-        self.assertIn("sap ooze", view.tree_rows[0].main_concerns)
-        self.assertIn("thirty percent of the roots", view.tree_rows[0].main_concerns)
+        self.assertEqual(view.tree_cards[0].ordinal, 1)
+        self.assertEqual(view.tree_cards[0].job_number, "briarwood_001")
+        self.assertEqual(view.tree_cards[0].species_common, "Quercus agrifolia")
+        self.assertEqual(view.tree_cards[0].risk_rating, "low")
+        self.assertIn("branches hanging over the parking lot", view.tree_cards[0].main_concerns)
+        self.assertIn("sap ooze", view.tree_cards[0].main_concerns)
+        self.assertIn("thirty percent of the roots", view.tree_cards[0].main_concerns)
 
     def test_tree_page_builder(self) -> None:
         tree_inputs = self.inputs.load_tree_inputs()

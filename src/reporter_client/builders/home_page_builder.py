@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from ..models.page_inputs import HomePageInput
-from ..models.page_views import BreadcrumbView, HomePageView, LinkView, MapView, SummaryMetricsView
+from ..models.page_views import BreadcrumbView, HomePageView, LinkView, SummaryMetricsView
 from ..services.path_service import PathService
 
 
@@ -20,10 +20,6 @@ class HomePageBuilder:
             description_markdown=page_input.description_markdown,
             summary_markdown=page_input.summary_markdown,
             breadcrumbs=[BreadcrumbView(label="Home", href=None)],
-            combined_map=MapView(
-                image_href=page_input.combined_map_src,
-                alt=page_input.combined_map_alt,
-            ),
             summary_metrics=SummaryMetricsView(
                 assessment_count=page_input.summary_metrics.assessment_count,
                 tree_count=page_input.summary_metrics.tree_count,

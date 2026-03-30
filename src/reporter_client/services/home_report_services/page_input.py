@@ -16,16 +16,12 @@ class HomePageInputService:
         home_source: HomeReportSource,
         stable_intro: str,
         summary_artifact: SummaryArtifact,
-        combined_map_src: str,
-        combined_map_alt: str,
         raw_updated_at: str,
     ) -> HomePageInput:
         return HomePageInput(
             site_title=home_source.site_title,
             description_markdown=stable_intro,
             summary_markdown=summary_artifact.summary_text + "\n",
-            combined_map_src=combined_map_src,
-            combined_map_alt=combined_map_alt,
             summary_metrics=SummaryMetricsInput(
                 assessment_count=str(home_source.tree_count),
                 tree_count=str(home_source.tree_count),

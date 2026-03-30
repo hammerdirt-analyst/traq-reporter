@@ -32,12 +32,11 @@ class SummaryMetricsView:
 
 
 @dataclass(frozen=True)
-class TreeRowView:
+class ProjectTreeCardView:
+    ordinal: int
     job_number: str
     tree_href: str
     species_common: str
-    dbh: str
-    height: str
     risk_rating: str
     main_concerns: str
 
@@ -54,7 +53,6 @@ class HomePageView:
     description_markdown: str
     summary_markdown: str
     breadcrumbs: list[BreadcrumbView]
-    combined_map: MapView
     summary_metrics: SummaryMetricsView
     project_links: list[LinkView]
     updated_at: str
@@ -69,7 +67,7 @@ class ProjectPageView:
     project_map: MapView
     project_image: ImageAssetView | None
     summary_metrics: SummaryMetricsView
-    tree_rows: list[TreeRowView]
+    tree_cards: list[ProjectTreeCardView]
     updated_at: str
 
 

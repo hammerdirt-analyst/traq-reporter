@@ -35,8 +35,6 @@ class StagedInputService:
 
     _SITE_TITLE = "TRAQ Reporter"
     _ABOUT_TITLE = "About Hammerdirt"
-    _HOME_MAP_SRC = "assets/maps/all-projects-overview.svg"
-    _HOME_MAP_ALT = "Combined assessment map"
     _PROJECT_MAPS = {
         "Briarwood": "assets/maps/project_alpha_overview.svg",
         "Arboretum": "assets/maps/project_bravo_overview.svg",
@@ -83,8 +81,6 @@ class StagedInputService:
             home_source=home_source,
             stable_intro=stable_intro,
             summary_artifact=home_summary,
-            combined_map_src=self._HOME_MAP_SRC,
-            combined_map_alt=self._HOME_MAP_ALT,
             raw_updated_at=home_source.latest_archived_at,
         )
 

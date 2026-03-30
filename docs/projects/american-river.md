@@ -49,8 +49,29 @@ I have been summarized for American River.
 | Trees | 3 |
 | Species | 3 |
 
-| Job | Species | DBH | Height | Risk | Main Concerns |
-| --- | --- | ---: | ---: | --- | --- |
-| [american-river_001](/reporter-client/projects/american-river/trees/american-river_001/) | Populus fremontii | 28 in | 66 ft | moderate | Observed erosion near root flare |
-| [american-river_002](/reporter-client/projects/american-river/trees/american-river_002/) | Salix gooddingii | 22 in | 44 ft | low | Observed seasonal vigor and healthy foliage |
-| [american-river_003](/reporter-client/projects/american-river/trees/american-river_003/) | Fraxinus latifolia | 24 in | 52 ft | moderate | Observed need for continued pruning and monitoring |
+<div class="project-tree-cards">
+  <a class="project-tree-card" href="/reporter-client/projects/american-river/trees/american-river_001/">
+    <div class="project-tree-card__number">1</div>
+    <div class="project-tree-card__body">
+      <div class="project-tree-card__species">Populus fremontii</div>
+      <div class="project-tree-card__risk">moderate</div>
+      <div class="project-tree-card__concerns">Observed erosion near root flare</div>
+    </div>
+  </a>
+  <a class="project-tree-card" href="/reporter-client/projects/american-river/trees/american-river_002/">
+    <div class="project-tree-card__number">2</div>
+    <div class="project-tree-card__body">
+      <div class="project-tree-card__species">Salix gooddingii</div>
+      <div class="project-tree-card__risk">low</div>
+      <div class="project-tree-card__concerns">Observed seasonal vigor and healthy foliage</div>
+    </div>
+  </a>
+  <a class="project-tree-card" href="/reporter-client/projects/american-river/trees/american-river_003/">
+    <div class="project-tree-card__number">3</div>
+    <div class="project-tree-card__body">
+      <div class="project-tree-card__species">Fraxinus latifolia</div>
+      <div class="project-tree-card__risk">moderate</div>
+      <div class="project-tree-card__concerns">Observed need for continued pruning and monitoring</div>
+    </div>
+  </a>
+</div>

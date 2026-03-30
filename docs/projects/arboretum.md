@@ -45,8 +45,29 @@ I have been summarized for Arboretum.
 | Trees | 3 |
 | Species | 3 |
 
-| Job | Species | DBH | Height | Risk | Main Concerns |
-| --- | --- | ---: | ---: | --- | --- |
-| [arboretum_001](/reporter-client/projects/arboretum/trees/arboretum_001/) | Cedrus deodara | 30 in | 72 ft | moderate | Conditions of concern involve branch extension over pedestrian area |
-| [arboretum_002](/reporter-client/projects/arboretum/trees/arboretum_002/) | Quercus lobata | 42 in | 76 ft | low | Observed dense crown and minor deadwood |
-| [arboretum_003](/reporter-client/projects/arboretum/trees/arboretum_003/) | Ulmus parvifolia | 16 in | 38 ft | low | Observed minor bark texture variation |
+<div class="project-tree-cards">
+  <a class="project-tree-card" href="/reporter-client/projects/arboretum/trees/arboretum_001/">
+    <div class="project-tree-card__number">1</div>
+    <div class="project-tree-card__body">
+      <div class="project-tree-card__species">Cedrus deodara</div>
+      <div class="project-tree-card__risk">moderate</div>
+      <div class="project-tree-card__concerns">Conditions of concern involve branch extension over pedestrian area</div>
+    </div>
+  </a>
+  <a class="project-tree-card" href="/reporter-client/projects/arboretum/trees/arboretum_002/">
+    <div class="project-tree-card__number">2</div>
+    <div class="project-tree-card__body">
+      <div class="project-tree-card__species">Quercus lobata</div>
+      <div class="project-tree-card__risk">low</div>
+      <div class="project-tree-card__concerns">Observed dense crown and minor deadwood</div>
+    </div>
+  </a>
+  <a class="project-tree-card" href="/reporter-client/projects/arboretum/trees/arboretum_003/">
+    <div class="project-tree-card__number">3</div>
+    <div class="project-tree-card__body">
+      <div class="project-tree-card__species">Ulmus parvifolia</div>
+      <div class="project-tree-card__risk">low</div>
+      <div class="project-tree-card__concerns">Observed minor bark texture variation</div>
+    </div>
+  </a>
+</div>
