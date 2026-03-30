@@ -25,7 +25,6 @@ class ProjectPageBuilder:
         return ProjectPageView(
             page_title=page_input.project_name,
             description_markdown=page_input.description_markdown,
-            summary_markdown=page_input.summary_markdown,
             breadcrumbs=[
                 BreadcrumbView(label="Home", href="/reporter-client/"),
                 BreadcrumbView(label=page_input.project_name, href=None),

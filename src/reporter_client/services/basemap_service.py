@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import io
 import json
+import logging
 import math
 import urllib.request
 from dataclasses import dataclass
@@ -11,6 +12,9 @@ from pathlib import Path
 from typing import Callable
 
 from PIL import Image
+
+
+logger = logging.getLogger("reporter_client.basemap")
 
 
 @dataclass(frozen=True)
@@ -53,6 +57,15 @@ class BasemapService:
         resolved_zoom = zoom if zoom is not None else self.DEFAULT_ZOOM
         target_dir = docs_dir / "assets" / "map-bases"
         target_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(
+            "building basemap for %s at zoom %s from west=%s east=%s south=%s north=%s",
+            slug,
+            resolved_zoom,
+            bbox.west,
+            bbox.east,
+            bbox.south,
+            bbox.north,
+        )
 
         image = self._render_basemap_image(bbox=bbox, zoom=resolved_zoom)
         image_path = target_dir / f"{slug}_base.jpg"

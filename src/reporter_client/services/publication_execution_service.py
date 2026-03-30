@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from ..models.publish_index import PublicationExecutionResult, PublishWorkItem
@@ -10,6 +11,9 @@ from .project_publication_service import ProjectPublicationService
 from .publish_state_service import PublishStateService
 from .staged_manifest_service import StagedManifestService
 from .tree_publication_service import TreePublicationService
+
+
+logger = logging.getLogger("reporter_client.publish")
 
 
 class PublicationExecutionService:
@@ -36,9 +40,17 @@ class PublicationExecutionService:
         )
 
     def run(self) -> PublicationExecutionResult:
+        logger.info("loading publish index from %s", self._index_path)
         index = self._publish_state_service.load_index(self._index_path)
+        logger.info("discovering staged manifests under %s", self._staging_root)
         staged_records = self._manifest_service.discover(self._staging_root)
         plan = self._publish_state_service.build_plan(staged_records=staged_records, index=index)
+        logger.info(
+            "publish plan: %s new, %s changed, %s unchanged",
+            len(plan.new_jobs),
+            len(plan.changed_jobs),
+            len(plan.unchanged_jobs),
+        )
 
         work_items = [*plan.new_jobs, *plan.changed_jobs, *plan.unchanged_jobs]
         changed_job_ids = {item.job_id for item in [*plan.new_jobs, *plan.changed_jobs]}
@@ -47,6 +59,7 @@ class PublicationExecutionService:
             changed_job_ids=changed_job_ids,
         )
 
+        logger.info("publishing %s tree page(s)", len(changed_job_ids))
         tree_pages_written = self._tree_publication_service.publish_tree_pages(
             records,
             target_job_ids=changed_job_ids,
@@ -54,10 +67,12 @@ class PublicationExecutionService:
         all_tree_sources = [record.source for record in records]
         affected_projects = sorted({item.project for item in [*plan.new_jobs, *plan.changed_jobs]})
         project_sources = self._project_publication_service.build_project_sources(all_tree_sources)
+        logger.info("publishing %s project page(s)", len(affected_projects))
         project_pages_written = self._project_publication_service.publish_project_pages(
             project_sources=project_sources,
             target_projects=set(affected_projects),
         )
+        logger.info("updating home/about: %s", "yes" if changed_job_ids else "no")
         home_updated = self._home_publication_service.publish(
             project_sources=project_sources,
             should_write=bool(changed_job_ids),
@@ -66,6 +81,7 @@ class PublicationExecutionService:
         if changed_job_ids:
             updated_index = self._publish_state_service.apply_plan(index=index, plan=plan)
             self._publish_state_service.save_index(self._index_path, updated_index)
+            logger.info("wrote publish index to %s", self._index_path)
 
         return PublicationExecutionResult(
             new_jobs=len(plan.new_jobs),

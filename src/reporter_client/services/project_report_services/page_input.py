@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from ...models.page_inputs import ProjectPageInput, ProjectTreeCardInput, SummaryMetricsInput
 from ...models.project_report_source import ProjectReportSource
-from ...models.summary_artifacts import SummaryArtifact
 from .map import ProjectMapService
 from .media import ProjectMediaService
 
@@ -25,7 +24,6 @@ class ProjectPageInputService:
         self,
         *,
         project_source: ProjectReportSource,
-        summary_artifact: SummaryArtifact,
         area_map_src: str,
     ) -> ProjectPageInput:
         media = self._project_media_service.build_media(project_source)
@@ -37,7 +35,6 @@ class ProjectPageInputService:
             project_id=project_source.project_slug,
             project_name=project_source.project,
             description_markdown=project_source.project_description,
-            summary_markdown=summary_artifact.summary_text,
             map_src=project_map.image_src,
             map_alt=project_map.alt,
             project_image=media.canonical_image,

@@ -37,6 +37,10 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 {% endfor %}
 </div>
 
+<p class="tree-form-link">
+  <a class="tree-form-link__button" href="{{ view.completed_inspection_form_link.href }}">{{ view.completed_inspection_form_link.label }}</a>
+</p>
+
 {% if view.image_gallery|length > 1 %}
 <div class="image-strip">
 {% for image in view.image_gallery[1:5] %}
@@ -47,5 +51,3 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 {% endfor %}
 </div>
 {% endif %}
-
-- [{{ view.completed_inspection_form_link.label }}]({{ view.completed_inspection_form_link.href }})

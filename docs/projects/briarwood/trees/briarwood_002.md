@@ -32,13 +32,21 @@ updated_at: "2026-03-25 09:10"
 </div>
 
 <div class="text-block" markdown="1">
-I have been summarized from transcript and form data for Quercus agrifolia.
+The Quercus agrifolia, commonly known as the coast live oak, is assessed in the context of its environment. The tree stands at a height of 54 feet with a DBH of 20 inches. The assessment did not specify site factors, but the tree's location and condition were considered in relation to potential targets in the vicinity.
 
-I have been summarized.
+The target assessment did not provide specific details regarding the proximity of targets to the tree. However, it is noted that the tree's extended branches reach over the parking area, which may pose a risk to vehicles or pedestrians within that space. The assessment did not indicate any targets within the dripline or within 1x height of the tree.
 
-I have been summarized again for layout testing.
+The crown of the tree exhibits extended branches that extend over the parking area, which is a primary concern noted in the assessment. No specific trunk defects were reported, indicating that the trunk appears to be in sound condition. The overall structural integrity of the crown and branches is considered stable, with no immediate concerns identified.
+
+The assessment did not provide specific details regarding the roots and root collar of the tree. Load factors were not explicitly mentioned, suggesting that there are no significant concerns related to the root system at this time. The overall health of the root system was not assessed in detail, but it is implied that it is functioning adequately.
+
+The overall risk associated with the Quercus agrifolia is categorized as low, with a corresponding low residual risk after mitigation. The assessment did not outline specific mitigation options, indicating that the tree is currently stable and does not require immediate intervention. The inspection interval is set at 18 months, suggesting a routine monitoring approach to ensure continued health and safety.
 
 </div>
+
+<p class="tree-form-link">
+  <a class="tree-form-link__button" href="/reporter-client/assets/traq-forms/briarwood_002.pdf">Completed inspection form</a>
+</p>
 
 <div class="image-strip">
   <figure>
@@ -46,5 +54,3 @@ I have been summarized again for layout testing.
     <figcaption>trunk</figcaption>
   </figure>
 </div>
-
-- [Completed inspection form](/reporter-client/assets/traq-forms/briarwood_002.pdf)

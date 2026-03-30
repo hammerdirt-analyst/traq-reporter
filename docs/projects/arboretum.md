@@ -8,7 +8,6 @@ updated_at: "2026-03-25 10:30"
 
 
 
-
 # Arboretum
 
 <div class="crumb-bar">
@@ -33,11 +32,6 @@ The University Arboretum at Sacramento State University supports 1400 species of
   <img src="../../assets/maps/projects/arboretum.jpg" alt="Arboretum assessment map" />
 </div>
 
-<div class="text-block" markdown="1">
-<hr class="section-rule" />
-I have been summarized for Arboretum.
-<hr class="section-rule" />
-</div>
 
 | Metric | Value |
 | --- | ---: |
@@ -46,28 +40,25 @@ I have been summarized for Arboretum.
 | Species | 3 |
 
 <div class="project-tree-cards">
-  <a class="project-tree-card" href="/reporter-client/projects/arboretum/trees/arboretum_001/">
+  <a class="project-tree-card project-tree-card--moderate" href="/reporter-client/projects/arboretum/trees/arboretum_001/">
     <div class="project-tree-card__number">1</div>
     <div class="project-tree-card__body">
       <div class="project-tree-card__species">Cedrus deodara</div>
       <div class="project-tree-card__risk">moderate</div>
-      <div class="project-tree-card__concerns">Conditions of concern involve branch extension over pedestrian area</div>
     </div>
   </a>
-  <a class="project-tree-card" href="/reporter-client/projects/arboretum/trees/arboretum_002/">
+  <a class="project-tree-card project-tree-card--low" href="/reporter-client/projects/arboretum/trees/arboretum_002/">
     <div class="project-tree-card__number">2</div>
     <div class="project-tree-card__body">
       <div class="project-tree-card__species">Quercus lobata</div>
       <div class="project-tree-card__risk">low</div>
-      <div class="project-tree-card__concerns">Observed dense crown and minor deadwood</div>
     </div>
   </a>
-  <a class="project-tree-card" href="/reporter-client/projects/arboretum/trees/arboretum_003/">
+  <a class="project-tree-card project-tree-card--low" href="/reporter-client/projects/arboretum/trees/arboretum_003/">
     <div class="project-tree-card__number">3</div>
     <div class="project-tree-card__body">
       <div class="project-tree-card__species">Ulmus parvifolia</div>
       <div class="project-tree-card__risk">low</div>
-      <div class="project-tree-card__concerns">Observed minor bark texture variation</div>
     </div>
   </a>
 </div>

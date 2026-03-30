@@ -1,12 +1,12 @@
 {% if tree_cards %}
 <div class="project-tree-cards">
 {% for tree in tree_cards %}
-  <a class="project-tree-card" href="{{ tree.tree_href }}">
+  {% set risk_class = tree.risk_rating.strip().lower().replace(' ', '-') %}
+  <a class="project-tree-card project-tree-card--{{ risk_class }}" href="{{ tree.tree_href }}">
     <div class="project-tree-card__number">{{ tree.ordinal }}</div>
     <div class="project-tree-card__body">
       <div class="project-tree-card__species">{{ tree.species_common }}</div>
       <div class="project-tree-card__risk">{{ tree.risk_rating }}</div>
-      <div class="project-tree-card__concerns">{{ tree.main_concerns }}</div>
     </div>
   </a>
 {% endfor %}

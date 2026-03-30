@@ -4,14 +4,15 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .home_report_source import HomeReportSource
-from .project_report_source import ProjectReportSource
 from .tree_report_source import TreeReportSource
 
 
 @dataclass(frozen=True)
 class TreeSummaryContext:
     source: TreeReportSource
+    site_factors: dict
+    target_assessment: dict
+    load_factors: dict
     crown_and_branches: dict
     trunk: dict
     roots_and_root_collar: dict
@@ -19,18 +20,3 @@ class TreeSummaryContext:
     risk_categorization: list[dict]
     mitigation_options: list[dict]
     transcript: str
-
-
-@dataclass(frozen=True)
-class ProjectSummaryContext:
-    project_id: str
-    project_name: str
-    stable_description: str
-    project_source: ProjectReportSource
-
-
-@dataclass(frozen=True)
-class HomeSummaryContext:
-    home_source: HomeReportSource
-    stable_intro: str
-    project_summaries: list[str]

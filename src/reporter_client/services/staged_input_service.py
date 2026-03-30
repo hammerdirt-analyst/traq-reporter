@@ -8,16 +8,14 @@ from pathlib import Path
 from ..models.home_report_source import HomeReportSource
 from ..models.page_inputs import AboutPageInput, HomePageInput, ProjectPageInput, TreePageInput
 from ..models.project_report_source import ProjectReportSource
-from ..models.summary_contexts import HomeSummaryContext, ProjectSummaryContext
 from .content_source_service import ContentSourceService
-from .home_report_services import HomePageInputService, HomeReportSourceService, HomeSummaryService
+from .home_report_services import HomePageInputService, HomeReportSourceService
 from .project_naming import project_slug
 from .project_report_services import (
     ProjectMapService,
     ProjectMediaService,
     ProjectPageInputService,
     ProjectReportSourceService,
-    ProjectSummaryService,
 )
 from .tree_report_services import (
     StagedTreeBundleService,
@@ -47,13 +45,11 @@ class StagedInputService:
         self._content_source = ContentSourceService(content_dir=content_dir)
         self._home_report_source_service = HomeReportSourceService()
         self._home_page_input_service = HomePageInputService()
-        self._home_summary_service = HomeSummaryService()
         self._project_page_input_service = ProjectPageInputService(
             project_media_service=ProjectMediaService(docs_dir=docs_dir),
             project_map_service=ProjectMapService(docs_dir=docs_dir)
         )
         self._project_report_source_service = ProjectReportSourceService()
-        self._project_summary_service = ProjectSummaryService()
         self._staged_tree_bundle_service = StagedTreeBundleService()
         self._tree_artifact_publish_service = TreeArtifactPublishService()
         self._tree_identity_service = TreeIdentityService()
@@ -70,17 +66,9 @@ class StagedInputService:
             site_title=self._SITE_TITLE,
             project_sources=project_sources,
         )
-        project_summaries = [
-            self._project_summary_service.generate(self._build_project_summary_context(project_source)).summary_text
-            for project_source in project_sources
-        ]
-        home_summary = self._home_summary_service.generate(
-            self._build_home_summary_context(home_source, stable_intro, project_summaries)
-        )
         return self._home_page_input_service.build(
             home_source=home_source,
             stable_intro=stable_intro,
-            summary_artifact=home_summary,
             raw_updated_at=home_source.latest_archived_at,
         )
 
@@ -96,13 +84,9 @@ class StagedInputService:
         project_sources = self._load_project_report_sources()
         inputs: list[ProjectPageInput] = []
         for project_source in project_sources:
-            summary_artifact = self._project_summary_service.generate(
-                self._build_project_summary_context(project_source)
-            )
             inputs.append(
                 self._project_page_input_service.build(
                     project_source=project_source,
-                    summary_artifact=summary_artifact,
                     area_map_src=self._PROJECT_MAPS[project_source.project],
                 )
             )
@@ -159,24 +143,3 @@ class StagedInputService:
     def _latest_archived_at(self) -> str:
         sources = self.load_tree_report_sources()
         return max((source.archived_at for source in sources), default="")
-
-    @staticmethod
-    def _build_project_summary_context(project_source: ProjectReportSource) -> ProjectSummaryContext:
-        return ProjectSummaryContext(
-            project_id=project_source.project_slug,
-            project_name=project_source.project,
-            stable_description=project_source.project_description,
-            project_source=project_source,
-        )
-
-    @staticmethod
-    def _build_home_summary_context(
-        home_source: HomeReportSource,
-        stable_intro: str,
-        project_summaries: list[str],
-    ) -> HomeSummaryContext:
-        return HomeSummaryContext(
-            home_source=home_source,
-            stable_intro=stable_intro,
-            project_summaries=project_summaries,
-        )

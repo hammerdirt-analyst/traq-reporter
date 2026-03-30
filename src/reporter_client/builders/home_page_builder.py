@@ -18,7 +18,6 @@ class HomePageBuilder:
         return HomePageView(
             page_title=page_input.site_title,
             description_markdown=page_input.description_markdown,
-            summary_markdown=page_input.summary_markdown,
             breadcrumbs=[BreadcrumbView(label="Home", href=None)],
             summary_metrics=SummaryMetricsView(
                 assessment_count=page_input.summary_metrics.assessment_count,

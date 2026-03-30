@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from ..builders.about_page_builder import AboutPageBuilder
@@ -13,6 +14,9 @@ from ..renderers.home_renderer import HomeRenderer
 from ..renderers.project_renderer import ProjectRenderer
 from ..renderers.tree_renderer import TreeRenderer
 from .staged_input_service import StagedInputService
+
+
+logger = logging.getLogger("reporter_client.docs")
 
 
 class DocsGenerationService:
@@ -34,23 +38,32 @@ class DocsGenerationService:
 
     def generate(self) -> None:
         """Generate the docs pages used by MkDocs."""
+        logger.info("loading home page input")
         home_view = self._home_builder.build(self._inputs.load_home_input())
         self._write("index.md", self._home_renderer.render({"view": home_view}))
+        logger.info("wrote index.md")
+        logger.info("loading about page input")
         about_view = self._about_builder.build(self._inputs.load_about_input())
         self._write("about.md", self._about_renderer.render({"view": about_view}))
+        logger.info("wrote about.md")
+        logger.info("loading project page inputs")
         project_inputs = self._inputs.load_project_inputs()
         self._clear_generated_docs(
             subdir="projects",
             keep_paths={f"projects/{project_input.project_id}.md" for project_input in project_inputs},
         )
+        logger.info("rendering %s project page(s)", len(project_inputs))
         for project_input in project_inputs:
             project_view = self._project_builder.build(project_input)
             self._write(f"projects/{project_input.project_id}.md", self._project_renderer.render({"view": project_view}))
+        logger.info("loading tree page inputs")
         tree_inputs = self._inputs.load_tree_inputs()
         self._clear_generated_tree_docs(keep_paths={tree_input.tree_doc for tree_input in tree_inputs})
+        logger.info("rendering %s tree page(s)", len(tree_inputs))
         for tree_input in tree_inputs:
             tree_view = self._tree_builder.build(tree_input)
             self._write(tree_input.tree_doc, self._tree_renderer.render({"view": tree_view}))
+        logger.info("docs generation wrote output to %s", self._docs_dir)
 
     def _write(self, relative_path: str, rendered: str) -> None:
         target = self._docs_dir / relative_path

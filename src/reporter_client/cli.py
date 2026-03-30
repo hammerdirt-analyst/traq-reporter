@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import argparse
+import logging
 from pathlib import Path
 
+from .cli_logging import configure_logging
 from .services.docs_generation_service import DocsGenerationService
 from .services.basemap_service import BasemapService, BoundingBox
 from .services.config_service import ConfigService
@@ -18,6 +20,11 @@ def build_parser() -> argparse.ArgumentParser:
         "--config",
         default="reporter_client.yaml",
         help="Path to the YAML configuration file",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Enable verbose CLI logging",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -41,18 +48,23 @@ def main() -> int:
     """Run the requested CLI command."""
     parser = build_parser()
     args = parser.parse_args()
+    configure_logging(verbose=args.verbose)
+    logger = logging.getLogger("reporter_client.cli")
     config = ConfigService().load(Path(args.config))
 
     if args.command == "generate-docs":
+        logger.info("starting generate-docs")
         service = DocsGenerationService(
             staging_root=config.staging.root,
             content_dir=Path(args.content_dir).resolve() if args.content_dir else config.paths.content_dir,
             docs_dir=Path(args.docs_dir).resolve() if args.docs_dir else config.paths.docs_dir,
         )
         service.generate()
+        logger.info("generate-docs complete")
         return 0
 
     if args.command == "publish-staged":
+        logger.info("starting publish-staged")
         service = PublicationExecutionService(
             staging_root=config.staging.root,
             content_dir=config.paths.content_dir,
@@ -60,9 +72,11 @@ def main() -> int:
             index_path=config.publish.index_path,
         )
         service.run()
+        logger.info("publish-staged complete")
         return 0
 
     if args.command == "build-basemap":
+        logger.info("starting build-basemap for %s", args.slug)
         service = BasemapService()
         service.build(
             docs_dir=Path(args.docs_dir).resolve() if args.docs_dir else config.paths.docs_dir,
@@ -75,6 +89,7 @@ def main() -> int:
             ),
             zoom=args.zoom,
         )
+        logger.info("build-basemap complete for %s", args.slug)
         return 0
 
     parser.error(f"Unsupported command: {args.command}")

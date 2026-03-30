@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 from datetime import UTC, datetime
 
@@ -20,6 +21,9 @@ from ...models.summary_artifacts import SummaryArtifact, SummaryResponse
 from ...models.summary_prompts import SummaryPrompts
 
 
+logger = logging.getLogger("reporter_client.summary")
+
+
 class SummaryGenerator:
     """Shared generation boundary for page-level summaries."""
 
@@ -29,8 +33,17 @@ class SummaryGenerator:
 
     def generate(self, *, page_kind: str, source_identifier: str, prompts: SummaryPrompts) -> SummaryArtifact:
         now = datetime.now(UTC).isoformat()
-        response_payload, model_name = self._generate_response_payload(prompts)
-        response = parse_summary_response(response_payload)
+        response_payload, model_name = self._generate_response_payload(prompts, page_kind=page_kind)
+        try:
+            response = parse_summary_response(response_payload, page_kind=page_kind)
+        except (json.JSONDecodeError, ValueError):
+            logger.exception(
+                "failed to parse %s summary response for %s; payload excerpt=%r",
+                page_kind,
+                source_identifier,
+                response_payload[:1200],
+            )
+            raise
         return SummaryArtifact(
             page_kind=page_kind,
             source_identifier=source_identifier,
@@ -41,16 +54,17 @@ class SummaryGenerator:
             narrative_blocks=response.narrative_blocks,
         )
 
-    def _generate_response_payload(self, prompts: SummaryPrompts) -> tuple[str, str]:
+    def _generate_response_payload(self, prompts: SummaryPrompts, *, page_kind: str) -> tuple[str, str]:
         api_key = os.environ.get("OPENAI_API_KEY")
         if not api_key:
-            return _build_stub_response_payload(prompts.user_prompt), "stub-summary-generator"
+            return _build_stub_response_payload(prompts.user_prompt, page_kind=page_kind), "stub-summary-generator"
         if OpenAI is None:
             raise RuntimeError(
                 "OpenAI dependency is not installed. Run `uv sync` to install project dependencies."
             )
 
         model = os.environ.get("REPORTER_OPENAI_SUMMARY_MODEL", "gpt-4o-mini")
+        logger.info("requesting %s summary from model %s", page_kind, model)
         client = OpenAI(api_key=api_key)
         response = client.chat.completions.create(
             model=model,
@@ -65,7 +79,7 @@ class SummaryGenerator:
         return payload, model
 
 
-def parse_summary_response(payload: str) -> SummaryResponse:
+def parse_summary_response(payload: str, *, page_kind: str = "generic") -> SummaryResponse:
     data = json.loads(payload)
     if not isinstance(data, dict):
         raise ValueError("Summary response must be a JSON object")
@@ -76,9 +90,19 @@ def parse_summary_response(payload: str) -> SummaryResponse:
         raise ValueError("narrative_blocks must be a JSON array")
 
     narrative_blocks = [str(item).strip() for item in narrative_blocks_raw if str(item).strip()]
+    if page_kind == "tree":
+        if len(narrative_blocks) == 5:
+            summary_text = narrative_blocks[0]
+            narrative_blocks = narrative_blocks[1:]
+        elif len(narrative_blocks) == 4 and summary_text:
+            pass
+        else:
+            raise ValueError("tree narrative_blocks must contain 5 paragraphs or 4 paragraphs with summary_text")
+    elif not summary_text:
+        raise ValueError("summary_text is required")
     if not summary_text:
         raise ValueError("summary_text is required")
-    if len(narrative_blocks) < 2 or len(narrative_blocks) > 4:
+    if page_kind != "tree" and (len(narrative_blocks) < 2 or len(narrative_blocks) > 4):
         raise ValueError("narrative_blocks must contain 2 to 4 paragraphs")
 
     return SummaryResponse(
@@ -101,7 +125,20 @@ def _extract_json_payload(content: str) -> str:
     return stripped
 
 
-def _build_stub_response_payload(user_prompt: str) -> str:
+def _build_stub_response_payload(user_prompt: str, *, page_kind: str) -> str:
+    if page_kind == "tree":
+        return json.dumps(
+            {
+                "summary_text": "",
+                "narrative_blocks": [
+                    _build_stub_summary(user_prompt),
+                    "Tree summary paragraph two.",
+                    "Tree summary paragraph three.",
+                    "Tree summary paragraph four.",
+                    "Tree summary paragraph five.",
+                ],
+            }
+        )
     return json.dumps(
         {
             "summary_text": _build_stub_summary(user_prompt),
@@ -116,7 +153,7 @@ def _build_stub_response_payload(user_prompt: str) -> str:
 def _build_stub_summary(user_prompt: str) -> str:
     for line in user_prompt.splitlines():
         if line.startswith("Species: "):
-            return f"I have been summarized from transcript and form data for {line.removeprefix('Species: ').strip()}."
+            return f"Tree assessment summary for {line.removeprefix('Species: ').strip()}."
         if line.startswith("Project name: "):
             return f"I have been summarized for {line.removeprefix('Project name: ').strip()}."
         if line.startswith("Site title: "):

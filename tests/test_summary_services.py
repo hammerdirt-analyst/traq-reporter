@@ -1,16 +1,11 @@
-"""Tests for page-level summary service wrappers."""
+"""Tests for the remaining tree summary service wrapper."""
 
 from __future__ import annotations
 
 import unittest
 from unittest.mock import patch
 
-from reporter_client.models.home_report_source import HomeReportSource
-from reporter_client.models.project_report_source import ProjectReportSource
-from reporter_client.models.summary_contexts import HomeSummaryContext, ProjectSummaryContext
 from reporter_client.models.tree_report_source import GpsPoint, RiskProfile, TreeReportSource
-from reporter_client.services.home_report_services import HomeSummaryService
-from reporter_client.services.project_report_services import ProjectSummaryService
 from reporter_client.services.tree_report_services import TreeSummaryContextBuilder, TreeSummaryService
 
 
@@ -39,6 +34,9 @@ class SummaryServiceWrapperTests(unittest.TestCase):
         self.completed_payload = {
             "form": {
                 "data": {
+                    "site_factors": {"history_of_failures": "none"},
+                    "target_assessment": {"targets": [{"label": "ParkingLot", "zone_within_drip_line": True}]},
+                    "load_factors": {"wind_exposure": "partial"},
                     "crown_and_branches": {"main_concerns": "branches over target"},
                     "trunk": {"main_concerns": "sap ooze"},
                     "roots_and_root_collar": {"main_concerns": "pavement over roots"},
@@ -48,7 +46,6 @@ class SummaryServiceWrapperTests(unittest.TestCase):
                 }
             }
         }
-        self.transcript = "[trunk]\nObserved sap ooze."
 
     def tearDown(self) -> None:
         self._env_patcher.stop()
@@ -57,7 +54,7 @@ class SummaryServiceWrapperTests(unittest.TestCase):
         context = TreeSummaryContextBuilder().build(
             source=self.tree_source,
             completed_payload=self.completed_payload,
-            transcript=self.transcript,
+            transcript="[trunk]\\nObserved sap ooze.",
         )
 
         artifact = TreeSummaryService().generate(context)
@@ -66,58 +63,6 @@ class SummaryServiceWrapperTests(unittest.TestCase):
         self.assertEqual(artifact.source_identifier, "job-123")
         self.assertEqual(artifact.prompt_version, "tree-v1")
         self.assertIn("Quercus agrifolia", artifact.summary_text)
-
-    def test_project_summary_service_returns_project_artifact(self) -> None:
-        project_source = ProjectReportSource(
-            project="Briarwood",
-            project_slug="briarwood",
-            project_description="Stable project description.",
-            tree_count=1,
-            species_count=1,
-            earliest_archived_at="2026-03-26T00:00:00Z",
-            latest_archived_at="2026-03-26T00:00:00Z",
-            canonical_image_src=None,
-            canonical_image_caption=None,
-            trees=[],
-        )
-
-        artifact = ProjectSummaryService().generate(
-            ProjectSummaryContext(
-                project_id="briarwood",
-                project_name="Briarwood",
-                stable_description="Stable project description.",
-                project_source=project_source,
-            )
-        )
-
-        self.assertEqual(artifact.page_kind, "project")
-        self.assertEqual(artifact.source_identifier, "briarwood")
-        self.assertEqual(artifact.prompt_version, "project-v1")
-        self.assertIn("Briarwood", artifact.summary_text)
-
-    def test_home_summary_service_returns_home_artifact(self) -> None:
-        home_source = HomeReportSource(
-            site_title="TRAQ Reporter",
-            project_count=3,
-            tree_count=10,
-            species_count=10,
-            earliest_archived_at="2026-03-25T09:10:08.608364Z",
-            latest_archived_at="2026-03-25T11:30:08.608364Z",
-            projects=[],
-        )
-
-        artifact = HomeSummaryService().generate(
-            HomeSummaryContext(
-                home_source=home_source,
-                stable_intro="Stable intro.",
-                project_summaries=["Briarwood summary"],
-            )
-        )
-
-        self.assertEqual(artifact.page_kind, "home")
-        self.assertEqual(artifact.source_identifier, "TRAQ Reporter")
-        self.assertEqual(artifact.prompt_version, "home-v1")
-        self.assertIn("TRAQ Reporter", artifact.summary_text)
 
 
 if __name__ == "__main__":

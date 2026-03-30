@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from ...models.home_report_source import HomeReportSource
 from ...models.page_inputs import HomePageInput, ProjectLinkInput, SummaryMetricsInput
-from ...models.summary_artifacts import SummaryArtifact
 
 
 class HomePageInputService:
@@ -15,13 +14,11 @@ class HomePageInputService:
         *,
         home_source: HomeReportSource,
         stable_intro: str,
-        summary_artifact: SummaryArtifact,
         raw_updated_at: str,
     ) -> HomePageInput:
         return HomePageInput(
             site_title=home_source.site_title,
             description_markdown=stable_intro,
-            summary_markdown=summary_artifact.summary_text + "\n",
             summary_metrics=SummaryMetricsInput(
                 assessment_count=str(home_source.tree_count),
                 tree_count=str(home_source.tree_count),

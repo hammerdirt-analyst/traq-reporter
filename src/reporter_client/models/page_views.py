@@ -51,7 +51,6 @@ class ImageAssetView:
 class HomePageView:
     page_title: str
     description_markdown: str
-    summary_markdown: str
     breadcrumbs: list[BreadcrumbView]
     summary_metrics: SummaryMetricsView
     project_links: list[LinkView]
@@ -62,7 +61,6 @@ class HomePageView:
 class ProjectPageView:
     page_title: str
     description_markdown: str
-    summary_markdown: str
     breadcrumbs: list[BreadcrumbView]
     project_map: MapView
     project_image: ImageAssetView | None

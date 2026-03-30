@@ -10,7 +10,7 @@ from ..models.page_inputs import AboutPageInput, HomePageInput
 from ..renderers.about_renderer import AboutRenderer
 from ..renderers.home_renderer import HomeRenderer
 from .content_source_service import ContentSourceService
-from .home_report_services import HomePageInputService, HomeReportSourceService, HomeSummaryService
+from .home_report_services import HomePageInputService, HomeReportSourceService
 
 
 class HomePublicationService:
@@ -27,7 +27,6 @@ class HomePublicationService:
         self._about_renderer = AboutRenderer(template_dir=template_dir)
         self._home_page_input_service = HomePageInputService()
         self._home_report_source_service = HomeReportSourceService()
-        self._home_summary_service = HomeSummaryService()
         self._docs_dir = docs_dir
 
     def publish(self, *, project_sources, should_write: bool) -> bool:
@@ -38,23 +37,9 @@ class HomePublicationService:
             site_title=self._SITE_TITLE,
             project_sources=project_sources,
         )
-        project_summaries = [
-            project_source.project_description
-            for project_source in project_sources
-        ]
-        from ..models.summary_contexts import HomeSummaryContext
-
-        summary_artifact = self._home_summary_service.generate(
-            HomeSummaryContext(
-                home_source=home_source,
-                stable_intro=stable_intro,
-                project_summaries=project_summaries,
-            )
-        )
         home_input = self._home_page_input_service.build(
             home_source=home_source,
             stable_intro=stable_intro,
-            summary_artifact=summary_artifact,
             raw_updated_at=home_source.latest_archived_at,
         )
         about_input = AboutPageInput(

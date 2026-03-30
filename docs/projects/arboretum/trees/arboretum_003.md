@@ -32,13 +32,21 @@ updated_at: "2026-03-25 10:30"
 </div>
 
 <div class="text-block" markdown="1">
-I have been summarized from transcript and form data for Ulmus parvifolia.
+The tree assessed is an Ulmus parvifolia, commonly known as the Chinese elm, with a diameter at breast height (DBH) of 16 inches and a height of 38 feet. The site factors were not specifically detailed in the assessment; however, the tree's health and structural integrity were evaluated in the context of its environment and growth conditions.
 
-I have been summarized.
+The target assessment did not specify particular targets or their distances from the tree. Therefore, no explicit measurements regarding proximity to structures or other significant features were provided in the assessment.
 
-I have been summarized again for layout testing.
+The crown and branches of the tree exhibited minor bark texture variation, which was the main concern noted during the assessment. No significant defects were reported in the trunk, indicating that the tree's structural integrity appears to be intact.
+
+There were no specific observations regarding the roots and root collar, nor were any load factors identified that would suggest a risk to the tree's stability or health.
+
+The overall risk categorization for the tree is low, and the expected residual risk after any potential mitigation options is also low. No specific mitigation options were identified in the assessment, reflecting the current condition of the tree.
 
 </div>
+
+<p class="tree-form-link">
+  <a class="tree-form-link__button" href="/reporter-client/assets/traq-forms/arboretum_003.pdf">Completed inspection form</a>
+</p>
 
 <div class="image-strip">
   <figure>
@@ -46,5 +54,3 @@ I have been summarized again for layout testing.
     <figcaption>trunk texture</figcaption>
   </figure>
 </div>
-
-- [Completed inspection form](/reporter-client/assets/traq-forms/arboretum_003.pdf)

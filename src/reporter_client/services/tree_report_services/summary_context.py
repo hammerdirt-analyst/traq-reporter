@@ -14,6 +14,9 @@ class TreeSummaryContextBuilder:
         mitigation_options = form_data.get("mitigation_options", {}).get("options", []) or []
         return TreeSummaryContext(
             source=source,
+            site_factors=dict(form_data.get("site_factors", {}) or {}),
+            target_assessment=dict(form_data.get("target_assessment", {}) or {}),
+            load_factors=dict(form_data.get("load_factors", {}) or {}),
             crown_and_branches=dict(form_data.get("crown_and_branches", {}) or {}),
             trunk=dict(form_data.get("trunk", {}) or {}),
             roots_and_root_collar=dict(form_data.get("roots_and_root_collar", {}) or {}),

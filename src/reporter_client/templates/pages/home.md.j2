@@ -10,14 +10,6 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 </div>
 {%- endset %}
 
-{% set summary_html -%}
-<div class="text-block" markdown="1">
-<hr class="section-rule" />
-{{ view.summary_markdown }}
-<hr class="section-rule" />
-</div>
-{%- endset %}
-
 {% set summary_table_html -%}
 <div class="summary-grid">
   <section class="panel">
@@ -26,13 +18,20 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
     {% endwith %}
   </section>
   <section class="panel">
-    <ul>
+    <div class="home-project-links">
       {% for item in view.project_links %}
-      <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+      <a class="home-project-link" href="{{ item.href }}">{{ item.label }}</a>
       {% endfor %}
-    </ul>
+    </div>
   </section>
+</div>
+<div class="home-attribution">
+  <p>
+    Built with <a href="https://www.mkdocs.org/">MkDocs</a>,
+    map data from <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>,
+    and Python tooling from the <a href="https://www.python.org/psf/">Python Software Foundation</a>.
+  </p>
 </div>
 {%- endset %}
 
-{{ frame.render(view.page_title, view.breadcrumbs, description_html=description_html, summary_html=summary_html, summary_table_html=summary_table_html) }}
+{{ frame.render(view.page_title, view.breadcrumbs, description_html=description_html, summary_table_html=summary_table_html) }}

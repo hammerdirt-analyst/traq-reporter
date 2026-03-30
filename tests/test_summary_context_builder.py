@@ -31,6 +31,9 @@ class SummaryContextBuilderTests(unittest.TestCase):
         self.completed_payload = {
             "form": {
                 "data": {
+                    "site_factors": {"history_of_failures": "none"},
+                    "target_assessment": {"targets": [{"label": "ParkingLot", "zone_within_drip_line": True}]},
+                    "load_factors": {"wind_exposure": "partial"},
                     "crown_and_branches": {"main_concerns": "branches over target"},
                     "trunk": {"main_concerns": "sap ooze"},
                     "roots_and_root_collar": {"main_concerns": "pavement over roots"},
@@ -53,6 +56,9 @@ class SummaryContextBuilderTests(unittest.TestCase):
             transcript=self.transcript,
         )
 
+        self.assertEqual(context.site_factors["history_of_failures"], "none")
+        self.assertEqual(context.target_assessment["targets"][0]["label"], "ParkingLot")
+        self.assertEqual(context.load_factors["wind_exposure"], "partial")
         self.assertEqual(context.crown_and_branches["main_concerns"], "branches over target")
         self.assertEqual(context.trunk["main_concerns"], "sap ooze")
         self.assertEqual(context.roots_and_root_collar["main_concerns"], "pavement over roots")

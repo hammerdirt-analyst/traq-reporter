@@ -13,7 +13,7 @@ theme:
     - scheme: default
       primary: custom
       accent: custom
-  logo: assets/branding/logo.svg
+  logo: assets/branding/ourlogo.png
 
 nav:
   - Home: index.md

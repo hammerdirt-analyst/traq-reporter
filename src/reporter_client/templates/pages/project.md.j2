@@ -27,14 +27,6 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 {% endwith %}
 {%- endset %}
 
-{% set summary_html -%}
-<div class="text-block" markdown="1">
-<hr class="section-rule" />
-{{ view.summary_markdown }}
-<hr class="section-rule" />
-</div>
-{%- endset %}
-
 {% set summary_table_html -%}
 {% with summary=view.summary_metrics %}
 {% include "components/project_summary_table.j2" %}
@@ -47,4 +39,4 @@ updated_at: "{{ view.updated_at[:16].replace('T', ' ') if view.updated_at else '
 {% endwith %}
 {%- endset %}
 
-{{ frame.render(view.page_title, view.breadcrumbs, description_html=description_html, image_html=image_html, map_html=map_html, summary_html=summary_html, summary_table_html=summary_table_html, extra_html=extra_html) }}
+{{ frame.render(view.page_title, view.breadcrumbs, description_html=description_html, image_html=image_html, map_html=map_html, summary_table_html=summary_table_html, extra_html=extra_html) }}

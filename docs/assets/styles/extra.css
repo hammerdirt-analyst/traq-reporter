@@ -197,6 +197,125 @@
   margin-bottom: 1rem;
 }
 
+.project-tree-cards {
+  display: grid;
+  gap: 0.85rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.project-tree-card {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--report-border);
+  border-radius: 0.9rem;
+  background: #fff;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.03);
+}
+
+.project-tree-card:hover {
+  border-color: #b9c5bb;
+  background: #fcfbf8;
+}
+
+.project-tree-card__number {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--report-border);
+  background: var(--report-surface);
+  font-weight: 700;
+}
+
+.project-tree-card__body {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.project-tree-card__species {
+  font-weight: 700;
+}
+
+.project-tree-card__risk {
+  color: var(--report-ink-soft);
+  text-transform: capitalize;
+}
+
+.project-tree-card--low {
+  background: #eef8ef;
+}
+
+.project-tree-card--moderate {
+  background: #fff8dc;
+}
+
+.project-tree-card--high {
+  background: #fdecec;
+}
+
+.home-project-links {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.home-project-link {
+  display: block;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--report-border);
+  border-radius: 0.9rem;
+  background: #fff;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 1px 0 rgba(17, 24, 39, 0.03);
+}
+
+.home-project-link:hover {
+  border-color: #b9c5bb;
+  background: #fcfbf8;
+}
+
+.home-attribution {
+  margin: -0.25rem 0 1.5rem;
+  padding: 0 6px;
+  color: var(--report-ink-soft);
+  font-size: 0.9rem;
+}
+
+.home-attribution p {
+  margin: 0;
+}
+
+.home-attribution a {
+  color: inherit;
+}
+
+.tree-form-link {
+  margin: 1.25rem 0 0;
+}
+
+.tree-form-link__button {
+  display: inline-block;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid #caa46a;
+  border-radius: 0.85rem;
+  background: #fff6e6;
+  color: #6f3f12;
+  font-size: 1.02rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.tree-form-link__button:hover {
+  background: #fbe9c7;
+}
+
 .project-alpha {
   border-top: 4px solid #2f6b4f;
 }

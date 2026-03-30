@@ -48,7 +48,6 @@ class PageBuilderTests(unittest.TestCase):
         project_input = next(item for item in self.inputs.load_project_inputs() if item.project_id == "briarwood")
         view = ProjectPageBuilder().build(project_input)
         self.assertEqual(view.page_title, "Briarwood")
-        self.assertIn("I have been summarized", view.summary_markdown)
         self.assertIn("Briarwood is a community of Rancho Cordova", view.description_markdown)
         self.assertEqual(view.project_image.caption, "Briarwood project image")
         self.assertIn("assets/project-images/briarwood.svg", view.project_image.image_href)

@@ -37,7 +37,12 @@ class SummaryGeneratorTests(unittest.TestCase):
         self.assertIn("Quercus agrifolia", artifact.summary_text)
         self.assertEqual(
             artifact.narrative_blocks,
-            ["I have been summarized.", "I have been summarized again for layout testing."],
+            [
+                "Tree summary paragraph two.",
+                "Tree summary paragraph three.",
+                "Tree summary paragraph four.",
+                "Tree summary paragraph five.",
+            ],
         )
 
     def test_parse_summary_response_accepts_valid_payload(self) -> None:
@@ -55,6 +60,25 @@ class SummaryGeneratorTests(unittest.TestCase):
     def test_parse_summary_response_rejects_wrong_paragraph_count(self) -> None:
         with self.assertRaisesRegex(ValueError, "narrative_blocks must contain 2 to 4 paragraphs"):
             parse_summary_response('{"summary_text":"Lead summary.","narrative_blocks":["Paragraph 1."]}')
+
+    def test_parse_summary_response_normalizes_tree_five_block_payload(self) -> None:
+        response = parse_summary_response(
+            '{"summary_text":"Lead summary.","narrative_blocks":["Paragraph 1.","Paragraph 2.","Paragraph 3.","Paragraph 4.","Paragraph 5."]}',
+            page_kind="tree",
+        )
+
+        self.assertEqual(response.summary_text, "Paragraph 1.")
+        self.assertEqual(
+            response.narrative_blocks,
+            ["Paragraph 2.", "Paragraph 3.", "Paragraph 4.", "Paragraph 5."],
+        )
+
+    def test_parse_summary_response_requires_four_tree_narrative_blocks(self) -> None:
+        with self.assertRaisesRegex(ValueError, "tree narrative_blocks must contain 5 paragraphs or 4 paragraphs with summary_text"):
+            parse_summary_response(
+                '{"summary_text":"Lead summary.","narrative_blocks":["Paragraph 1.","Paragraph 2.","Paragraph 3."]}',
+                page_kind="tree",
+            )
 
     def test_parse_summary_response_requires_summary_text(self) -> None:
         with self.assertRaisesRegex(ValueError, "summary_text is required"):

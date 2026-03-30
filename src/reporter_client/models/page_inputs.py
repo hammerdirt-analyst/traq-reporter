@@ -46,7 +46,6 @@ class MapAssetInput:
 class HomePageInput:
     site_title: str
     description_markdown: str
-    summary_markdown: str
     summary_metrics: SummaryMetricsInput
     project_links: list[ProjectLinkInput]
     updated_at: str
@@ -57,7 +56,6 @@ class ProjectPageInput:
     project_id: str
     project_name: str
     description_markdown: str
-    summary_markdown: str
     map_src: str
     map_alt: str
     project_image: ImageAssetInput | None
