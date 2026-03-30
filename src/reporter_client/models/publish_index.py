@@ -43,3 +43,13 @@ class PublishPlan:
     changed_jobs: list[PublishWorkItem] = field(default_factory=list)
     unchanged_jobs: list[PublishWorkItem] = field(default_factory=list)
 
+
+@dataclass(frozen=True)
+class PublicationExecutionResult:
+    new_jobs: int
+    changed_jobs: int
+    unchanged_jobs: int
+    tree_pages_written: int
+    project_pages_written: int
+    home_updated: bool
+    affected_projects: list[str] = field(default_factory=list)

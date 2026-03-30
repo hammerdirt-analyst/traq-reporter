@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .services.docs_generation_service import DocsGenerationService
 from .services.config_service import ConfigService
+from .services.publication_execution_service import PublicationExecutionService
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -23,6 +24,7 @@ def build_parser() -> argparse.ArgumentParser:
     generate_docs.add_argument("--examples-dir", default=None, help="Directory containing example JSON payloads")
     generate_docs.add_argument("--content-dir", default=None, help="Directory containing authored Markdown content")
     generate_docs.add_argument("--docs-dir", default=None, help="Target MkDocs docs directory")
+    subparsers.add_parser("publish-staged", help="Incrementally publish from staged job bundles using the local publish index")
     return parser
 
 
@@ -39,6 +41,16 @@ def main() -> int:
             docs_dir=Path(args.docs_dir).resolve() if args.docs_dir else config.paths.docs_dir,
         )
         service.generate()
+        return 0
+
+    if args.command == "publish-staged":
+        service = PublicationExecutionService(
+            staging_root=config.staging.root,
+            content_dir=config.paths.content_dir,
+            docs_dir=config.paths.docs_dir,
+            index_path=config.publish.index_path,
+        )
+        service.run()
         return 0
 
     parser.error(f"Unsupported command: {args.command}")

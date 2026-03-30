@@ -66,3 +66,30 @@ class TreeArtifactPublishService:
             images=published_images,
             completed_inspection_form_url=completed_inspection_form_url,
         )
+
+    def link_existing(self, source: TreeReportSource) -> TreeReportSource:
+        if not source.tree_id:
+            raise ValueError("tree_id is required before linking tree artifacts")
+
+        published_geojson = None
+        if source.geojson and source.geojson.geojson_src:
+            published_geojson = TreeGeoJsonSource(geojson_src=f"assets/geojson/{source.tree_id}.geojson")
+
+        published_images = [
+            TreeImageSource(
+                image_src=f"assets/images/{source.tree_id}/image_{index:02d}{Path(image.image_src).suffix or '.jpg'}",
+                caption=image.caption,
+            )
+            for index, image in enumerate(source.images, start=1)
+        ]
+
+        completed_inspection_form_url = source.completed_inspection_form_url
+        if completed_inspection_form_url:
+            completed_inspection_form_url = f"assets/traq-forms/{source.tree_id}.pdf"
+
+        return replace(
+            source,
+            geojson=published_geojson,
+            images=published_images,
+            completed_inspection_form_url=completed_inspection_form_url,
+        )

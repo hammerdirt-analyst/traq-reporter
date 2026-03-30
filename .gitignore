@@ -7,3 +7,4 @@ __pycache__/
 src/*.egg-info/
 site/
 notes-design/
+.state/
