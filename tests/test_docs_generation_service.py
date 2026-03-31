@@ -19,10 +19,15 @@ class DocsGenerationServiceTests(unittest.TestCase):
         staging_root = repo_root.parent / "server" / "staging"
         content_source = ContentSourceService(content_dir=repo_root / "content")
         with patch.dict("os.environ", {"OPENAI_API_KEY": ""}, clear=False), TemporaryDirectory() as tempdir:
-            docs_dir = Path(tempdir) / "docs"
+            docs_dir = Path(tempdir) / "site-src"
             shutil.copytree(
-                repo_root / "docs" / "assets" / "map-bases",
+                repo_root / "site-src" / "assets" / "map-bases",
                 docs_dir / "assets" / "map-bases",
+                dirs_exist_ok=True,
+            )
+            shutil.copytree(
+                repo_root / "site-src" / "assets" / "project-images",
+                docs_dir / "assets" / "project-images",
                 dirs_exist_ok=True,
             )
             service = DocsGenerationService(
@@ -52,7 +57,7 @@ class DocsGenerationServiceTests(unittest.TestCase):
             self.assertIn("american-river_001", project_page)
             self.assertIn("assets/maps/projects/american-river.jpg", project_page)
             self.assertIn("assets/maps/trees/american-river_001.jpg", tree_page)
-            self.assertIn("assets/project-images/american-river.svg", project_page)
+            self.assertIn("assets/project-images/american-river.jpg", project_page)
             self.assertIn("assets/images/", tree_page)
             self.assertIn("/traq-reporter/assets/traq-forms/american-river_001.pdf", tree_page)
             self.assertIn("project-tree-card__number", project_page)

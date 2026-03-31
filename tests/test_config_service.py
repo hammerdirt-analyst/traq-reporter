@@ -23,7 +23,7 @@ class ConfigServiceTests(unittest.TestCase):
                         "  index_path: .state/publish_index.json",
                         "paths:",
                         "  content_dir: content",
-                        "  docs_dir: docs",
+                        "  docs_dir: site-src",
                     ]
                 ),
                 encoding="utf-8",
@@ -34,7 +34,7 @@ class ConfigServiceTests(unittest.TestCase):
             self.assertEqual(config.staging.root, (config_dir / "../server/testdata/staged_jobs_manual").resolve())
             self.assertEqual(config.publish.index_path, (config_dir / ".state/publish_index.json").resolve())
             self.assertEqual(config.paths.content_dir, (config_dir / "content").resolve())
-            self.assertEqual(config.paths.docs_dir, (config_dir / "docs").resolve())
+            self.assertEqual(config.paths.docs_dir, (config_dir / "site-src").resolve())
 
 
 if __name__ == "__main__":

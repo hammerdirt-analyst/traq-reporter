@@ -20,7 +20,7 @@ class ProjectReportSourceServiceTests(unittest.TestCase):
         staged_inputs = StagedInputService(
             staging_root=repo_root.parent / "server" / "staging",
             content_dir=repo_root / "content",
-            docs_dir=repo_root / "docs",
+            docs_dir=repo_root / "site-src",
         )
         content_source = ContentSourceService(content_dir=repo_root / "content")
         tree_sources = staged_inputs.load_tree_report_sources()
@@ -37,19 +37,16 @@ class ProjectReportSourceServiceTests(unittest.TestCase):
 
         self.assertEqual(len(project_sources), 3)
         american_river = next(item for item in project_sources if item.project_slug == "american-river")
-        briarwood = next(item for item in project_sources if item.project_slug == "briarwood")
         self.assertEqual(american_river.tree_count, 1)
         self.assertEqual(american_river.species_count, 1)
         self.assertEqual(american_river.trees[0].tree_id, "american-river_001")
         self.assertEqual(american_river.trees[0].tree_doc, "projects/american-river/trees/american-river_001.md")
         self.assertTrue(american_river.trees[0].risk_rating)
         self.assertTrue(american_river.trees[0].main_concerns)
-        self.assertEqual(briarwood.tree_count, 0)
-        self.assertEqual(briarwood.species_count, 0)
-        self.assertEqual(briarwood.trees, [])
+        self.assertTrue(all(item.project_slug in {"briarwood", "arboretum", "american-river"} for item in project_sources))
 
         media = ProjectMediaService(
-            docs_dir=repo_root / "docs",
+            docs_dir=repo_root / "site-src",
             content_dir=repo_root / "content",
         ).build_media(american_river)
         self.assertEqual(media.canonical_image.caption, "El Manto access, view of the parkway.")

@@ -6,4 +6,4 @@ publish:
 
 paths:
   content_dir: content
-  docs_dir: docs
+  docs_dir: site-src

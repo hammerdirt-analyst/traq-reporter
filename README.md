@@ -2,12 +2,12 @@
 
 This repo builds the local reporter documentation site from staged job bundles in the sibling `server` repo.
 
-The generated documentation source lives in [docs](/home/roger/projects/codex_trial/agent_client/reporter_client/docs). The built MkDocs site goes into `site/` and is not committed.
+The generated MkDocs source lives in [site-src](/home/roger/projects/codex_trial/agent_client/reporter_client/site-src). The deployable built site lives in [docs](/home/roger/projects/codex_trial/agent_client/reporter_client/docs) and is committed for GitHub Pages.
 
 ## What This Repo Does
 
 - reads staged job bundles from the configured staging root
-- publishes assets into `docs/assets/...`
+- publishes assets into `site-src/assets/...`
 - renders:
   - home page
   - project pages
@@ -22,7 +22,8 @@ The generated documentation source lives in [docs](/home/roger/projects/codex_tr
 
 - source code: [src/reporter_client](/home/roger/projects/codex_trial/agent_client/reporter_client/src/reporter_client)
 - authored content: [content](/home/roger/projects/codex_trial/agent_client/reporter_client/content)
-- generated docs source: [docs](/home/roger/projects/codex_trial/agent_client/reporter_client/docs)
+- generated docs source: [site-src](/home/roger/projects/codex_trial/agent_client/reporter_client/site-src)
+- deployable built site: [docs](/home/roger/projects/codex_trial/agent_client/reporter_client/docs)
 - config: [reporter_client.yaml](/home/roger/projects/codex_trial/agent_client/reporter_client/reporter_client.yaml)
 - tests: [tests](/home/roger/projects/codex_trial/agent_client/reporter_client/tests)
 
@@ -106,8 +107,8 @@ env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync reporter-client build-basemap \
 ```
 
 What it writes:
-- `docs/assets/map-bases/<slug>_base.jpg`
-- `docs/assets/map-bases/<slug>_base.json`
+- `site-src/assets/map-bases/<slug>_base.jpg`
+- `site-src/assets/map-bases/<slug>_base.json`
 
 No padding is added by the tool. The supplied bounding box is used exactly.
 
@@ -136,7 +137,7 @@ env UV_CACHE_DIR=/tmp/uv-cache uv run --no-sync mkdocs serve -a 0.0.0.0:8000
 Open:
 
 ```text
-http://127.0.0.1:8000/reporter-client/
+http://127.0.0.1:8000/traq-reporter/
 ```
 
 ### Build the MkDocs site
@@ -152,12 +153,15 @@ There is no checked-in CI workflow file in this repo right now. The build workfl
 1. run tests
 2. run `reporter-client generate-docs` or `reporter-client publish-staged`
 3. run `mkdocs serve` for review or `mkdocs build` for a site build
-4. review changes in `docs/`
-5. commit the source and generated docs together when appropriate
+4. review changes in `site-src/`
+5. run `mkdocs build`
+6. review changes in `docs/`
+7. commit the source and built site together when appropriate
 
 Important repo behavior:
-- `docs/` is treated as generated documentation source and is committed
-- `site/` is the built MkDocs output and is not committed
+- `site-src/` is treated as generated MkDocs source and is committed
+- `docs/` is the built GitHub Pages output and is committed
+- `site/` is an unused local build path and is ignored
 - `.state/` is local runtime state and is ignored
 
 ## Basemap Bounding Boxes

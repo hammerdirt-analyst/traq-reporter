@@ -1,10 +1,12 @@
 site_name: TRAQ Reporter
 site_description: TRAQ Reporter uses the data captured with the TRAQ observer to make a client-ready view of each project. The reporter organizes the trees by project, maps the locations and organizes them by risk.
 site_url: https://hammerdirt-analyst.github.io/traq-reporter/
+docs_dir: site-src
+site_dir: docs
 
 theme:
   name: material
-  custom_dir: docs/overrides
+  custom_dir: site-src/overrides
   features:
     - navigation.tabs
     - navigation.top

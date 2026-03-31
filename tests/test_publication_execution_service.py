@@ -51,6 +51,7 @@ class PublicationExecutionServiceTests(unittest.TestCase):
             root = Path(tmp_dir)
             staging_root = root / "staging"
             self._copy_tree(repo_root.parent / "server" / "staging", staging_root)
+            expected_jobs = len(sorted((staging_root / "jobs").glob("*/manifest.json")))
             docs_dir = root / "docs"
             index_path = root / ".state" / "publish_index.json"
             service = PublicationExecutionService(
@@ -67,10 +68,10 @@ class PublicationExecutionServiceTests(unittest.TestCase):
 
             second = service.run()
 
-            self.assertEqual(first.new_jobs, 1)
+            self.assertEqual(first.new_jobs, expected_jobs)
             self.assertEqual(second.new_jobs, 0)
             self.assertEqual(second.changed_jobs, 1)
-            self.assertEqual(second.unchanged_jobs, 0)
+            self.assertEqual(second.unchanged_jobs, expected_jobs - 1)
             self.assertEqual(second.tree_pages_written, 1)
             self.assertEqual(second.project_pages_written, 3)
             self.assertTrue(second.home_updated)
@@ -82,6 +83,7 @@ class PublicationExecutionServiceTests(unittest.TestCase):
             root = Path(tmp_dir)
             staging_root = root / "staging"
             self._copy_tree(repo_root.parent / "server" / "staging", staging_root)
+            expected_jobs = len(sorted((staging_root / "jobs").glob("*/manifest.json")))
             docs_dir = root / "docs"
             index_path = root / ".state" / "publish_index.json"
             service = PublicationExecutionService(
@@ -102,7 +104,7 @@ class PublicationExecutionServiceTests(unittest.TestCase):
 
             second = service.run()
 
-            self.assertEqual(first.new_jobs, 1)
+            self.assertEqual(first.new_jobs, expected_jobs)
             self.assertEqual(second.new_jobs, 0)
             self.assertEqual(second.changed_jobs, 0)
             self.assertEqual(second.unchanged_jobs, 0)
@@ -121,6 +123,7 @@ class PublicationExecutionServiceTests(unittest.TestCase):
             root = Path(tmp_dir)
             docs_dir = root / "docs"
             index_path = root / ".state" / "publish_index.json"
+            expected_jobs = len(sorted((repo_root.parent / "server" / "staging" / "jobs").glob("*/manifest.json")))
             service = PublicationExecutionService(
                 staging_root=repo_root.parent / "server" / "staging",
                 content_dir=repo_root / "content",
@@ -134,10 +137,10 @@ class PublicationExecutionServiceTests(unittest.TestCase):
 
             second = service.run()
 
-            self.assertEqual(first.new_jobs, 1)
+            self.assertEqual(first.new_jobs, expected_jobs)
             self.assertEqual(second.new_jobs, 0)
             self.assertEqual(second.changed_jobs, 0)
-            self.assertEqual(second.unchanged_jobs, 1)
+            self.assertEqual(second.unchanged_jobs, expected_jobs)
             self.assertEqual(second.tree_pages_written, 1)
             self.assertEqual(second.project_pages_written, 3)
             self.assertTrue(missing_tree.exists())

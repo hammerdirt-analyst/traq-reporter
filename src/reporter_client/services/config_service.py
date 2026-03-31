@@ -19,7 +19,7 @@ class ConfigService:
         staging_root = self._resolve_path(base_dir, raw.get("staging", {}).get("root", "../server/testdata/staged_jobs_manual"))
         publish_index = self._resolve_path(base_dir, raw.get("publish", {}).get("index_path", ".state/publish_index.json"))
         content_dir = self._resolve_path(base_dir, raw.get("paths", {}).get("content_dir", "content"))
-        docs_dir = self._resolve_path(base_dir, raw.get("paths", {}).get("docs_dir", "docs"))
+        docs_dir = self._resolve_path(base_dir, raw.get("paths", {}).get("docs_dir", "site-src"))
 
         return AppConfig(
             staging=StagingConfig(root=staging_root),

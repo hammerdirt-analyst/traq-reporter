@@ -21,7 +21,7 @@ class PageBuilderTests(unittest.TestCase):
         self.inputs = StagedInputService(
             staging_root=repo_root.parent / "server" / "staging",
             content_dir=repo_root / "content",
-            docs_dir=repo_root / "docs",
+            docs_dir=repo_root / "site-src",
         )
 
     def tearDown(self) -> None:
