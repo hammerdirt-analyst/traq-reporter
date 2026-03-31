@@ -1,22 +1,22 @@
 ---
-updated_at: "2026-03-25 09:10"
+updated_at: "2026-03-31 05:19"
 ---
 
 <div class="page-header">
   <div>
-    <h1>Quercus agrifolia</h1>
-    <p class="tagline">20 in DBH | 54 ft tall</p>
+    <h1>Afrocarpus</h1>
+    <p class="tagline">13 in DBH | 36 ft tall</p>
   </div>
 </div>
 <div class="crumb-bar">
-  <a href="/reporter-client/">Home</a>
+  <a href="/traq-reporter/">Home</a>
   <span>/</span>
-  <a href="/reporter-client/projects/briarwood/">Briarwood</a>
+  <a href="/traq-reporter/projects/briarwood/">Briarwood</a>
   <span>/</span>
-  <span>Quercus agrifolia</span>
+  <span>Afrocarpus</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/briarwood_002.jpg" alt="Quercus agrifolia locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_002.jpg" alt="Afrocarpus locator map" />
 </div>
 | Field | Value |
 | --- | --- |
@@ -26,31 +26,39 @@ updated_at: "2026-03-25 09:10"
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../assets/images/briarwood_002/image_01.svg" alt="The tree: in the middle" />
-    <figcaption>The tree: in the middle</figcaption>
+    <img src="../../../../assets/images/briarwood_002/image_01.jpg" alt="Next to powerlines" />
+    <figcaption>Next to powerlines</figcaption>
   </figure>
 </div>
 
 <div class="text-block" markdown="1">
-The Quercus agrifolia, commonly known as the coast live oak, is assessed in the context of its environment. The tree stands at a height of 54 feet with a DBH of 20 inches. The assessment did not specify site factors, but the tree's location and condition were considered in relation to potential targets in the vicinity.
+This report provides an assessment of an Afrocarpus tree located in a suburban environment, characterized by hot dry summers and rainy, windy conditions. The tree has a diameter at breast height (DBH) of 13 inches and a height of 36 feet. There is no history of failures associated with this tree, and the site has not undergone any significant changes that would affect its health or stability, such as soil hydrology alterations or grade changes. The prevailing wind direction is from the west, and the topography is flat, which may influence the tree's exposure to wind stress.
 
-The target assessment did not provide specific details regarding the proximity of targets to the tree. However, it is noted that the tree's extended branches reach over the parking area, which may pose a risk to vehicles or pedestrians within that space. The assessment did not indicate any targets within the dripline or within 1x height of the tree.
+The assessment identified two primary targets in proximity to the tree. The first target is a set of powerlines located within the tree's dripline, which is critical for maintaining safe clearance. The second target is a patio situated within 1x the height of the tree, which is approximately 36 feet away. Both targets are occupied with a moderate occupancy rate, indicating potential risk factors associated with the tree's growth and stability.
 
-The crown of the tree exhibits extended branches that extend over the parking area, which is a primary concern noted in the assessment. No specific trunk defects were reported, indicating that the trunk appears to be in sound condition. The overall structural integrity of the crown and branches is considered stable, with no immediate concerns identified.
+The crown of the tree exhibits a sparse density with a large relative crown size. There are no observed dead twigs, and the likelihood of failure is considered improbable. However, the main concern is the tree's propensity to develop V-shaped unions, which can be a structural weakness. The trunk shows signs of included bark at the co-dominant stems, which may contribute to a possible likelihood of failure, though the overall risk remains low.
 
-The assessment did not provide specific details regarding the roots and root collar of the tree. Load factors were not explicitly mentioned, suggesting that there are no significant concerns related to the root system at this time. The overall health of the root system was not assessed in detail, but it is implied that it is functioning adequately.
+The roots and root collar of the tree are in good condition, with no visible decay or damage. The collar is not buried and is clearly visible, indicating healthy root development. There are no concerns regarding soil weakness or stem girdling, which supports the tree's stability and health. The load factors associated with the tree's crown and trunk do not indicate any severe stress or risk.
 
-The overall risk associated with the Quercus agrifolia is categorized as low, with a corresponding low residual risk after mitigation. The assessment did not outline specific mitigation options, indicating that the tree is currently stable and does not require immediate intervention. The inspection interval is set at 18 months, suggesting a routine monitoring approach to ensure continued health and safety.
+The overall risk assessment categorizes the tree's risk as low, with a possible likelihood of failure due to the V-shaped union at the trunk to crown transition. The potential consequences of failure are severe, but the likelihood of such an event occurring is deemed unlikely. Mitigation options include continuing to maintain the tree professionally, which is expected to result in a low residual risk after such maintenance is performed.
 
 </div>
 
 <p class="tree-form-link">
-  <a class="tree-form-link__button" href="/reporter-client/assets/traq-forms/briarwood_002.pdf">Completed inspection form</a>
+  <a class="tree-form-link__button" href="/traq-reporter/assets/traq-forms/briarwood_002.pdf">Completed inspection form</a>
 </p>
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../assets/images/briarwood_002/image_02.svg" alt="trunk" />
-    <figcaption>trunk</figcaption>
+    <img src="../../../../assets/images/briarwood_002/image_02.jpg" alt="Trunk, v shaped unions" />
+    <figcaption>Trunk, v shaped unions</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/briarwood_002/image_03.jpg" alt="Leaves" />
+    <figcaption>Leaves</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/briarwood_002/image_04.jpg" alt="Bark" />
+    <figcaption>Bark</figcaption>
   </figure>
 </div>

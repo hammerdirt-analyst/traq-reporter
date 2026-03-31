@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from ..models.page_inputs import AboutPageInput
 from ..models.page_views import AboutPageView, BreadcrumbView
+from ..services.path_service import PathService
 
 
 class AboutPageBuilder:
@@ -13,7 +14,7 @@ class AboutPageBuilder:
         return AboutPageView(
             page_title=page_input.title,
             breadcrumbs=[
-                BreadcrumbView(label="Home", href="/reporter-client/"),
+                BreadcrumbView(label="Home", href=f"{PathService.SITE_ROOT}/"),
                 BreadcrumbView(label=page_input.title, href=None),
             ],
             body_markdown=page_input.body_markdown,

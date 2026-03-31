@@ -21,7 +21,6 @@ class MapRenderPoint:
 @dataclass(frozen=True)
 class MapRenderRequest:
     output_asset_src: str
-    fallback_image_src: str
     alt: str
     points: list[MapRenderPoint]
     basemap_slug: str | None = None
@@ -59,17 +58,24 @@ class MapProcessorService:
         if not basemap_image_path.exists() or not basemap_metadata_path.exists():
             return self._fallback(request)
 
-        render_points = self._load_render_points(request.points)
-        if not render_points:
-            return self._fallback(request)
-
         try:
             bounds = json.loads(basemap_metadata_path.read_text(encoding="utf-8"))
             image = Image.open(basemap_image_path).convert("RGB")
         except (OSError, json.JSONDecodeError):
             return self._fallback(request)
 
+        render_points = self._load_render_points(request.points)
         annotated = image.copy()
+        if not render_points:
+            target_path = self._docs_dir / request.output_asset_src
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            annotated.save(target_path, format="JPEG", quality=92)
+            return MapRenderArtifact(
+                image_src=request.output_asset_src,
+                alt=request.alt,
+                points=list(request.points),
+            )
+
         crop_box = self._crop_box(
             request=request,
             bounds=bounds,
@@ -350,7 +356,7 @@ class MapProcessorService:
     @staticmethod
     def _fallback(request: MapRenderRequest) -> MapRenderArtifact:
         return MapRenderArtifact(
-            image_src=request.fallback_image_src,
+            image_src=request.output_asset_src,
             alt=request.alt,
             points=list(request.points),
         )

@@ -58,7 +58,6 @@ class MapProcessorServiceTests(unittest.TestCase):
             artifact = MapProcessorService(docs_dir=docs_dir).render(
                 MapRenderRequest(
                     output_asset_src="assets/maps/trees/example_001.jpg",
-                    fallback_image_src="assets/maps/placeholder.jpg",
                     alt="Example map",
                     basemap_slug="briarwood",
                     points=[
@@ -85,7 +84,6 @@ class MapProcessorServiceTests(unittest.TestCase):
             artifact = MapProcessorService(docs_dir=Path(tempdir) / "docs").render(
                 MapRenderRequest(
                     output_asset_src="assets/maps/trees/example_001.jpg",
-                    fallback_image_src="assets/maps/placeholder.jpg",
                     alt="Example map",
                     basemap_slug="briarwood",
                     points=[
@@ -98,7 +96,7 @@ class MapProcessorServiceTests(unittest.TestCase):
                 )
             )
 
-        self.assertEqual(artifact.image_src, "assets/maps/placeholder.jpg")
+        self.assertEqual(artifact.image_src, "assets/maps/trees/example_001.jpg")
 
     def test_resolve_marker_positions_displaces_overlapping_project_points(self) -> None:
         service = MapProcessorService()
@@ -146,13 +144,14 @@ class TreeMapServiceTests(unittest.TestCase):
             transcript="Transcript",
             completed_inspection_form_url="assets/traq-forms/briarwood_001.pdf",
             tree_id="briarwood_001",
+            project_ordinal=3,
             geojson=TreeGeoJsonSource(geojson_src="assets/geojson/briarwood_001.geojson"),
         )
 
         artifact = TreeMapService().build_map(source)
 
-        self.assertEqual(artifact.image_src, "../assets/maps/job_123_locator.jpg")
-        self.assertEqual(artifact.ordinal, 1)
+        self.assertEqual(artifact.image_src, "assets/maps/trees/briarwood_001.jpg")
+        self.assertEqual(artifact.ordinal, 3)
         self.assertEqual(artifact.risk_rating, "low")
         self.assertEqual(artifact.geojson_asset_src, "assets/geojson/briarwood_001.geojson")
 
@@ -285,7 +284,6 @@ class ProjectMapServiceTests(unittest.TestCase):
 
             artifact = ProjectMapService(docs_dir=docs_dir).build_map(
                 project_source=project_source,
-                fallback_map_src="assets/maps/project_alpha_overview.svg",
             )
 
             self.assertEqual(artifact.image_src, "assets/maps/projects/briarwood.jpg")

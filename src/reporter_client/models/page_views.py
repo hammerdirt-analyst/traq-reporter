@@ -66,6 +66,7 @@ class ProjectPageView:
     project_image: ImageAssetView | None
     summary_metrics: SummaryMetricsView
     tree_cards: list[ProjectTreeCardView]
+    empty_state_notice: str
     updated_at: str
 
 

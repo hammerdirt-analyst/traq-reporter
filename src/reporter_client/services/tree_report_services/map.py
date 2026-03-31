@@ -31,17 +31,17 @@ class TreeMapService:
 
     def build_map(self, source: TreeReportSource, *, geojson_asset_src: str | None = None) -> TreeMapArtifact:
         resolved_geojson_asset_src = geojson_asset_src or (source.geojson.geojson_src if source.geojson else None)
+        ordinal = source.project_ordinal or 1
         map_artifact = self._map_processor_service.render(
             MapRenderRequest(
                 output_asset_src=f"assets/maps/trees/{source.tree_id}.jpg" if source.tree_id else self._PLACEHOLDER_IMAGE_SRC,
-                fallback_image_src=self._PLACEHOLDER_IMAGE_SRC,
                 alt=f"{source.species} locator map",
                 basemap_slug=project_slug(source.project),
                 crop_width=self._CROP_WIDTH,
                 crop_height=self._CROP_HEIGHT,
                 points=[
                     MapRenderPoint(
-                        ordinal=1,
+                        ordinal=ordinal,
                         risk_rating=source.risk_profile.overall_tree_risk,
                         geojson_src=resolved_geojson_asset_src or "",
                         longitude=source.gps.longitude,
@@ -55,7 +55,7 @@ class TreeMapService:
         return TreeMapArtifact(
             image_src=map_artifact.image_src,
             alt=map_artifact.alt,
-            ordinal=1,
+            ordinal=ordinal,
             risk_rating=source.risk_profile.overall_tree_risk,
             geojson_asset_src=resolved_geojson_asset_src,
         )

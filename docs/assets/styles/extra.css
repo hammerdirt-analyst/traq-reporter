@@ -154,6 +154,16 @@
   background: linear-gradient(160deg, #fffdf8, #f5f1e7);
 }
 
+.panel-empty-state {
+  margin: 1rem 0 1.5rem;
+  background: linear-gradient(160deg, #fffdf8, #f5f1e7);
+  color: var(--report-ink-soft);
+}
+
+.panel-empty-state p {
+  margin: 0;
+}
+
 .section-rule {
   border: 0;
   border-top: 2px solid var(--report-border);

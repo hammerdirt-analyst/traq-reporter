@@ -1,11 +1,11 @@
 ---
-updated_at: "2026-03-25 11:30"
+updated_at: "2026-03-31 05:19"
 ---
 
 # About Hammerdirt
 
 <div class="crumb-bar">
-  <a href="/reporter-client/">Home</a>
+  <a href="/traq-reporter/">Home</a>
   <span>/</span>
   <span>About Hammerdirt</span>
 </div>
@@ -14,10 +14,10 @@ Hammerdirt is the long-running work of Roger and Shannon Erismann: environmental
 
 In Switzerland, this work was built through repeated, real-world monitoring projects that demanded more 
 than data collection alone. The IQAASL project for the Swiss Federal Office for the Environment required 
-a maintainable end-to-end system. This included repeatable field methods, custom mobile apps, backend 
-server operations and report generation.  Everything adapted to reporting and analysis transparent enough for both public accountability and scientific review. The same model carried through coauthored work in academic articles and reports for public administrations.
+a maintainable end-to-end system.** This included repeatable field methods, custom mobile apps, backend 
+server operations and report generation.  Everything adapted to reporting and analysis transparent enough for both public accountability and scientific review.** The same model carried through coauthored work in academic articles and reports for public administrations.
 
 Each project refined the same core practice: building and maintaining the data, field, and reporting 
-systems needed to gather observations at scale and make the results clear, traceable, and credible.
+systems needed to gather observations at scale and make the results clear, traceable, and credible. For more information: [hammerdirt solutions](https://www.hammerdirt.solutions).
 
 </div>

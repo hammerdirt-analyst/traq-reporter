@@ -1,56 +1,60 @@
 ---
-updated_at: "2026-03-25 09:20"
+updated_at: "2026-03-31 05:19"
 ---
 
 <div class="page-header">
   <div>
-    <h1>Platanus racemosa</h1>
-    <p class="tagline">26 in DBH | 62 ft tall</p>
+    <h1>Acer oliverianum</h1>
+    <p class="tagline">14 in DBH | 42 ft tall</p>
   </div>
 </div>
 <div class="crumb-bar">
-  <a href="/reporter-client/">Home</a>
+  <a href="/traq-reporter/">Home</a>
   <span>/</span>
-  <a href="/reporter-client/projects/briarwood/">Briarwood</a>
+  <a href="/traq-reporter/projects/briarwood/">Briarwood</a>
   <span>/</span>
-  <span>Platanus racemosa</span>
+  <span>Acer oliverianum</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/briarwood_003.jpg" alt="Platanus racemosa locator map" />
+  <img src="../../../../assets/maps/trees/briarwood_003.jpg" alt="Acer oliverianum locator map" />
 </div>
 | Field | Value |
 | --- | --- |
-| Overall Tree Risk | moderate |
+| Overall Tree Risk | low |
 | Residual Risk | low |
-| Inspection Interval | 12 months |
+| Inspection Interval | 18 months |
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../assets/images/briarwood_003/image_01.svg" alt="The tree: west-facing view" />
-    <figcaption>The tree: west-facing view</figcaption>
+    <img src="../../../../assets/images/briarwood_003/image_01.jpg" alt="Tree" />
+    <figcaption>Tree</figcaption>
   </figure>
 </div>
 
 <div class="text-block" markdown="1">
-The Platanus racemosa, commonly known as the California sycamore, stands at a height of 62 feet with a DBH of 26 inches. The assessment context indicates that the tree is situated in an area where its size and species are relevant to the surrounding environment. Although specific site factors were not provided, the tree's significant height and size suggest it plays a notable role in the landscape.
+The Acer oliverianum tree is situated in an area with flat topography and experiences windy and rainy weather conditions, particularly in winter. The tree has been maintained professionally, which contributes to its overall health. The absence of any significant site changes or history of failures indicates a stable environment for the tree's growth.
 
-The target assessment did not specify particular targets or their distances from the tree. However, it is important to note that the tree's height and spread may influence nearby structures or areas of use. The proximity of targets to the tree, such as structures or pedestrian pathways, would typically be considered in a comprehensive risk assessment.
+The primary target assessed is the patio, which is located within 1x the height of the tree. The occupancy rate of the patio is two individuals, and there are no practical restrictions for moving away from the area. The proximity of the tree to the patio necessitates careful consideration of any potential risks associated with the tree's structure.
 
-The crown and branches of the tree were noted to have bark irregularities on the trunk. These observations may indicate potential issues with the tree's health or structural stability. The presence of such defects can affect the overall integrity of the tree and may warrant further observation during future assessments.
+The crown of the tree exhibits a dense canopy with overextended branches. There are vertical cracks present in the trunk, but the likelihood of failure is deemed improbable. The main concerns include the extended branches over the patio, which could pose a risk, although the overall likelihood of failure remains low.
 
-The assessment did not provide specific details regarding the roots and root collar or any load factors associated with the tree. However, the stability of the tree is inherently linked to the condition of its root system. A healthy root system is crucial for supporting the tree's height and weight, particularly in adverse weather conditions.
+The root system and root collar show no signs of decay, damage, or significant concerns. The tree's roots are stable, and there are no indicators of soil weakness or issues that could compromise the tree's structural integrity. The load factors are considered manageable, with no recent changes affecting the tree's stability.
 
-The overall risk categorization for the Platanus racemosa is moderate, with an expected residual risk classified as low after potential mitigation options. While specific mitigation strategies were not outlined in the assessment, the low residual risk suggests that any identified issues may be manageable, allowing for continued monitoring and evaluation of the tree's health and stability.
+The overall risk associated with the tree is categorized as low, with mitigation options including ongoing maintenance to ensure its health and stability. After implementing these measures, the expected residual risk remains low, indicating that the tree is unlikely to pose a significant threat to the surrounding area.
 
 </div>
 
 <p class="tree-form-link">
-  <a class="tree-form-link__button" href="/reporter-client/assets/traq-forms/briarwood_003.pdf">Completed inspection form</a>
+  <a class="tree-form-link__button" href="/traq-reporter/assets/traq-forms/briarwood_003.pdf">Completed inspection form</a>
 </p>
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../assets/images/briarwood_003/image_02.svg" alt="trunk detail" />
-    <figcaption>trunk detail</figcaption>
+    <img src="../../../../assets/images/briarwood_003/image_02.jpg" alt="Trunk" />
+    <figcaption>Trunk</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/briarwood_003/image_03.jpg" alt="Interior branches" />
+    <figcaption>Interior branches</figcaption>
   </figure>
 </div>

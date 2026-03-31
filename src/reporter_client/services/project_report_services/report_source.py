@@ -24,7 +24,8 @@ class ProjectReportSourceService:
             grouped[source.project].append(source)
 
         project_sources: list[ProjectReportSource] = []
-        for project_name in sorted(grouped):
+        all_projects = sorted(set(grouped) | set(project_descriptions))
+        for project_name in all_projects:
             project_tree_sources = sorted(grouped[project_name], key=lambda item: (item.archived_at, item.job_id))
             entries = [self._build_tree_entry(source) for source in project_tree_sources]
             archived_dates = [entry.archived_at for entry in entries]

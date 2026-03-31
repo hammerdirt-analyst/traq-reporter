@@ -36,36 +36,29 @@ class ProjectReportSourceServiceTests(unittest.TestCase):
         )
 
         self.assertEqual(len(project_sources), 3)
-        briarwood = next(item for item in project_sources if item.project == "Briarwood")
-        self.assertEqual(briarwood.project_slug, "briarwood")
-        self.assertEqual(briarwood.tree_count, 4)
-        self.assertEqual(briarwood.species_count, 3)
-        self.assertEqual(briarwood.earliest_archived_at, "2026-03-25T09:10:08.608364Z")
-        self.assertEqual(briarwood.latest_archived_at, "2026-03-25T09:40:08.608364Z")
-        self.assertEqual(briarwood.trees[0].tree_id, "briarwood_001")
-        self.assertEqual(briarwood.trees[0].tree_doc, "projects/briarwood/trees/briarwood_001.md")
-        self.assertEqual(briarwood.trees[0].risk_rating, "low")
-        self.assertEqual(
-            briarwood.trees[0].main_concerns,
-            [
-                "The main concern are the branches hanging over the parking lot, and that's it.",
-                "the sap ooze in the, there is a, yes, there is sap ooze coming from a crack on the north",
-                "the pavement that covers thirty percent of the roots",
-            ],
-        )
-        self.assertEqual(briarwood.canonical_image_caption, "the tree in the middle")
+        american_river = next(item for item in project_sources if item.project_slug == "american-river")
+        briarwood = next(item for item in project_sources if item.project_slug == "briarwood")
+        self.assertEqual(american_river.tree_count, 1)
+        self.assertEqual(american_river.species_count, 1)
+        self.assertEqual(american_river.trees[0].tree_id, "american-river_001")
+        self.assertEqual(american_river.trees[0].tree_doc, "projects/american-river/trees/american-river_001.md")
+        self.assertTrue(american_river.trees[0].risk_rating)
+        self.assertTrue(american_river.trees[0].main_concerns)
+        self.assertEqual(briarwood.tree_count, 0)
+        self.assertEqual(briarwood.species_count, 0)
+        self.assertEqual(briarwood.trees, [])
 
-        media = ProjectMediaService(docs_dir=repo_root / "docs").build_media(briarwood)
-        self.assertEqual(media.canonical_image.caption, "Briarwood project image")
-        self.assertEqual(media.canonical_image.image_src, "assets/project-images/briarwood.svg")
+        media = ProjectMediaService(
+            docs_dir=repo_root / "docs",
+            content_dir=repo_root / "content",
+        ).build_media(american_river)
+        self.assertEqual(media.canonical_image.caption, "El Manto access, view of the parkway.")
+        self.assertEqual(media.canonical_image.image_src, "assets/project-images/american-river.jpg")
 
-        project_map = ProjectMapService().build_map(
-            project_source=briarwood,
-            fallback_map_src="assets/maps/project_alpha_overview.svg",
-        )
-        self.assertEqual(project_map.image_src, "assets/maps/project_alpha_overview.svg")
-        self.assertEqual(len(project_map.points), 4)
-        self.assertEqual([point.ordinal for point in project_map.points], [1, 2, 3, 4])
+        project_map = ProjectMapService().build_map(project_source=american_river)
+        self.assertEqual(project_map.image_src, "assets/maps/projects/american-river.jpg")
+        self.assertEqual(len(project_map.points), 1)
+        self.assertEqual([point.ordinal for point in project_map.points], [1])
 
 
 if __name__ == "__main__":

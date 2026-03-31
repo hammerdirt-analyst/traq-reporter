@@ -8,6 +8,7 @@ from pathlib import Path
 from ..builders.tree_page_builder import TreePageBuilder
 from ..models.publish_index import PublishWorkItem
 from ..renderers.tree_renderer import TreeRenderer
+from .project_naming import project_slug
 from .tree_report_services import (
     StagedTreeBundleService,
     TreeArtifactPublishService,
@@ -45,7 +46,7 @@ class TreePublicationService:
             record = replace(record, source=replace(record.source, tree_id=item.tree_id))
             source = (
                 self._tree_artifact_publish_service.publish(source=record.source, docs_dir=self._docs_dir)
-                if item.job_id in changed_job_ids
+                if item.job_id in changed_job_ids or self._missing_published_artifacts(record.source)
                 else self._tree_artifact_publish_service.link_existing(record.source)
             )
             records.append(replace(record, source=source))
@@ -54,7 +55,7 @@ class TreePublicationService:
     def publish_tree_pages(self, records, *, target_job_ids: set[str]) -> int:
         written = 0
         for record in records:
-            if record.source.job_id not in target_job_ids:
+            if record.source.job_id not in target_job_ids and self._tree_doc_path(record.source).exists():
                 continue
             summary_context = self._tree_summary_context_builder.build(
                 source=record.source,
@@ -72,3 +73,21 @@ class TreePublicationService:
         target = self._docs_dir / relative_path
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(rendered, encoding="utf-8")
+
+    def _tree_doc_path(self, source) -> Path:
+        slug = project_slug(source.project)
+        return self._docs_dir / "projects" / slug / "trees" / f"{source.tree_id}.md"
+
+    def _missing_published_artifacts(self, source) -> bool:
+        if source.geojson and not (self._docs_dir / "assets" / "geojson" / f"{source.tree_id}.geojson").exists():
+            return True
+        if source.completed_inspection_form_url and not (
+            self._docs_dir / "assets" / "traq-forms" / f"{source.tree_id}.pdf"
+        ).exists():
+            return True
+        for index, image in enumerate(source.images, start=1):
+            suffix = Path(image.image_src).suffix or ".jpg"
+            expected = self._docs_dir / "assets" / "images" / source.tree_id / f"image_{index:02d}{suffix}"
+            if not expected.exists():
+                return True
+        return False

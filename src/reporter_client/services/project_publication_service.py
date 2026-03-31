@@ -19,18 +19,12 @@ from .project_report_services import (
 class ProjectPublicationService:
     """Publish affected project pages from the current tree source set."""
 
-    _PROJECT_MAPS = {
-        "Briarwood": "assets/maps/project_alpha_overview.svg",
-        "Arboretum": "assets/maps/project_bravo_overview.svg",
-        "American River": "assets/maps/project_charlie_overview.svg",
-    }
-
     def __init__(self, *, content_dir: Path, docs_dir: Path, template_dir: Path) -> None:
         self._content_source = ContentSourceService(content_dir=content_dir)
         self._builder = ProjectPageBuilder()
         self._renderer = ProjectRenderer(template_dir=template_dir)
         self._page_input_service = ProjectPageInputService(
-            project_media_service=ProjectMediaService(docs_dir=docs_dir),
+            project_media_service=ProjectMediaService(docs_dir=docs_dir, content_dir=content_dir),
             project_map_service=ProjectMapService(docs_dir=docs_dir)
         )
         self._report_source_service = ProjectReportSourceService()
@@ -54,7 +48,6 @@ class ProjectPublicationService:
                 continue
             page_input = self._page_input_service.build(
                 project_source=project_source,
-                area_map_src=self._PROJECT_MAPS[project_source.project],
             )
             page_view = self._builder.build(page_input)
             self._write(f"projects/{project_source.project_slug}.md", self._renderer.render({"view": page_view}))

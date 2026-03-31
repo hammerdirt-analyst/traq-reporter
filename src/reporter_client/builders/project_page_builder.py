@@ -26,7 +26,7 @@ class ProjectPageBuilder:
             page_title=page_input.project_name,
             description_markdown=page_input.description_markdown,
             breadcrumbs=[
-                BreadcrumbView(label="Home", href="/reporter-client/"),
+                BreadcrumbView(label="Home", href=f"{PathService.SITE_ROOT}/"),
                 BreadcrumbView(label=page_input.project_name, href=None),
             ],
             project_map=MapView(
@@ -57,5 +57,6 @@ class ProjectPageBuilder:
                 )
                 for card in page_input.tree_cards
             ],
+            empty_state_notice=page_input.empty_state_notice,
             updated_at=page_input.updated_at,
         )

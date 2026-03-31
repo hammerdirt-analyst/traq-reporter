@@ -1,56 +1,68 @@
 ---
-updated_at: "2026-03-25 11:10"
+updated_at: "2026-03-31 01:57"
 ---
 
 <div class="page-header">
   <div>
-    <h1>Populus fremontii</h1>
-    <p class="tagline">28 in DBH | 66 ft tall</p>
+    <h1>Quercus agrifolia</h1>
+    <p class="tagline">23 in DBH | 60 ft tall</p>
   </div>
 </div>
 <div class="crumb-bar">
-  <a href="/reporter-client/">Home</a>
+  <a href="/traq-reporter/">Home</a>
   <span>/</span>
-  <a href="/reporter-client/projects/american-river/">American River</a>
+  <a href="/traq-reporter/projects/american-river/">American River</a>
   <span>/</span>
-  <span>Populus fremontii</span>
+  <span>Quercus agrifolia</span>
 </div>
 <div class="panel panel-map">
-  <img src="../../../../assets/maps/trees/american-river_001.jpg" alt="Populus fremontii locator map" />
+  <img src="../../../../assets/maps/trees/american-river_001.jpg" alt="Quercus agrifolia locator map" />
 </div>
 | Field | Value |
 | --- | --- |
-| Overall Tree Risk | moderate |
+| Overall Tree Risk | low |
 | Residual Risk | low |
-| Inspection Interval | 12 months |
+| Inspection Interval | 18 months |
 
 <div class="tree-hero">
   <figure>
-    <img src="../../../../assets/images/american-river_001/image_01.svg" alt="The tree: riverbank view" />
-    <figcaption>The tree: riverbank view</figcaption>
+    <img src="../../../../assets/images/american-river_001/image_01.jpg" alt="The tree: parking lot with cars" />
+    <figcaption>The tree: parking lot with cars</figcaption>
   </figure>
 </div>
 
 <div class="text-block" markdown="1">
-The site factors surrounding the Populus fremontii were considered during the assessment. The tree is situated in an environment that may influence its health and stability. Specific site conditions were not detailed in the assessment, but they are relevant to understanding the tree's overall condition and risk profile.
+The target assessment indicates that the tree's branches extend over a parking lot, which is occupied at a rate of 2 vehicles. The branches are within the dripline of the tree, which may pose a risk to the vehicles and individuals in that area. The proximity of the tree to the parking lot necessitates careful monitoring of its health and structural integrity.
 
-The target assessment identified potential targets in proximity to the tree. However, specific details regarding the targets and their distances from the tree were not provided in the assessment. It is important to note that the targets are likely within the tree's dripline or within a distance that could be affected by the tree's height.
+The tree exhibits high vigor, with 100% of its foliage appearing normal. There are no observed pests or abiotic stress factors affecting the tree's health. However, the species profile indicates potential failure risks associated with the branches overhanging the parking lot and the pavement over the roots. The likelihood of failure is considered possible, with minor consequences and a fall distance of approximately 30 feet.
 
-The crown and branches of the tree were evaluated, revealing observed erosion near the root flare. This condition may impact the structural integrity of the tree and its ability to withstand environmental stresses. No additional trunk defects were noted in the assessment, indicating that the trunk appears to be in acceptable condition.
+The crown of the tree shows signs of overextended branches, with a small percentage of dead twigs present. Specifically, 5% of the twigs are dead, with a maximum diameter of 1 inch. The trunk appears healthy, with no significant defects noted, and there are no concerns regarding poor taper or decay. The tree has codominant stems, but there are no other major concerns regarding the trunk's condition.
 
-The assessment did not provide specific details regarding the roots and root collar. However, it is acknowledged that load factors may play a role in the overall stability of the tree. The condition of the root system is critical in supporting the tree's height and weight, particularly in the context of the observed erosion.
+The roots and root collar are affected by the pavement that covers 25% of the root area. While there are no visible signs of decay or damage to the roots, the presence of pavement may pose a risk to root health and stability. The root collar is visible and shows no signs of being buried or damaged. There are no noted concerns regarding stem girdling or soil weakness.
 
-Overall, the tree presents a moderate risk, with a low expected residual risk after potential mitigation measures. The assessment did not specify any particular mitigation options, but it is understood that addressing the erosion near the root flare could contribute to reducing the risk further. The expected residual risk indicates that, following appropriate actions, the tree may maintain a lower risk profile moving forward.
+The overall risk associated with this tree is categorized as low, with a low expected residual risk after mitigation. The recommended mitigation option is to maintain the current pruning schedule to manage the tree's structure and health. This approach aims to reduce the likelihood of branch failure while ensuring the tree remains a valuable component of the urban landscape.
 
 </div>
 
 <p class="tree-form-link">
-  <a class="tree-form-link__button" href="/reporter-client/assets/traq-forms/american-river_001.pdf">Completed inspection form</a>
+  <a class="tree-form-link__button" href="/traq-reporter/assets/traq-forms/american-river_001.pdf">Completed inspection form</a>
 </p>
 
 <div class="image-strip">
   <figure>
-    <img src="../../../../assets/images/american-river_001/image_02.svg" alt="root flare" />
-    <figcaption>root flare</figcaption>
+    <img src="../../../../assets/images/american-river_001/image_02.jpg" alt="Trunk" />
+    <figcaption>Trunk</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/american-river_001/image_03.jpg" alt="interior branch density" />
+    <figcaption>interior branch density</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/american-river_001/image_04.jpg" alt="The tree in the centef" />
+    <figcaption>The tree in the centef</figcaption>
+  </figure>
+  <figure>
+    <img src="../../../../assets/images/american-river_001/image_05.jpg" alt="Roots covered by asphalt" />
+    <figcaption>Roots covered by asphalt</figcaption>
   </figure>
 </div>

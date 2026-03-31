@@ -23,7 +23,7 @@ class TreePageBuilder:
             page_title=page_input.tree_name,
             title_text=page_input.title_text,
             breadcrumbs=[
-                BreadcrumbView(label="Home", href="/reporter-client/"),
+                BreadcrumbView(label="Home", href=f"{PathService.SITE_ROOT}/"),
                 BreadcrumbView(label=page_input.project_name, href=project_href),
                 BreadcrumbView(label=page_input.tree_name, href=None),
             ],

@@ -44,6 +44,7 @@ class TreeReportSource:
     transcript: str
     completed_inspection_form_url: str
     tree_id: str = ""
+    project_ordinal: int = 1
     main_concerns: list[str] = field(default_factory=list)
     images: list[TreeImageSource] = field(default_factory=list)
     geojson: TreeGeoJsonSource | None = None

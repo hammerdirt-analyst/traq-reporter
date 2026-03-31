@@ -61,7 +61,7 @@ class GeoJsonPublishServiceTests(unittest.TestCase):
         artifact = TreeMapService().build_map(source, geojson_asset_src="assets/geojson/briarwood_001.geojson")
 
         self.assertEqual(artifact.geojson_asset_src, "assets/geojson/briarwood_001.geojson")
-        self.assertIn("locator", artifact.image_src)
+        self.assertEqual(artifact.image_src, "assets/maps/trees/briarwood_001.jpg")
 
     def test_project_map_service_accepts_project_geojson_asset_list(self) -> None:
         project_source = ProjectReportSource(
@@ -110,7 +110,6 @@ class GeoJsonPublishServiceTests(unittest.TestCase):
 
         artifact = ProjectMapService().build_map(
             project_source=project_source,
-            fallback_map_src="assets/maps/project_alpha_overview.svg",
         )
 
         self.assertEqual(
@@ -119,7 +118,7 @@ class GeoJsonPublishServiceTests(unittest.TestCase):
         )
         self.assertEqual([point.ordinal for point in artifact.points], [1, 2])
         self.assertEqual([point.risk_rating for point in artifact.points], ["low", "moderate"])
-        self.assertEqual(artifact.image_src, "assets/maps/project_alpha_overview.svg")
+        self.assertEqual(artifact.image_src, "assets/maps/projects/briarwood.jpg")
 
 
 if __name__ == "__main__":

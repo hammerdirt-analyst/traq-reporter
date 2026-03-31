@@ -33,11 +33,6 @@ class StagedInputService:
 
     _SITE_TITLE = "TRAQ Reporter"
     _ABOUT_TITLE = "About Hammerdirt"
-    _PROJECT_MAPS = {
-        "Briarwood": "assets/maps/project_alpha_overview.svg",
-        "Arboretum": "assets/maps/project_bravo_overview.svg",
-        "American River": "assets/maps/project_charlie_overview.svg",
-    }
 
     def __init__(self, *, staging_root: Path, content_dir: Path, docs_dir: Path) -> None:
         self._staging_root = staging_root
@@ -46,7 +41,7 @@ class StagedInputService:
         self._home_report_source_service = HomeReportSourceService()
         self._home_page_input_service = HomePageInputService()
         self._project_page_input_service = ProjectPageInputService(
-            project_media_service=ProjectMediaService(docs_dir=docs_dir),
+            project_media_service=ProjectMediaService(docs_dir=docs_dir, content_dir=content_dir),
             project_map_service=ProjectMapService(docs_dir=docs_dir)
         )
         self._project_report_source_service = ProjectReportSourceService()
@@ -87,7 +82,6 @@ class StagedInputService:
             inputs.append(
                 self._project_page_input_service.build(
                     project_source=project_source,
-                    area_map_src=self._PROJECT_MAPS[project_source.project],
                 )
             )
         return inputs
@@ -129,6 +123,11 @@ class StagedInputService:
             self._tree_artifact_publish_service.publish(source=source, docs_dir=self._docs_dir)
             for source in identified_sources
         ]
+        ordinal_by_job_id = self._project_ordinals_by_job_id(published_sources)
+        published_sources = [
+            replace(source, project_ordinal=ordinal_by_job_id.get(source.job_id, 1))
+            for source in published_sources
+        ]
         return [
             replace(record, source=source)
             for source in published_sources
@@ -143,3 +142,16 @@ class StagedInputService:
     def _latest_archived_at(self) -> str:
         sources = self.load_tree_report_sources()
         return max((source.archived_at for source in sources), default="")
+
+    def _project_ordinals_by_job_id(self, sources):
+        ordinal_by_job_id: dict[str, int] = {}
+        grouped: dict[str, list] = {}
+        for source in sources:
+            grouped.setdefault(source.project, []).append(source)
+        for project_sources in grouped.values():
+            for index, source in enumerate(
+                sorted(project_sources, key=lambda item: (item.archived_at, item.job_id)),
+                start=1,
+            ):
+                ordinal_by_job_id[source.job_id] = index
+        return ordinal_by_job_id

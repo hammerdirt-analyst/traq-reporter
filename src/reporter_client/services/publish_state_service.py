@@ -89,14 +89,17 @@ class PublishStateService:
 
     def apply_plan(self, *, index: PublishIndex, plan: PublishPlan, built_at: str | None = None) -> PublishIndex:
         timestamp = built_at or datetime.now(timezone.utc).isoformat()
-        updated_records = dict(index.records)
-        for item in [*plan.new_jobs, *plan.changed_jobs]:
+        updated_records: dict[str, PublishRecord] = {}
+        for item in [*plan.new_jobs, *plan.changed_jobs, *plan.unchanged_jobs]:
+            existing = index.records.get(item.job_id)
             updated_records[item.job_id] = PublishRecord(
                 job_id=item.job_id,
                 client_revision_id=item.client_revision_id,
                 tree_id=item.tree_id,
                 project=item.project,
-                last_built_at=timestamp,
+                last_built_at=(
+                    timestamp if item.status in {"new", "changed"} else (existing.last_built_at if existing else timestamp)
+                ),
             )
         return PublishIndex(records=updated_records)
 

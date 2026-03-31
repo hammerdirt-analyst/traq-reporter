@@ -24,12 +24,10 @@ class ProjectPageInputService:
         self,
         *,
         project_source: ProjectReportSource,
-        area_map_src: str,
     ) -> ProjectPageInput:
         media = self._project_media_service.build_media(project_source)
         project_map = self._project_map_service.build_map(
             project_source=project_source,
-            fallback_map_src=area_map_src,
         )
         return ProjectPageInput(
             project_id=project_source.project_slug,
@@ -54,5 +52,10 @@ class ProjectPageInputService:
                 )
                 for index, entry in enumerate(project_source.trees, start=1)
             ],
+            empty_state_notice=(
+                "Assessments have not started for this project yet."
+                if not project_source.trees
+                else ""
+            ),
             updated_at=project_source.latest_archived_at,
         )

@@ -1,5 +1,5 @@
 ---
-updated_at: "2026-03-25 11:30"
+updated_at: "2026-03-31 05:19"
 ---
 
 
@@ -12,9 +12,9 @@ updated_at: "2026-03-25 11:30"
 </div>
 <div class="text-block" markdown="1">
 TRAQ Reporter uses the data captured with the TRAQ observer to make a client-ready view of each project. 
-The reporter is built on top of the TRAQ server, **a platform that supports Tree Risk Assessment Qualification workflows**. The TRAQ server transcribes audio notes, extracts data for TRAQ form field, stores the images, stores the completed TRAQ form and prepares data packages for the reporter.
+The reporter is built on top of the TRAQ server, **a platform that supports Tree Risk Assessment Qualification workflows**. 
 
-The reporter organizes the trees by project, maps the locations and organizes them by risk. Each tree has a detail page where the original TRAQ form can be viewed as well as an aroborist report for the tree of interest. This is designed as an **operational foundation for capturing assessment data reliably and consistently,** while keeping completed forms and related outputs organized and accessible.
+The reporter organizes the trees by project, maps the locations and organizes them by risk. Each tree has a detail page where the original TRAQ form can be viewed as well as an arborist report for the tree of interest. This is designed as an **operational foundation for capturing assessment data reliably and consistently,** while keeping completed forms and related outputs organized and accessible.
 
 </div>
 <div class="home-repo-link">
@@ -38,18 +38,18 @@ The reporter organizes the trees by project, maps the locations and organizes th
     <tr><th>Metric</th><th>Value</th></tr>
   </thead>
   <tbody>
-    <tr><td>Assessments</td><td>10</td></tr>
-    <tr><td>Trees</td><td>10</td></tr>
-    <tr><td>Species</td><td>9</td></tr>
+    <tr><td>Assessments</td><td>4</td></tr>
+    <tr><td>Trees</td><td>4</td></tr>
+    <tr><td>Species</td><td>4</td></tr>
     <tr><td>Projects</td><td>3</td></tr>
   </tbody>
 </table>  </section>
   <section class="panel">
     <div class="home-project-links">
-      <a class="home-project-link" href="/reporter-client/projects/american-river/">American River</a>
-      <a class="home-project-link" href="/reporter-client/projects/arboretum/">Arboretum</a>
-      <a class="home-project-link" href="/reporter-client/projects/briarwood/">Briarwood</a>
-      <a class="home-project-link" href="/reporter-client/about/">About</a>
+      <a class="home-project-link" href="/traq-reporter/projects/american-river/">American River</a>
+      <a class="home-project-link" href="/traq-reporter/projects/arboretum/">Arboretum</a>
+      <a class="home-project-link" href="/traq-reporter/projects/briarwood/">Briarwood</a>
+      <a class="home-project-link" href="/traq-reporter/about/">About</a>
     </div>
   </section>
 </div>

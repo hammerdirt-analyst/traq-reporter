@@ -8,7 +8,7 @@ from pathlib import PurePosixPath
 class PathService:
     """Build stable relative links between generated page locations."""
 
-    SITE_ROOT = "/reporter-client"
+    SITE_ROOT = "/traq-reporter"
 
     @staticmethod
     def doc_link(from_doc: str, to_doc: str) -> str:

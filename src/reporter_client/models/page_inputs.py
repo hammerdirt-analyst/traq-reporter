@@ -62,6 +62,7 @@ class ProjectPageInput:
     summary_metrics: SummaryMetricsInput
     tree_cards: list[ProjectTreeCardInput]
     updated_at: str
+    empty_state_notice: str = ""
 
 
 @dataclass(frozen=True)

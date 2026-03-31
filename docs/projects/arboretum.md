@@ -1,5 +1,5 @@
 ---
-updated_at: "2026-03-25 10:30"
+updated_at: ""
 ---
 
 
@@ -11,7 +11,7 @@ updated_at: "2026-03-25 10:30"
 # Arboretum
 
 <div class="crumb-bar">
-  <a href="/reporter-client/">Home</a>
+  <a href="/traq-reporter/">Home</a>
   <span>/</span>
   <span>Arboretum</span>
 </div>
@@ -22,8 +22,8 @@ The University Arboretum at Sacramento State University supports 1400 species of
 
 <div class="tree-hero">
   <figure>
-    <img src="../../assets/project-images/arboretum.svg" alt="Arboretum project image" />
-    <figcaption>Arboretum project image</figcaption>
+    <img src="../../assets/project-images/arboretum.jpg" alt="Image taken from the Arboretum website" />
+    <figcaption>Image taken from the Arboretum website</figcaption>
   </figure>
 </div>
 
@@ -35,30 +35,11 @@ The University Arboretum at Sacramento State University supports 1400 species of
 
 | Metric | Value |
 | --- | ---: |
-| Assessments | 3 |
-| Trees | 3 |
-| Species | 3 |
+| Assessments | 0 |
+| Trees | 0 |
+| Species | 0 |
 
-<div class="project-tree-cards">
-  <a class="project-tree-card project-tree-card--moderate" href="/reporter-client/projects/arboretum/trees/arboretum_001/">
-    <div class="project-tree-card__number">1</div>
-    <div class="project-tree-card__body">
-      <div class="project-tree-card__species">Cedrus deodara</div>
-      <div class="project-tree-card__risk">moderate</div>
-    </div>
-  </a>
-  <a class="project-tree-card project-tree-card--low" href="/reporter-client/projects/arboretum/trees/arboretum_002/">
-    <div class="project-tree-card__number">2</div>
-    <div class="project-tree-card__body">
-      <div class="project-tree-card__species">Quercus lobata</div>
-      <div class="project-tree-card__risk">low</div>
-    </div>
-  </a>
-  <a class="project-tree-card project-tree-card--low" href="/reporter-client/projects/arboretum/trees/arboretum_003/">
-    <div class="project-tree-card__number">3</div>
-    <div class="project-tree-card__body">
-      <div class="project-tree-card__species">Ulmus parvifolia</div>
-      <div class="project-tree-card__risk">low</div>
-    </div>
-  </a>
+<div class="panel panel-empty-state">
+  <p>Assessments have not started for this project yet.</p>
 </div>
+Project tree cards will appear here when project-specific publish data is assigned.
