@@ -32,15 +32,15 @@ updated_at: "2026-03-31 05:18"
 </div>
 
 <div class="text-block" markdown="1">
-Tree assessment summary for Arbutus andrachne.
+The target assessment identifies the driveway as the primary target, which is located within the tree's drip line. The occupancy rate for this area is two, indicating that it is used regularly. There are no practical restrictions for moving the target, and the tree's proximity to the driveway necessitates careful monitoring of its health and stability.
 
-Tree summary paragraph two.
+The tree exhibits high vigor, with 100% of its foliage appearing normal and no abiotic stress or pests observed. However, there are some dead twigs present, accounting for 5% of the crown. The tree's overall health is satisfactory, and it is classified as having a low risk of failure, with the likelihood of dead branches falling onto the driveway being considered probable but with minor consequences.
 
-Tree summary paragraph three.
+The crown of the tree is dense, and there are no significant concerns regarding broken branches, cankers, or decay. The trunk is also in good condition, with no signs of cracks, decay, or other defects. The main concerns noted are minimal, indicating that the structural integrity of both the crown and trunk is sound.
 
-Tree summary paragraph four.
+The roots and root collar show that the collar is buried and not visible, with a depth of 2 inches. There are no signs of decay or dead roots, and the overall condition of the root system appears stable. The buried collar may present some concerns, but no immediate issues have been identified that would compromise the tree's stability.
 
-Tree summary paragraph five.
+The overall risk associated with the tree is classified as low, with a residual risk remaining low after mitigation measures. Regular maintenance, including pruning, is recommended to manage the tree's health and mitigate any potential risks. The expected residual risk after such maintenance is low, indicating that the tree can be safely retained in its current location.
 
 </div>
 

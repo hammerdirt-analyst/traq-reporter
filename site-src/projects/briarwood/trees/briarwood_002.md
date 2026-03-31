@@ -32,15 +32,15 @@ updated_at: "2026-03-31 05:19"
 </div>
 
 <div class="text-block" markdown="1">
-Tree assessment summary for Afrocarpus.
+The tree assessment identified two primary targets: powerlines and a patio. The powerlines are located within the tree's dripline, while the patio is situated within 1x the height of the tree. The occupancy rates for these targets are 4 and 2, respectively, indicating a moderate level of risk associated with their proximity to the tree.
 
-Tree summary paragraph two.
+The crown of the tree exhibits a sparse density with a large relative crown size. There are no dead twigs or significant defects noted in the crown and branches. However, the tree has a propensity to form V-shaped unions, which is a concern for structural integrity. The trunk has a co-dominant stem with included bark, which may affect its stability. The likelihood of failure is considered possible, but the overall risk remains low.
 
-Tree summary paragraph three.
+The roots and root collar show no signs of decay or damage, and there are no concerns regarding the root structure. The collar is visible and not buried, indicating healthy root growth. The load factors associated with the tree are stable, with no recent changes noted that would affect the tree's overall health or structural integrity.
 
-Tree summary paragraph four.
+The overall risk assessment indicates a low risk for the tree, despite the presence of a co-dominant stem and V-shaped unions. The recommended mitigation option is to continue professional maintenance of the tree. After implementing this option, the expected residual risk remains low, suggesting that the tree can be safely retained in its current location without significant concern for failure.
 
-Tree summary paragraph five.
+This assessment will be reviewed at an interval of 18 months to ensure ongoing monitoring of the tree's health and structural integrity. Regular inspections will help to identify any changes in condition that may arise due to environmental factors or growth patterns.
 
 </div>
 
