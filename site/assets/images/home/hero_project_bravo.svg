@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#8d4f35"/>
+      <stop offset="100%" stop-color="#d9a17f"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="420" fill="url(#g2)"/>
+  <path d="M0 280 C120 240 280 260 420 220 S590 170 720 200 V420 H0 Z" fill="#6a3322"/>
+  <path d="M420 310 L455 190 L490 310 Z" fill="#8d4f35"/>
+  <circle cx="455" cy="170" r="58" fill="#cc8760"/>
+  <text x="36" y="50" font-family="Georgia, serif" font-size="30" fill="#fff">Image Slot: Project Bravo</text>
+</svg>

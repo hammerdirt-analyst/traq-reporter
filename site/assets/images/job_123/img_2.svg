@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
+  <rect width="720" height="420" fill="#dbe7ea"/>
+  <path d="M0 360 C120 320 220 330 360 300 S560 260 720 320 V420 H0 Z" fill="#b8c8cf"/>
+  <rect x="320" y="120" width="46" height="210" rx="15" fill="#5b3d2b"/>
+  <circle cx="343" cy="118" r="88" fill="#5c7e61"/>
+  <path d="M450 360 L610 360" stroke="#797f83" stroke-width="10" stroke-linecap="round"/>
+  <text x="34" y="50" font-family="Georgia, serif" font-size="30" fill="#34505a">Image Slot: Crown over walkway</text>
+</svg>

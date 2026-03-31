@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#f7f4ec"/>
+  <rect x="42" y="42" width="876" height="456" rx="26" fill="#fff" stroke="#d8dfd7" stroke-width="4"/>
+  <rect x="140" y="120" width="620" height="280" rx="22" fill="#2f6b4f" opacity="0.12"/>
+  <path d="M210 360 C310 260 400 250 520 310 S720 350 770 210" fill="none" stroke="#a6b79d" stroke-width="20" stroke-linecap="round"/>
+  <path d="M180 180 C260 200 380 170 500 200 S690 230 790 170" fill="none" stroke="#d0d9cc" stroke-width="16" stroke-linecap="round"/>
+  <g fill="#2f6b4f">
+    <circle cx="245" cy="182" r="12"/><circle cx="320" cy="245" r="12"/><circle cx="410" cy="210" r="12"/>
+    <circle cx="505" cy="312" r="12"/><circle cx="620" cy="280" r="12"/><circle cx="705" cy="220" r="12"/>
+  </g>
+  <text x="78" y="92" font-family="Georgia, serif" font-size="28" fill="#2d3a33">Project Alpha Map Placeholder</text>
+</svg>
