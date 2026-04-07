@@ -34,6 +34,8 @@ docs/_file/generated/jobs/<job_number>/
 
 Run `npm run prepare:artifacts` to refresh the cache manually. The copy steps only delete/recreate reporter-owned files under `src/generated/jobs` and `docs/_file/generated/jobs`; they never mutate `../server/staging`.
 
+GitHub Pages must publish from `main` and `/docs`. The build writes `docs/.nojekyll` so GitHub Pages serves Observable's underscored asset directories, including `_observablehq`, `_import`, `_file`, `_node`, and `_npm`.
+
 Site-level copy lives in:
 
 ```text

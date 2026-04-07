@@ -10,6 +10,7 @@ async function main() {
   await fs.rm(outputRoot, {recursive: true, force: true});
   await fs.mkdir(path.dirname(outputRoot), {recursive: true});
   await fs.cp(sourceRoot, outputRoot, {recursive: true});
+  await fs.writeFile(path.resolve(projectRoot, "docs/.nojekyll"), "");
   console.log(`Copied prepared artifacts to ${path.relative(projectRoot, outputRoot)}`);
 }
 
