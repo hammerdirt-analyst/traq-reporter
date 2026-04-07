@@ -1,9 +1,0 @@
-staging:
-  root: ../server/staging
-
-publish:
-  index_path: .state/publish_index.json
-
-paths:
-  content_dir: content
-  docs_dir: site-src

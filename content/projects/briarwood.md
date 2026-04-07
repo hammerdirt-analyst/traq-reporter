@@ -1,1 +1,0 @@
-Briarwood is a community of Rancho Cordova. It is a friendly community known for its well maintained  homes. There are plenty of green spaces and quite a few trees that are professionally maintained. Briarwood is also where I live. 

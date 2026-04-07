@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 420">
-  <rect width="720" height="420" fill="#ede2d4"/>
-  <rect x="80" y="70" width="560" height="280" rx="24" fill="#ffffff" stroke="#dbc8b5" stroke-width="4"/>
-  <path d="M150 300 L250 200 L350 300 Z" fill="#c48e68"/>
-  <path d="M330 300 L430 180 L530 300 Z" fill="#b56d48"/>
-  <text x="112" y="128" font-family="Georgia, serif" font-size="28" fill="#2d3a33">Image Slot: Project Alpha Context 2</text>
-</svg>
