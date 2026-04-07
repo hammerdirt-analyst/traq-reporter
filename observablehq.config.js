@@ -1,4 +1,23 @@
 // See https://observablehq.com/framework/config for documentation.
+const siteUrl = "https://hammerdirt-analyst.github.io/traq-reporter/";
+const siteTitle = "TRAQ Reporter | Hammerdirt";
+const siteDescription =
+  "Hammerdirt TRAQ Reporter publishes tree risk assessment observations as project inventories, maps, TRAQ form detail, transcripts, images, and downloadable forms.";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "TRAQ Reporter",
+  url: siteUrl,
+  description: siteDescription,
+  publisher: {
+    "@type": "Organization",
+    name: "Hammerdirt",
+    url: "https://hammerdirt.solutions"
+  },
+  inLanguage: "en-US"
+};
+
 export default {
   // The app’s title; used in the sidebar and webpage titles.
   title: "TRAQ Reporter",
@@ -11,8 +30,25 @@ export default {
     {name: "Project view", path: "/project"}
   ],
 
-  // Content to add to the head of the page, e.g. for a favicon:
-  head: '<link rel="icon" href="observable.png" type="image/png" sizes="32x32">',
+  // Shared metadata for search engines and link previews.
+  head: `
+    <link rel="icon" href="observable.png" type="image/png" sizes="32x32">
+    <link rel="canonical" href="${siteUrl}">
+    <meta name="description" content="${siteDescription}">
+    <meta name="robots" content="index,follow">
+    <meta name="author" content="Hammerdirt">
+    <meta name="application-name" content="TRAQ Reporter">
+    <meta name="theme-color" content="#111827">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Hammerdirt TRAQ Reporter">
+    <meta property="og:title" content="${siteTitle}">
+    <meta property="og:description" content="${siteDescription}">
+    <meta property="og:url" content="${siteUrl}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="${siteTitle}">
+    <meta name="twitter:description" content="${siteDescription}">
+    <script type="application/ld+json">${JSON.stringify(structuredData)}</script>
+  `,
 
   // The path to the source root.
   root: "src",
