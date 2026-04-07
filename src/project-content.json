@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "american-river",
+    "name": "American River",
+    "description": "El Manto Access, is a public entry point to the American River Parkway in Rancho Cordova.  It is a neighborhood-friendly way to get down to the river for walking, biking, fishing, swimming, kayaking, relaxing, and beach/river access. ",
+    "image": null,
+    "map_bounds": {
+      "west": -121.29353585346439,
+      "south": 38.61734479859987,
+      "east": -121.2838424751227,
+      "north": 38.62316523581157
+    }
+  },
+  {
+    "slug": "briarwood",
+    "name": "Briarwood",
+    "description": "Briarwood is a community of Rancho Cordova. It is a friendly community known for its well maintained  homes. There are plenty of green spaces and quite a few trees that are professionally maintained. Briarwood is also where I live.",
+    "image": null,
+    "map_bounds": {
+      "west": -121.28101670195525,
+      "south": 38.613356397796935,
+      "east": -121.27448722406692,
+      "north": 38.61699761222076
+    }
+  },
+ {
+    "slug": "arboretum",
+    "name": "Arboretum",
+    "description": "The University Arboretum at Sacramento State University supports 1400 species of trees and shrubs. Winner of this year's Legacy Award, presented by the Sacramento Tree  Foundation, the Arboretum is utilized by classes in several departments  and continues to offer free guided field trips to Sacramento's public  schools. Currently it is upgrading the descriptive signage along its  trails to allow casual visitors self-guided tours of the diverse  collection and work continues on an interactive digitized map of the  whole collection.",
+    "image": null,
+    "map_bounds": {
+      "west": -121.43074717273919,
+      "south": 38.563799990800874,
+      "east": -121.4267454093663,
+      "north": 38.56620294217032
+    }
+  }
+]

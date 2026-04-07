@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf src/.observablehq/cache",
+    "prepare:artifacts": "node scripts/prepare-artifacts.js",
+    "copy:artifacts": "node scripts/copy-artifacts-to-dist.js",
+    "build": "npm run prepare:artifacts && observable build && npm run copy:artifacts",
+    "dev": "npm run prepare:artifacts && observable preview",
+    "deploy": "observable deploy",
+    "test": "node --test tests/*.test.js",
+    "observable": "observable"
+  },
+  "dependencies": {
+    "@observablehq/framework": "^1.13.4",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
