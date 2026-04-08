@@ -14,7 +14,7 @@
 <link rel="modulepreload" href="./_observablehq/runtime.607a8173.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.318537f4.js">
 <link rel="modulepreload" href="./_import/components/reporter-ui.2aec6440.js">
-<link rel="modulepreload" href="./_import/components/reporter-styles.58d8db47.js">
+<link rel="modulepreload" href="./_import/components/reporter-styles.799f3737.js">
 <link rel="modulepreload" href="./_import/components/project-content.9baa2c5e.js">
 <link rel="modulepreload" href="./_import/components/site-content.ddf45abd.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
@@ -55,10 +55,10 @@ import {registerFile} from "./_observablehq/stdlib.318537f4.js";
 
 registerFile("./data/reporter.json", {"name":"./data/reporter.json","mimeType":"application/json","path":"./_file/data/reporter.72eaf380.json","lastModified":1775570652093,"size":65482});
 registerFile("./project-content.json", {"name":"./project-content.json","mimeType":"application/json","path":"./_file/project-content.f1ea3a14.json","lastModified":1775567150813,"size":1805});
-registerFile("./site-content.json", {"name":"./site-content.json","mimeType":"application/json","path":"./_file/site-content.45dd6dcf.json","lastModified":1775576710096,"size":701});
+registerFile("./site-content.json", {"name":"./site-content.json","mimeType":"application/json","path":"./_file/site-content.90f04e9f.json","lastModified":1775624823007,"size":748});
 
 define({id: "b8245cc7", outputs: ["renderHome","reporterStyles","withProjectContent","withSiteContent"], body: async () => {
-const [{renderHome}, {reporterStyles}, {withProjectContent}, {withSiteContent}] = await Promise.all([import("./_import/components/reporter-ui.2aec6440.js"), import("./_import/components/reporter-styles.58d8db47.js"), import("./_import/components/project-content.9baa2c5e.js"), import("./_import/components/site-content.ddf45abd.js")]);
+const [{renderHome}, {reporterStyles}, {withProjectContent}, {withSiteContent}] = await Promise.all([import("./_import/components/reporter-ui.2aec6440.js"), import("./_import/components/reporter-styles.799f3737.js"), import("./_import/components/project-content.9baa2c5e.js"), import("./_import/components/site-content.ddf45abd.js")]);
 
 return {renderHome,reporterStyles,withProjectContent,withSiteContent};
 }});
@@ -82,24 +82,7 @@ display(renderHome(reporter));
 </script>
 </head>
 <body>
-<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
-<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
-<nav id="observablehq-sidebar">
-  <ol>
-    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link observablehq-link-active"><a href="./">TRAQ Reporter</a></li>
-  </ol>
-  <ol>
-    <li class="observablehq-link observablehq-link-active"><a href="./">Projects</a></li>
-    <li class="observablehq-link"><a href="./project">Project view</a></li>
-  </ol>
-</nav>
-<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
 <div id="observablehq-center">
-<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
-<nav>
-</nav>
-</aside>
 <main id="observablehq-main" class="observablehq">
 <div class="observablehq observablehq--block"><!--:b8245cc7:--></div>
 <div class="observablehq observablehq--block"><!--:a1affd8b:--></div>

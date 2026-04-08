@@ -16,8 +16,16 @@ export const reporterStyles = `
 }
 
 .lede {
-  max-width: 76ch;
+  width: 100%;
+  max-width: none;
   font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.hero p,
+.hero h1,
+.hero-links {
+  max-width: none;
 }
 
 .stat-grid,
@@ -110,6 +118,21 @@ export const reporterStyles = `
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem;
+}
+
+.hero-links {
+  margin-top: 1.25rem;
+  gap: 0.75rem;
+}
+
+.hero-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .risk-low { color: #16833a; }

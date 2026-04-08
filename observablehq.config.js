@@ -53,6 +53,9 @@ export default {
   // The path to the source root.
   root: "src",
 
+  header: "",
+  sidebar: false,
+  toc: false,
   footer: "Built with Observable.",
   pager: false,
   output: "docs",
