@@ -19,6 +19,10 @@ function asArray(value) {
   return Array.isArray(value) ? value : [];
 }
 
+function nonEmptyString(value, fallback) {
+  return typeof value === "string" && value.trim() ? value : fallback;
+}
+
 function riskKey(value) {
   return String(value ?? "unknown").trim().toLowerCase() || "unknown";
 }
@@ -65,8 +69,8 @@ async function normalizeTree(jobNumber, manifest, final, geojson, warnings) {
     id: jobNumber,
     job_number: jobNumber,
     job_id: value(final?.job_id, manifest?.job_id),
-    project: value(manifest?.project, "Unknown project"),
-    project_slug: value(manifest?.project_slug, "unknown-project"),
+    project: nonEmptyString(manifest?.project, "Unknown project"),
+    project_slug: nonEmptyString(manifest?.project_slug, "unknown-project"),
     species: value(details.tree_species, "Unknown species"),
     tree_number: value(details.tree_number, null),
     assessor: value(details.assessors, final?.user_name ?? null),
@@ -120,13 +124,13 @@ function projectSummaries(trees) {
   }
   return Array.from(byProject.entries(), ([slug, projectTrees]) => ({
     slug,
-    name: projectTrees[0]?.project ?? slug,
+    name: nonEmptyString(projectTrees[0]?.project, nonEmptyString(slug, "Unknown project")),
     tree_count: projectTrees.length,
     species_count: new Set(projectTrees.map((tree) => tree.species).filter(Boolean)).size,
     risk_counts: riskCounts(projectTrees),
     latest_staged_at: latestDate(projectTrees.map((tree) => tree.staged_at)),
     coordinate_count: projectTrees.filter((tree) => Number.isFinite(tree.latitude) && Number.isFinite(tree.longitude)).length
-  })).sort((a, b) => a.name.localeCompare(b.name));
+  })).sort((a, b) => nonEmptyString(a.name, a.slug).localeCompare(nonEmptyString(b.name, b.slug)));
 }
 
 function toGeojson(trees) {

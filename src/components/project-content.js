@@ -7,10 +7,14 @@ const emptyRiskCounts = Object.freeze({
   unknown: 0
 });
 
+function nonEmptyString(value, fallback) {
+  return typeof value === "string" && value.trim() ? value : fallback;
+}
+
 export function normalizeProjectContent(project) {
   return {
     slug: project.slug,
-    name: project.name ?? project.slug,
+    name: nonEmptyString(project.name, nonEmptyString(project.slug, "Unknown project")),
     description: project.description ?? "",
     image: project.image ?? null,
     map_bounds: project.map_bounds ?? null
@@ -49,7 +53,9 @@ export function mergeProjectSummaries(jobProjects, contentProjects) {
     });
   }
 
-  return Array.from(bySlug.values()).sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(bySlug.values()).sort((a, b) =>
+    nonEmptyString(a.name, a.slug).localeCompare(nonEmptyString(b.name, b.slug))
+  );
 }
 
 export function withProjectContent(reporter, contentProjects) {
